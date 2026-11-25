@@ -1,0 +1,2226 @@
+                        },
+                        Bread = {
+                            category = "Resources",
+                            kind = "Mesh"
+                        },
+                        SkyGlassBlock = {
+                            kind = "Block"
+                        },
+                        CoalStairs = {
+                            variant = "CoalBricks",
+                            kind = "Block"
+                        },
+                        BrickSlab = {
+                            variant = "Bricks",
+                            kind = "Block"
+                        },
+                        SkyTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        RedTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        GoldSlab = {
+                            variant = "GoldBlock",
+                            kind = "Block"
+                        },
+                        BlackGlassBlock = {
+                            kind = "Block"
+                        },
+                        PinkSlimeBlock = {
+                            variant = "SlimeBlock",
+                            kind = "Block"
+                        },
+                        GoldStairs = {
+                            variant = "GoldBlock",
+                            kind = "Block"
+                        },
+                        RailBooster = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        CyanCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BrownCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BlueClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        ShinyTank = {
+                            kind = "Model",
+                            prefab = "ShinyLantern",
+                            category = "World"
+                        },
+                        YellowGlassBlock = {
+                            kind = "Block"
+                        },
+                        OrangeTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        OrangeSlimeBlock = {
+                            variant = "SlimeBlock",
+                            kind = "Block"
+                        },
+                        WhiteTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        DarkBlueWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PinkGlassBlock = {
+                            kind = "Block"
+                        },
+                        WhiteNeonBlock = {
+                            kind = "Block"
+                        },
+                        StoneBrickSlab = {
+                            variant = "StoneBricks",
+                            kind = "Block"
+                        },
+                        WoodStairs = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        PurpleWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        GreenTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        GrayCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        GrayWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BlackWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        Dough = {
+                            category = "Resources",
+                            kind = "Mesh"
+                        },
+                        WoodChair = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        LightOrangeWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        GoldBlock = {
+                            variant = "GoldBlock",
+                            kind = "Block"
+                        },
+                        BrickBlock = {
+                            variant = "Bricks",
+                            kind = "Block"
+                        },
+                        FriendTotem = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        IronBlock = {
+                            variant = "IronBlock",
+                            kind = "Block"
+                        },
+                        CyanWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        ArcanePipeCorner = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        LightYellowCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        DirtBlock = {
+                            variant = "Dirt",
+                            kind = "Block"
+                        },
+                        BlueWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        OrangeClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        WaterBucket = {
+                            kind = "Model",
+                            prefab = "Bucket",
+                            category = "Tools"
+                        },
+                        DarkPurpleCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        LightOrangeCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        TanCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PurpleGlassBlock = {
+                            kind = "Block"
+                        },
+                        OrangeWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        WaterPipeCorner = {
+                            kind = "Model",
+                            hideParts = {
+                                "Spigot"
+                            },
+                            category = "World"
+                        },
+                        LimeGreenCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        LimeGreenWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        WallLantern = {
+                            kind = "Model",
+                            light = {
+                                rangeStuds = 15,
+                                brightness = 1.3999999999999999
+                            },
+                            category = "World"
+                        },
+                        DarkGreenCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PurpleClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        LightBlueCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        WhiteGlassBlock = {
+                            kind = "Block"
+                        },
+                        LightBlueWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        TanWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BlueNeonBlock = {
+                            kind = "Block"
+                        },
+                        LightYellowWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PineWoodStairs = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        RedWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        DarkBlueCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        Stone = {
+                            kind = "Mesh",
+                            prefab = "StoneItem",
+                            category = "Resources"
+                        },
+                        LavenderCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        StoneSlab = {
+                            variant = "Stone",
+                            kind = "Block"
+                        },
+                        Clay = {
+                            kind = "Mesh",
+                            prefab = "ClayItem",
+                            category = "Resources"
+                        },
+                        Lantern = {
+                            kind = "Model",
+                            light = {
+                                rangeStuds = 24,
+                                brightness = 2
+                            },
+                            category = "World"
+                        },
+                        YellowWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PinkCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PinkClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        PurpleCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BlackNeonBlock = {
+                            kind = "Block"
+                        },
+                        DarkPurpleWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        PinkWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        RedNeonBlock = {
+                            kind = "Block"
+                        },
+                        WoolCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        WoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        ArcaneCoal = {
+                            kind = "Mesh",
+                            prefab = "ArcaneCoalItem",
+                            category = "Resources"
+                        },
+                        BlackTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        RedCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BlackClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        LimeTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        PinkTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        PineTreeSapling = {
+                            kind = "Model",
+                            prefab = "PineTreeSapling",
+                            category = "Resources"
+                        },
+                        CoalSlab = {
+                            variant = "CoalBricks",
+                            kind = "Block"
+                        },
+                        RedGlassBlock = {
+                            kind = "Block"
+                        },
+                        DVPlush = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        LavenderWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        RailRamp = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        GrassBlock = {
+                            kind = "Block",
+                            cap = {
+                                materialName = "SmoothPlastic",
+                                heightStuds = 0.29999999999999999,
+                                colorId = "GrassCap",
+                                variant = "PixelGrass"
+                            },
+                            variant = "Dirt"
+                        },
+                        Sign = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        ArcaneGold = {
+                            kind = "Mesh",
+                            prefab = "ArcaneGoldItem",
+                            category = "Resources"
+                        },
+                        RedClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        SkyClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        LimeGlassBlock = {
+                            kind = "Block"
+                        },
+                        TipJar = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        FarmSoil = {
+                            variant = "Soil",
+                            kind = "Block"
+                        },
+                        GreenNeonBlock = {
+                            kind = "Block"
+                        },
+                        PineWoodSlab = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        BrickStairs = {
+                            variant = "Bricks",
+                            kind = "Block"
+                        },
+                        GreenClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        VaultDoor = {
+                            variant = "IronBlock",
+                            kind = "Block"
+                        },
+                        GoldenDough = {
+                            tintParts = {
+                                "*"
+                            },
+                            kind = "Mesh",
+                            prefab = "Dough",
+                            category = "Resources"
+                        },
+                        OrangeNeonBlock = {
+                            kind = "Block"
+                        },
+                        PurpleNeonBlock = {
+                            kind = "Block"
+                        },
+                        BlueSlimeBlock = {
+                            variant = "SlimeBlock",
+                            kind = "Block"
+                        },
+                        GreenWoolBlock = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        IronOre = {
+                            kind = "Mesh",
+                            prefab = "IronOreItem",
+                            category = "Resources"
+                        },
+                        GoldenBread = {
+                            category = "Resources",
+                            kind = "Mesh"
+                        },
+                        StoneBrick = {
+                            variant = "StoneBricks",
+                            kind = "Block"
+                        },
+                        Minecart = {
+                            kind = "Model",
+                            prefab = "Railcart",
+                            category = "World"
+                        },
+                        SkyNeonBlock = {
+                            kind = "Block"
+                        },
+                        StoneStairs = {
+                            variant = "Stone",
+                            kind = "Block"
+                        },
+                        StoneBlock = {
+                            variant = "Stone",
+                            kind = "Block"
+                        },
+                        GoldOre = {
+                            kind = "Mesh",
+                            prefab = "GoldOreItem",
+                            category = "Resources"
+                        },
+                        ArcaneBone = {
+                            kind = "Mesh",
+                            prefab = "ArcaneBoneItem",
+                            category = "Resources"
+                        },
+                        OrangeGlassBlock = {
+                            kind = "Block"
+                        },
+                        BlueTile = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        BlueCarpet = {
+                            variant = "Wool",
+                            kind = "Block"
+                        },
+                        BoneStairs = {
+                            variant = "Bone",
+                            kind = "Block"
+                        },
+                        MortenPlush = {
+                            category = "World",
+                            kind = "Model"
+                        },
+                        LimeClayBlock = {
+                            variant = "Clay",
+                            kind = "Block"
+                        },
+                        WoodTrapdoor = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        SandBlock = {
+                            variant = "Sand",
+                            kind = "Block"
+                        },
+                        WoodFence = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        },
+                        WoodFenceGate = {
+                            variant = "WoodPlank",
+                            kind = "Block"
+                        }
+                    },
+                    MaxTextGrowth = 1,
+                    RevealTransparencyAttribute = "RevealTransparency",
+                    SpinningParts = {
+                        Blade = {
+                            speed = 240,
+                            whileWorking = true
+                        },
+                        Drill = {
+                            speed = 200,
+                            whileWorking = true
+                        },
+                        Blades = {
+                            speed = 360,
+                            whileWorking = true
+                        },
+                        ["Shredder Gear Rotate R"] = {
+                            speed = -240,
+                            whileWorking = true,
+                            axis = "Z"
+                        },
+                        Object = {
+                            speed = 40,
+                            hover = {
+                                seconds = 2.7999999999999998,
+                                studs = 0.29999999999999999
+                            },
+                            axis = "Y"
+                        },
+                        ["Shredder Gear Rotate L"] = {
+                            speed = 240,
+                            whileWorking = true,
+                            axis = "Z"
+                        },
+                        ["Inside Gear Rotate R"] = {
+                            speed = -120,
+                            whileWorking = true,
+                            axis = "Z"
+                        }
+                    },
+                    SunTracking = {
+                        turnSeconds = 2,
+                        stepSeconds = 10,
+                        nightDroopDegrees = 15,
+                        part = "FlowerPart",
+                        face = "Face",
+                        maxLiftDegrees = 50,
+                        nightTurnSeconds = 6
+                    },
+                    EffectWatchStuds = 650,
+                    MotionStuds = 100,
+                    pressStrokeSeconds = function(arg1)
+                        --[[Name: pressStrokeSeconds | Line: 1346
+                        Upvalues: 1
+                        Function Hash: f5aee1c21550dc10d3a5e7ae16dd0c96e40bd1e98e2e653dbf49a3f6d6bb39e8bc285a1eed27eef20795099f030a8dc2
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    BreakFx = {
+                        MaxDistanceStuds = 220,
+                        Seconds = 0.90000000000000002,
+                        Count = 10,
+                        SizeStuds = 0.34999999999999998,
+                        SpeedStuds = 20,
+                        UpwardMinStuds = 10,
+                        CollectDelaySeconds = 0.22,
+                        UpwardStuds = 22
+                    },
+                    PressStrokeAttribute = "PressStrokes",
+                    PressStrokeTag = "AbovePressStroke",
+                    Kinds = {
+                        "Block",
+                        "Mesh",
+                        "Model"
+                    },
+                    WorkLightPart = "Spotlight",
+                    FillGauges = {
+                        OverflowChest = {
+                            Indicators = {
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5"
+                            },
+                            LitRgb = {
+                                255,
+                                132,
+                                24
+                            }
+                        }
+                    },
+                    TextTones = {
+                        Gain = {
+                            b = 60,
+                            g = 255,
+                            r = 42
+                        },
+                        Info = {
+                            b = 255,
+                            g = 255,
+                            r = 255
+                        },
+                        Special = {
+                            b = 255,
+                            g = 221,
+                            r = 0
+                        },
+                        Important = {
+                            b = 58,
+                            g = 222,
+                            r = 255
+                        },
+                        Bad = {
+                            b = 106,
+                            g = 98,
+                            r = 255
+                        },
+                        Rare = {
+                            b = 255,
+                            g = 83,
+                            r = 212
+                        }
+                    },
+                    CompostArt = {
+                        HeapPart = "Compost",
+                        LitRgb = {
+                            83,
+                            132,
+                            76
+                        },
+                        Indicators = {
+                            20,
+                            40,
+                            60,
+                            80,
+                            100
+                        },
+                        MinHeightStuds = 0.10000000000000001
+                    },
+                    DefaultTextTone = "Bad",
+                    ArcaneTablePlaces = {
+                        Tool = "Pickaxe1",
+                        Weapon = "Sword1"
+                    },
+                    PromptLiftStuds = {
+                        HenHouse = 3
+                    },
+                    Backpack = {
+                        ArrangeSaveSeconds = 1.5,
+                        DragHoldSeconds = 0.17999999999999999,
+                        ArrangeMaxEntries = 1500,
+                        ArrangeMaxCells = 2400,
+                        DragThresholdPixels = 6
+                    },
+                    LowHealthVignette = {
+                        MaxAlpha = 0.59999999999999998,
+                        Color = {
+                            b = 16,
+                            g = 10,
+                            r = 150
+                        },
+                        EdgeFraction = 0.29999999999999999,
+                        MinAlpha = 0.20000000000000001,
+                        BelowHp = 50
+                    },
+                    Panel = {
+                        Enabled = false,
+                        OpenSeconds = 0.12,
+                        RisePixels = 12,
+                        FromScale = 0.93999999999999995
+                    },
+                    Floaters = {
+                        MaxOnScreen = 24,
+                        Seconds = 0.90000000000000002,
+                        CritColor = {
+                            b = 58,
+                            g = 222,
+                            r = 255
+                        },
+                        RisePixels = 64,
+                        GainColor = {
+                            b = 60,
+                            g = 255,
+                            r = 42
+                        },
+                        DamageColor = {
+                            b = 120,
+                            g = 168,
+                            r = 255
+                        },
+                        CoinColor = {
+                            b = 58,
+                            g = 222,
+                            r = 255
+                        },
+                        TextSize = 20,
+                        DriftPixels = 34
+                    },
+                    IntakePartName = "Intake",
+                    FontFamily = "rbxasset://fonts/families/Ubuntu.json",
+                    ArtYawDegrees = {
+                        BuilderBench = 180,
+                        FletchingMachine = 180,
+                        LightingBench = 180,
+                        ArcFuser = 180,
+                        Furnace = 180,
+                        CookingStation = 180,
+                        Toolsmith = 180
+                    },
+                    ArtExamples = {
+                        ArcaneTable = {
+                            "Sword1",
+                            "Pickaxe1"
+                        }
+                    },
+                    TextGreys = {
+                        Dim = {
+                            b = 178,
+                            g = 158,
+                            r = 150
+                        },
+                        Faint = {
+                            b = 152,
+                            g = 133,
+                            r = 126
+                        }
+                    },
+                    ActiveLook = {
+                        IndustrialFurnace = {
+                            partName = "HotPlate",
+                            idle = {
+                                transparency = 1
+                            },
+                            active = {
+                                transparency = 0
+                            }
+                        },
+                        FletchingMachine = {
+                            lights = true,
+                            idle = {
+                                color = {
+                                    0,
+                                    0,
+                                    0
+                                }
+                            },
+                            active = {
+                                color = {
+                                    185,
+                                    124,
+                                    17
+                                }
+                            },
+                            partName = "Crafter_Tunnel_Light",
+                            more = {
+                                {
+                                    partName = "Crafter_Body.002",
+                                    idle = {
+                                        color = {
+                                            0,
+                                            0,
+                                            0
+                                        }
+                                    },
+                                    active = {
+                                        color = {
+                                            185,
+                                            124,
+                                            17
+                                        }
+                                    }
+                                },
+                                {
+                                    partName = "Crafter_Beacon_Core",
+                                    idle = {
+                                        color = {
+                                            0,
+                                            0,
+                                            0
+                                        }
+                                    },
+                                    active = {
+                                        color = {
+                                            236,
+                                            178,
+                                            78
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Bakehouse = {
+                            partName = "HotPlate",
+                            idle = {
+                                color = {
+                                    26,
+                                    26,
+                                    26
+                                },
+                                material = "Plastic"
+                            },
+                            active = {
+                                color = {
+                                    255,
+                                    97,
+                                    65
+                                },
+                                material = "Neon"
+                            }
+                        },
+                        Furnace = {
+                            partName = "LavaBlock",
+                            idle = {
+                                color = {
+                                    20,
+                                    20,
+                                    20
+                                },
+                                material = "SmoothPlastic"
+                            },
+                            active = {
+                                color = {
+                                    255,
+                                    97,
+                                    65
+                                },
+                                material = "Neon"
+                            }
+                        }
+                    },
+                    GatherFx = {
+                        MaxOnScreen = 60,
+                        Seconds = 0.52000000000000002,
+                        MaxCount = 14,
+                        CountPerItem = 5,
+                        StaggerSeconds = 0.12,
+                        Colors = {
+                            Wheat = {
+                                b = 90,
+                                g = 205,
+                                r = 240
+                            },
+                            SlimeGel = {
+                                b = 145,
+                                g = 235,
+                                r = 130
+                            },
+                            Wood = {
+                                b = 85,
+                                g = 140,
+                                r = 190
+                            },
+                            IronOre = {
+                                b = 150,
+                                g = 180,
+                                r = 215
+                            },
+                            Coal = {
+                                b = 128,
+                                g = 120,
+                                r = 120
+                            },
+                            Stone = {
+                                b = 205,
+                                g = 200,
+                                r = 200
+                            }
+                        },
+                        SizePixels = 7,
+                        SpreadPixels = 22,
+                        DriftPixels = 70,
+                        ArriveScale = 0.34999999999999998
+                    },
+                    TextToneAliases = {
+                        Announce = "Special",
+                        Partner = "Info"
+                    },
+                    EnemyHealthBar = {
+                        MaxDistanceStuds = 60
+                    },
+                    of = function(arg1)
+                        --[[Name: of | Line: 543
+                        Upvalues: 2
+                        Function Hash: d4927f47d70f62dfe23e1ad6318feafc4e7b05f44e680835d9782d73148a9b2c8c978572a5edc888a7e7c31ebfb242c8
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    HitFlash = {
+                        Alpha = 0.34999999999999998,
+                        Seconds = 0.45000000000000001
+                    },
+                    ArtOffsetStuds = {
+                        Recycler = {
+                            y = 0,
+                            x = 1.04,
+                            z = 0
+                        }
+                    },
+                    lightFor = function(arg1)
+                        --[[Name: lightFor | Line: 538
+                        Upvalues: 1
+                        Function Hash: 639532af5d230b1b277375f3908242fa35970e68a306bd44395a6d1a4722994a98d71183cd3d9ed887867fc6a69c8f50
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end
+                },
+                Animation = {
+                    HitMarkerName = "Hit",
+                    Draws = {
+                        Lasso = {
+                            draw = "rbxassetid://100525354452966",
+                            loop = true,
+                            release = "rbxassetid://84895610798800"
+                        }
+                    },
+                    MinSwingSpeed = 1,
+                    FallbackHitDelaySeconds = 0.14999999999999999,
+                    Cast = {
+                        "rbxassetid://140045013734179",
+                        "rbxassetid://138785564292103"
+                    },
+                    Eat = "rbxassetid://16925376176",
+                    BySlot = {
+                        Weapon = {
+                            hitFrame = 11,
+                            swings = {
+                                "rbxassetid://86861921756773",
+                                "rbxassetid://89881700832616"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        },
+                        Pickaxe = {
+                            hitFrame = 7,
+                            swings = {
+                                "rbxassetid://16925268786"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        },
+                        Axe = {
+                            hitFrame = 3,
+                            swings = {
+                                "rbxassetid://16925360800"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        }
+                    },
+                    DebugHitTiming = false,
+                    MaxHitDelaySeconds = 0.40000000000000002,
+                    EditorFps = 30,
+                    IdleFadeSeconds = 0.20000000000000001,
+                    SwingPriority = Enum.AnimationPriority.Action,
+                    HitFraction = 0.34999999999999998,
+                    MaxSwingSpeed = 3,
+                    Use = {
+                        Plow = "rbxassetid://16925396266"
+                    },
+                    Bow = {
+                        drawPriority = Enum.AnimationPriority.Action,
+                        releasePriority = Enum.AnimationPriority.Action2,
+                        releaseFadeSeconds = 0.050000000000000003,
+                        draw = "rbxassetid://106896677045639",
+                        drawFadeSeconds = 0.10000000000000001,
+                        cancelFadeSeconds = 0.14999999999999999,
+                        release = "rbxassetid://132995788621607"
+                    },
+                    resolve = function(arg1, arg2)
+                        --[[Name: resolve | Line: 56
+                        Upvalues: 1
+                        Function Hash: 99e1b34f75ecfbea947a92000e478f440ddc566fc81803bb8ed24e4bf0e6cef20ef560baa8f8a1b8f539c8f956c8696d
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    SwingFadeSeconds = 0.080000000000000002,
+                    ByItem = {
+                        WoodPickaxe = {
+                            hitFrame = 7,
+                            swings = {
+                                "rbxassetid://16925268786"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        },
+                        WoodSword = {
+                            hitFrame = 11,
+                            swings = {
+                                "rbxassetid://86861921756773",
+                                "rbxassetid://89881700832616"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        },
+                        WoodAxe = {
+                            hitFrame = 3,
+                            swings = {
+                                "rbxassetid://16925360800"
+                            },
+                            idle = "rbxassetid://16913220551"
+                        }
+                    }
+                },
+                Celebration = {
+                    FinaleGapSeconds = 0.12,
+                    DisplaySeconds = 18,
+                    SparkLifetimeSeconds = {
+                        min = 1.3,
+                        max = 2.2000000000000002
+                    },
+                    RiseSeconds = {
+                        min = 1.1000000000000001,
+                        max = 1.6000000000000001
+                    },
+                    SpreadStuds = 48,
+                    SparkGravity = 14,
+                    SoundVolume = 0.80000000000000004,
+                    Finish = {
+                        HeightStuds = {
+                            min = 16,
+                            max = 26
+                        },
+                        RiseSeconds = {
+                            min = 0.59999999999999998,
+                            max = 0.90000000000000002
+                        },
+                        SpreadStuds = 10,
+                        AheadStuds = 14,
+                        LaunchGapSeconds = {
+                            min = 0.12,
+                            max = 0.29999999999999999
+                        },
+                        Shells = 7
+                    },
+                    BurstSparks = 140,
+                    VisibleStuds = 1600,
+                    FlashRangeStuds = 90,
+                    LaunchGapSeconds = {
+                        min = 0.40000000000000002,
+                        max = 1.1000000000000001
+                    },
+                    BurstSoundId = "",
+                    FlashSeconds = 0.5,
+                    HeightStuds = {
+                        min = 70,
+                        max = 120
+                    },
+                    Colors = {
+                        {
+                            b = 96,
+                            g = 96,
+                            r = 255
+                        },
+                        {
+                            b = 72,
+                            g = 200,
+                            r = 255
+                        },
+                        {
+                            b = 140,
+                            g = 220,
+                            r = 120
+                        },
+                        {
+                            b = 255,
+                            g = 170,
+                            r = 96
+                        },
+                        {
+                            b = 255,
+                            g = 120,
+                            r = 220
+                        },
+                        {
+                            b = 255,
+                            g = 255,
+                            r = 255
+                        }
+                    },
+                    LaunchSoundId = "",
+                    SparkSize = {
+                        start = 1.3999999999999999,
+                        finish = 0.20000000000000001
+                    },
+                    FinaleShells = 5,
+                    BurstSpeed = {
+                        min = 28,
+                        max = 46
+                    },
+                    Shells = 16
+                },
+                Analytics = {
+                    coinReason = function(arg1)
+                        --[[Name: coinReason | Line: 126
+                        Upvalues: 1
+                        Function Hash: 85d9902b7e874f461a1609ac5742354658517bfa03628a9ef474663595658ff96e86da92c17c8e1b647e8c108293886d
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    CoinReasons = {
+                        ServerEvent = "Mint",
+                        Tip = "Transfer",
+                        Kill = "Mint",
+                        ["Horse coat"] = "Burn",
+                        Order = "Mint",
+                        Vending = "Transfer",
+                        ["Hatch Now"] = "Burn",
+                        Achievement = "Mint",
+                        ["Portal skin"] = "Burn",
+                        ["NPC buy"] = "Burn",
+                        Workbench = "Burn",
+                        ["NPC sale"] = "Mint",
+                        DevCommand = "Mint",
+                        Shiny = "Mint",
+                        AdminBounty = "Mint"
+                    },
+                    OnboardingSteps = {
+                        {
+                            id = "Joined",
+                            step = 1,
+                            label = "Joined the game"
+                        },
+                        {
+                            id = "Spawned",
+                            step = 2,
+                            label = "Spawned on their island"
+                        },
+                        {
+                            id = "FirstTree",
+                            step = 3,
+                            label = "Chopped a tree"
+                        },
+                        {
+                            id = "FirstStone",
+                            step = 4,
+                            label = "Mined stone"
+                        },
+                        {
+                            id = "FirstSoil",
+                            step = 5,
+                            label = "Tilled soil"
+                        },
+                        {
+                            id = "FirstWater",
+                            step = 6,
+                            label = "Filled a Water Bucket"
+                        },
+                        {
+                            id = "FirstCrop",
+                            step = 7,
+                            label = "Harvested a crop"
+                        },
+                        {
+                            id = "UsedPortal",
+                            step = 8,
+                            label = "Used the Main Island Portal"
+                        },
+                        {
+                            id = "ReachedHub",
+                            step = 9,
+                            label = "Reached the Hub"
+                        },
+                        {
+                            id = "FirstIron",
+                            step = 10,
+                            label = "Smelted iron"
+                        },
+                        {
+                            id = "WorkbenchII",
+                            step = 11,
+                            label = "Unlocked Workbench II"
+                        },
+                        {
+                            id = "WorkbenchIII",
+                            step = 12,
+                            label = "Unlocked Workbench III"
+                        },
+                        {
+                            id = "MachineryWorkbench",
+                            step = 13,
+                            label = "Crafted the Machinery Workbench"
+                        },
+                        {
+                            id = "FirstSteel",
+                            step = 14,
+                            label = "Produced steel"
+                        },
+                        {
+                            id = "FirstCoalDrill",
+                            step = 15,
+                            label = "Placed a Coal Drill"
+                        },
+                        {
+                            id = "FirstIronDrill",
+                            step = 16,
+                            label = "Placed an Iron Drill"
+                        },
+                        {
+                            id = "FirstAutomatedIron",
+                            step = 17,
+                            label = "Automated iron reached an Output Chest"
+                        },
+                        {
+                            id = "VendingConfigured",
+                            step = 18,
+                            label = "Configured a Vending Machine"
+                        },
+                        {
+                            id = "VendingSale",
+                            step = 19,
+                            label = "Made a player-to-player Vending sale"
+                        },
+                        {
+                            id = "FirstPlant",
+                            step = 20,
+                            label = "Planted a crop"
+                        },
+                        {
+                            id = "FirstBuild",
+                            step = 21,
+                            label = "Placed a block"
+                        },
+                        {
+                            id = "FirstSale",
+                            step = 22,
+                            label = "Sold something at the Hub"
+                        },
+                        {
+                            id = "FirstPurchase",
+                            step = 23,
+                            label = "Bought something at the Hub"
+                        },
+                        {
+                            id = "FirstCraft",
+                            step = 24,
+                            label = "Crafted something"
+                        },
+                        {
+                            id = "FirstFurnace",
+                            step = 25,
+                            label = "Got a Furnace"
+                        },
+                        {
+                            id = "PlacedWorkbench",
+                            step = 26,
+                            label = "Placed a Workbench"
+                        },
+                        {
+                            id = "FirstIronOre",
+                            step = 27,
+                            label = "Mined iron ore"
+                        }
+                    },
+                    Currencies = {
+                        SkyMarks = "SkyMarks",
+                        Coins = "Coins"
+                    },
+                    EconomyFlushSeconds = 30,
+                    Stream = {
+                        MaxQueue = 5000,
+                        ConfigStore = "AboveAnalyticsStream_v1",
+                        ConfigKey = "config",
+                        ConfigRefreshSeconds = 120,
+                        MaxBatch = 250,
+                        Platforms = {
+                            Desktop = true,
+                            Mobile = true,
+                            VR = true,
+                            Console = true
+                        },
+                        CampaignMaxLength = 100,
+                        RetrySeconds = {
+                            2,
+                            5,
+                            15,
+                            30,
+                            60
+                        },
+                        FlushSeconds = 1
+                    },
+                    FieldSlots = {
+                        TimeTo = {
+                            "WorkbenchTier"
+                        },
+                        LoadScreenClosed = {
+                            "Place",
+                            "Arrival",
+                            "Ending"
+                        },
+                        PurchaseCompleted = {
+                            "Source",
+                            "WorkbenchTier"
+                        },
+                        LeftOnLoadScreen = {
+                            "Place",
+                            "Arrival"
+                        },
+                        PositiveMoment = {
+                            "Source"
+                        },
+                        PromptShown = {
+                            "Source"
+                        }
+                    },
+                    Milestones = {
+                        "WorkbenchII",
+                        "FirstExpansion",
+                        "FirstPrime",
+                        "FirstMasterwork",
+                        "FirstPerfect",
+                        "FirstShiny",
+                        "FirstCollection",
+                        "FirstTierII",
+                        "FirstTierIII",
+                        "FirstTierIV",
+                        "FirstTierV",
+                        "FirstTierVI"
+                    },
+                    CustomFields = {
+                        "WorkbenchTier",
+                        "SessionMinutes",
+                        "Source"
+                    },
+                    TransferEvents = {
+                        Tip = "TipCoinsSent",
+                        Vending = "VendingCoinsTraded"
+                    },
+                    EventBudget = {
+                        PerMinute = 90,
+                        PerPlayerPerMinute = 12
+                    },
+                    ShopReasons = {
+                        ["NPC sale"] = true,
+                        ["NPC buy"] = true
+                    }
+                },
+                Event = {
+                    RewardShares = {
+                        1,
+                        0.25,
+                        0.10000000000000001
+                    },
+                    MinPlayers = 4,
+                    MaxMinutes = 30,
+                    PublicOnly = true,
+                    UpdateSeconds = 1,
+                    Reward = {
+                        Amount = 10000,
+                        Currency = "Coins"
+                    },
+                    DefaultMinutes = 6
+                },
+                Tutorial = {
+                    NewPlayerView = {
+                        ClockHour = 13
+                    },
+                    FinishedHint = "Grow your island and build machines that run it for you",
+                    Experiment = {
+                        Attribute = "TutorialVersion",
+                        Concluded = true,
+                        Key = "TutorialVersion",
+                        Default = "Guided"
+                    },
+                    Intro = {
+                        Seconds = 3.5,
+                        Lines = {
+                            "This is your own island!",
+                            "We'll build our first farm before automating it"
+                        },
+                        Tour = {
+                            WaitForIslandSeconds = 5,
+                            Radius = 110,
+                            Height = 55,
+                            BlendSeconds = 0.80000000000000004,
+                            StartHeight = 130,
+                            ReturnSeconds = 1,
+                            StartRadius = 30,
+                            Degrees = 300
+                        },
+                        Card = "Till"
+                    },
+                    QuietCards = {
+                        Regrow = true,
+                        Till = true,
+                        Plant = true,
+                        Harvest = true
+                    },
+                    FinishGiftHint = "A Wheat Harvester is in your backpack. Place it by your wheat",
+                    DoneGift = {
+                        BerryBushSeed = 1
+                    },
+                    FinishedSeconds = 9,
+                    Finished = "Tutorial Complete",
+                    Showcase = {
+                        At = {
+                            y = 1500,
+                            x = 0,
+                            z = -9000
+                        },
+                        AfterStep = "FirstCrop",
+                        TourSeconds = 8,
+                        GuidedAfterStep = "FirstSale",
+                        Title = "Turn your farm into a factory!",
+                        Skip = "Skip",
+                        DeliverySeconds = 60
+                    },
+                    Steps = {
+                        {
+                            orReached = "FirstCrop",
+                            id = "Till",
+                            guided = true,
+                            step = "FirstSoil",
+                            touchHint = "",
+                            atLeast = 4,
+                            text = "Plow the marked grass next to pond",
+                            stat = "HydratedSoil",
+                            hint = ""
+                        },
+                        {
+                            orReached = "FirstCrop",
+                            id = "Plant",
+                            guided = true,
+                            step = "FirstPlant",
+                            touchHint = "",
+                            atLeast = 4,
+                            text = "Plant your Wheat Seeds on the soil",
+                            stat = "HydratedCrops",
+                            hint = ""
+                        },
+                        {
+                            touchHint = "Tap the hand button on the Wheat",
+                            text = "Harvest the Wheat once it's ready",
+                            id = "Harvest",
+                            guided = true,
+                            step = "FirstCrop",
+                            hint = "Press {Pickup} on the Wheat"
+                        },
+                        {
+                            orReached = "PlacedWorkbench",
+                            id = "Regrow",
+                            guided = true,
+                            step = "FirstPlant",
+                            touchHint = "",
+                            atLeast = 4,
+                            text = "Replant your Wheat Seeds",
+                            notClassic = true,
+                            stat = "HydratedCrops",
+                            hint = ""
+                        },
+                        {
+                            touchHint = "",
+                            bridgeText = "Build a bridge to your portal",
+                            text = "Place a Grass Block",
+                            bridgeHint = "",
+                            id = "Build",
+                            guided = true,
+                            step = "FirstBuild",
+                            hint = ""
+                        },
+                        {
+                            touchHint = "",
+                            bridge = true,
+                            guideTo = "Portal",
+                            bridgeHint = "",
+                            id = "Hub",
+                            text = "Step through your portal to the Hub",
+                            step = "ReachedHub",
+                            hint = ""
+                        },
+                        {
+                            guideTo = "Merchant",
+                            touchHint = "",
+                            id = "Sell",
+                            text = "Sell your wheat to the Merchant at the Hub island",
+                            step = "FirstSale",
+                            hint = ""
+                        },
+                        {
+                            guideTo = "SeedDealer",
+                            touchHint = "",
+                            id = "Buy",
+                            text = "Buy more seeds from the Seed Dealer",
+                            step = "FirstPurchase",
+                            hint = ""
+                        },
+                        {
+                            orReached = "FirstWater",
+                            id = "FillBucket",
+                            text = "Fill your Bucket in the Hub's pond",
+                            step = "FirstWater",
+                            guideTo = "HubPond",
+                            focus = "HubPond",
+                            touchHint = "Tap the water with your Bucket",
+                            atLeast = 1,
+                            stat = "BucketsFilled",
+                            hint = "Click the water with your Bucket"
+                        },
+                        {
+                            touchHint = "Place it by your field",
+                            focus = "Pond",
+                            id = "PlaceWater",
+                            text = "Bring the water home to your pond",
+                            step = "FirstWater",
+                            hint = "Place it by your field"
+                        },
+                        {
+                            touchHint = "",
+                            stat = "CropsPlanted",
+                            guideTo = "HomePortal",
+                            atLeast = 5,
+                            id = "Replant",
+                            text = "Plant your new seeds to grow a bigger field",
+                            step = "FirstPlant",
+                            hint = ""
+                        },
+                        {
+                            touchHint = "",
+                            orReached = "FirstFurnace",
+                            id = "PlaceBench",
+                            text = "Place your Workbench on your island",
+                            step = "PlacedWorkbench",
+                            hint = ""
+                        },
+                        {
+                            touchHint = "Mine 8 Stone and 4 Iron Ore first",
+                            id = "Craft",
+                            text = "Craft a Furnace at your Workbench",
+                            step = "FirstFurnace",
+                            hint = "Mine 8 Stone and 4 Iron Ore first"
+                        }
+                    },
+                    Guide = {
+                        Grass = "GrassBlock",
+                        GuidedTools = {
+                            Craft = "WoodPickaxe"
+                        },
+                        BlockRepublishSeconds = 0.29999999999999999,
+                        BuildMaxCells = 6,
+                        Water = "WaterBlock",
+                        Tools = {
+                            PlaceWater = "WaterBucket",
+                            Till = "Plow",
+                            Plant = "WheatSeeds",
+                            PlaceBench = "Workbench",
+                            Regrow = "WheatSeeds",
+                            Replant = "WheatSeeds",
+                            FillBucket = "Bucket",
+                            Build = "GrassBlock"
+                        },
+                        BuildMinCells = 2,
+                        KeepInHand = {
+                            GrassBlock = true
+                        },
+                        BridgeSearchCells = 24,
+                        Soil = "FarmSoil",
+                        Camera = {
+                            HeightStuds = 14,
+                            DistanceStuds = 22,
+                            WelcomeGraceSeconds = 0.75,
+                            MoveSeconds = 0.90000000000000002,
+                            HoldSeconds = 2.6000000000000001,
+                            NearStuds = 30,
+                            MaxStuds = 260
+                        },
+                        BuildMarks = 3,
+                        RipeTouch = "It's READY! Look at the Wheat and tap the hand button",
+                        Ripe = "It's READY! Look at the Wheat and press {Pickup}",
+                        Plots = 4,
+                        BridgeMaxBlocks = 12,
+                        BridgeIsletMaxCells = 200,
+                        Growing = "Growing... ready in %ds...",
+                        Seed = "WheatSeeds"
+                    },
+                    nextStep = function(arg1, arg2, arg3)
+                        --[[Name: nextStep | Line: 606
+                        Upvalues: 1
+                        Function Hash: 318adc299f1332c9213411512e0a536ff6d115e3b746b5b535735e6c12bae3cf62e20508cc276ac6513f1c5ba16b3483
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    stepsFor = function(arg1)
+                        --[[Name: stepsFor | Line: 591
+                        Upvalues: 1
+                        Function Hash: 1af0547d488c52d8d793ab7176fc53c979d8adedb860fcf2ff4d4aebe2280706ee24bf08301c073aa6a8fdcf287561c1
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    FinishGift = {
+                        WheatHarvester = 1
+                    },
+                    NewPlayerGrowth = {
+                        Until = "Harvest",
+                        Attribute = "NewPlayerGrowth",
+                        CropId = "Wheat",
+                        Multiplier = 15,
+                        MaxCrops = 4
+                    },
+                    Versions = {
+                        Classic = {
+                            "Till",
+                            "Plant",
+                            "Harvest",
+                            "Build",
+                            "Hub",
+                            "Sell",
+                            "Buy",
+                            "FillBucket",
+                            "PlaceWater",
+                            "Replant",
+                            "PlaceBench",
+                            "Craft"
+                        },
+                        Guided = {
+                            "Till",
+                            "Plant",
+                            "Harvest",
+                            "Regrow",
+                            "PlaceBench",
+                            "Build",
+                            "Hub",
+                            "Sell"
+                        },
+                        Factory = {
+                            "Till",
+                            "Plant",
+                            "Harvest",
+                            "PlaceBench",
+                            "Craft",
+                            "Build",
+                            "Hub",
+                            "Sell"
+                        }
+                    },
+                    isStep = function(arg1)
+                        --[[Name: isStep | Line: 534
+                        Upvalues: 1
+                        Function Hash: 5dbe73b4cb9e8593a9f23478618493aef98fec1bbb3b395dc802b9687ee04b8e7764f0faae2d74d3cb454b13ae9abfad
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    SharedOnIsland = {
+                        FirstFurnace = "Furnace"
+                    },
+                    IslandCounters = {
+                        HydratedCrops = true,
+                        HydratedSoil = true
+                    },
+                    Focus = {
+                        Version = "Guided",
+                        Items = {
+                            Till = {
+                                "Plow"
+                            },
+                            Plant = {
+                                "Plow",
+                                "WheatSeeds"
+                            },
+                            Build = {
+                                "Plow",
+                                "WheatSeeds",
+                                "Workbench",
+                                "WoodPickaxe",
+                                "GrassBlock"
+                            },
+                            Craft = {
+                                "Plow",
+                                "WheatSeeds",
+                                "Workbench",
+                                "WoodPickaxe"
+                            },
+                            Regrow = {
+                                "Plow",
+                                "WheatSeeds"
+                            },
+                            PlaceBench = {
+                                "Plow",
+                                "WheatSeeds",
+                                "Workbench"
+                            },
+                            Harvest = {
+                                "Plow",
+                                "WheatSeeds"
+                            }
+                        }
+                    },
+                    Headers = {
+                        Regrow = "Build a Wheat Farm",
+                        Plant = "Build a Wheat Farm",
+                        PlaceBench = "Start Your Factory",
+                        Craft = "Make a Furnace",
+                        Till = "Build a Wheat Farm",
+                        Sell = "Sell Your Wheat",
+                        Hub = "Get to the Hub",
+                        Build = "Get to the Hub",
+                        Harvest = "Build a Wheat Farm"
+                    }
+                },
+                Pattern = {
+                    rarityMultiplier = function(arg1)
+                        --[[Name: rarityMultiplier | Line: 146
+                        Upvalues: 2
+                        Function Hash: e6681f5f58c936434fd9b1d68e9d01008da264a1bd048255fd3a81d6ad0abf2cd9f21ab1cabb402f75b6d45ddc15df8b
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    Patterns = {
+                        {
+                            id = "Plain",
+                            weight = 86,
+                            displayName = ""
+                        },
+                        {
+                            colorMap = "rbxassetid://110819480934998",
+                            weight = 8,
+                            id = "Striped",
+                            overlay = "Striped",
+                            displayName = "Striped"
+                        },
+                        {
+                            colorMap = "rbxassetid://107203721679618",
+                            weight = 4,
+                            id = "Dotted",
+                            overlay = "Dotted",
+                            displayName = "Dotted"
+                        },
+                        {
+                            id = "Glowing",
+                            material = "Neon",
+                            weight = 2,
+                            displayName = "Glowing"
+                        }
+                    },
+                    compose = function(arg1, arg2)
+                        --[[Name: compose | Line: 140
+                        Upvalues: 1
+                        Function Hash: ce5a7465f7a734c3c20596bcd9085034fd80aaaa796cbee5be559c001c2b3d7c68b5f8cb1ad8fa6b713b488d82079582
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    split = function(arg1)
+                        --[[Name: split | Line: 129
+                        Upvalues: 1
+                        Function Hash: 96196c3fd44c92813b7f636e19cc73c3a0d8d2502bcef4cc2605b9474ee89925f16523a80bc9035936d1338631ffa42a
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    Plain = "Plain",
+                    get = function(arg1)
+                        --[[Name: get | Line: 104
+                        Upvalues: 2
+                        Function Hash: a10b9699cbf45bf1d1a57c864a480fd8e4ca58d315891ad7467c1513a1cd1a3adf4fc560282daf63a220a6a370b63cfc
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    choose = function(arg1)
+                        --[[Name: choose | Line: 113
+                        Upvalues: 2
+                        Function Hash: fbabfaa1e61ce636157c567969cd357049340f5957a06a54a48f73beba4d9c1ec3c4d61fc2428bd330dddc8dc0d93a77
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    prefixOf = function(arg1)
+                        --[[Name: prefixOf | Line: 93
+                        Upvalues: 1
+                        Function Hash: 8edd5901276de094b5fa966896da5e545a324b985e30a18ec8a5357eb583ea446fbef14f4504214114053ff062222410
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end
+                },
+                Permission = {
+                    RoleBlurbs = {
+                        Visitor = "Everyone starts as a visitor. Can visit and look around.",
+                        TrustedBuilder = "ONLY GIVE TO TRUSTED PEOPLE. Gives full access to break blocks and take stuff from your island.",
+                        Builder = "Can place things from their inventory, plant, and use machines. Can't take anything."
+                    },
+                    RoleLabels = {
+                        Visitor = "Visitor",
+                        TrustedBuilder = "Trusted Builder",
+                        Builder = "Builder"
+                    },
+                    IslandToggles = {
+                        UseMachines = {
+                            minimum = "Builder",
+                            default = true,
+                            label = "Use Machines and Stations"
+                        },
+                        HarvestCrops = {
+                            minimum = "TrustedBuilder",
+                            default = true,
+                            label = "Harvest Crops and Bushes"
+                        },
+                        ManageDisplays = {
+                            minimum = "Builder",
+                            deferred = true,
+                            default = false,
+                            label = "Manage Displays"
+                        },
+                        PlantCrops = {
+                            minimum = "Builder",
+                            default = true,
+                            label = "Plant Crops and Flowers"
+                        },
+                        GatherResources = {
+                            minimum = "TrustedBuilder",
+                            default = true,
+                            label = "Chop Trees and Mine Ore"
+                        },
+                        ManageCropHarvesters = {
+                            minimum = "Builder",
+                            default = false,
+                            label = "Set Up Crop Harvesters"
+                        },
+                        MoveMachines = {
+                            minimum = "TrustedBuilder",
+                            default = false,
+                            label = "Move and Dismantle Machines"
+                        },
+                        ManageVending = {
+                            minimum = "TrustedBuilder",
+                            default = false,
+                            label = "Manage Vending"
+                        },
+                        CollectFactoryOutputs = {
+                            minimum = "TrustedBuilder",
+                            default = false,
+                            label = "Collect Factory Output"
+                        }
+                    },
+                    VisitPolicyLabels = {
+                        FriendsOnly = {
+                            detail = "Only your Roblox friends can come through your portal.",
+                            label = "Friends"
+                        },
+                        Open = {
+                            detail = "Anyone in the server can come through your portal.",
+                            label = "Open"
+                        },
+                        Closed = {
+                            detail = "Nobody can come through your portal. Co-op partners always can.",
+                            label = "Closed"
+                        }
+                    },
+                    DefaultVisitPolicy = "Open",
+                    MaxKeptRoles = 50,
+                    RoleOrder = {
+                        "Visitor",
+                        "Builder",
+                        "TrustedBuilder"
+                    },
+                    StorageToggles = {
+                        View = {
+                            warnOnEnable = false,
+                            default = false,
+                            label = "See What Storage Holds"
+                        },
+                        Withdraw = {
+                            warnOnEnable = true,
+                            default = false,
+                            label = "Take Items Out of Storage"
+                        },
+                        Deposit = {
+                            warnOnEnable = false,
+                            default = false,
+                            label = "Put Items in Storage"
+                        }
+                    },
+                    PlayerDropPickupPolicy = "Anyone",
+                    pickupCategoryOf = function(arg1)
+                        --[[Name: pickupCategoryOf | Line: 180
+                        Upvalues: 0
+                        Function Hash: ac04a602e7940954ed08339b3deffe1f3060a70dfc63f2a3f1fd0a18c750c738e9fa5cb0da8a84886ac3b2ea5f3c3968
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    DismantleReturnsTo = "Owner",
+                    PickupDefaults = {
+                        Visitor = {
+                            FactoryOutputs = false,
+                            LooseOwnerItems = false,
+                            CombatLoot = false
+                        },
+                        TrustedBuilder = {
+                            FactoryOutputs = true,
+                            LooseOwnerItems = true,
+                            CombatLoot = true
+                        },
+                        Builder = {
+                            FactoryOutputs = false,
+                            LooseOwnerItems = false,
+                            CombatLoot = false
+                        }
+                    },
+                    reachOf = function(arg1)
+                        --[[Name: reachOf | Line: 267
+                        Upvalues: 1
+                        Function Hash: 2e0d4c164300aabc136d576c85f820d64202e6a574e507534b73d57eb50328efc1d55cdb0ce4a8c01e829730831f7796
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    VisitPolicies = {
+                        "Closed",
+                        "FriendsOnly",
+                        "Open"
+                    },
+                    VerbLabels = {
+                        {
+                            label = "Visit and Walk Around",
+                            verb = "walk"
+                        },
+                        {
+                            label = "Fight Slimes",
+                            verb = "fight"
+                        },
+                        {
+                            label = "Pick Up Slime Drops",
+                            verb = "pickupCombatLoot"
+                        },
+                        {
+                            label = "Build With Their Own Blocks",
+                            verb = "placeFromOwnInventory"
+                        },
+                        {
+                            label = "Break Your Blocks",
+                            verb = "dismantleOwnerStructures"
+                        }
+                    },
+                    TrustedBuilderWarning = {
+                        confirm = "Yes, I'm Sure",
+                        cancel = "Never Mind",
+                        title = "Are You Sure?",
+                        body = "Beware of scammers. Giving this role means they can take things from you and your island. We cannot restore stolen items."
+                    },
+                    BanWarning = {
+                        confirm = "Ban Them",
+                        cancel = "Never Mind",
+                        title = "Ban From Your Island?",
+                        body = "They won't be able to visit your island, including when it's published, until you unban them from this list."
+                    },
+                    BanWatchSeconds = 1,
+                    MaxBans = 100,
+                    Roles = {
+                        Visitor = {
+                            dropOwnItems = true,
+                            fight = true,
+                            pickupCombatLoot = false,
+                            placeFromOwnInventory = false,
+                            id = "Visitor",
+                            dismantleOwnerStructures = false,
+                            operateMachines = false,
+                            walk = true
+                        },
+                        TrustedBuilder = {
+                            dropOwnItems = true,
+                            fight = true,
+                            pickupCombatLoot = true,
+                            placeFromOwnInventory = true,
+                            id = "TrustedBuilder",
+                            dismantleOwnerStructures = true,
+                            operateMachines = true,
+                            walk = true
+                        },
+                        Builder = {
+                            dropOwnItems = true,
+                            fight = true,
+                            pickupCombatLoot = false,
+                            placeFromOwnInventory = true,
+                            id = "Builder",
+                            dismantleOwnerStructures = false,
+                            operateMachines = true,
+                            walk = true
+                        }
+                    },
+                    toggleAllows = function(arg1, arg2)
+                        --[[Name: toggleAllows | Line: 141
+                        Upvalues: 1
+                        Function Hash: e057f8aeb685edd19bd393f91690517979e7aa1baa43ce279dcc65b629106f5a996b663cd0112a7f3cde8b84f70482b8
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    BanWatchMarginStuds = 12,
+                    rank = function(arg1)
+                        --[[Name: rank | Line: 135
+                        Upvalues: 1
+                        Function Hash: c8fff453cc49a11c68a416ead8457e663e060eb47bfd692f24cec5a2074b045b0ce8cfa251668d11466eee23d424d5ae
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end
+                },
+                Version = "1.209.4",
+                Notice = {
+                    MaxOnScreen = 3,
+                    WaterDrySeconds = 300,
+                    DefaultTone = "World",
+                    FadeSeconds = 0.40000000000000002,
+                    CropSweepSeconds = 180,
+                    SecondsOnScreen = 5,
+                    DrySoil = "That soil is dry. Crops only grow within 3 blocks of water",
+                    Weather = {
+                        Scorching = "The sun is scorching today",
+                        Windy = "The wind is picking up",
+                        Rain = "It's starting to rain",
+                        Clear = "The sky is clearing",
+                        WildBloom = "Wild animals are stirring in the Ruins"
+                    },
+                    RepeatCooldownSeconds = 45,
+                    Tones = {
+                        Ready = {
+                            color = {
+                                b = 60,
+                                g = 255,
+                                r = 42
+                            }
+                        },
+                        World = {
+                            color = {
+                                b = 255,
+                                g = 221,
+                                r = 0
+                            }
+                        }
+                    },
+                    WaterDry = "A Water Block ran dry. Fill your Bucket in the Hub's pond and place it to bring water home"
+                },
+                Grant = {
+                    PollSeconds = 60,
+                    StoreName = "AboveGrants_v1",
+                    ArrivedText = "An admin sent you {amount} {item}",
+                    KeepDeliveredSeconds = 604800,
+                    MaxAmount = 10000,
+                    NoteMaxLength = 200,
+                    MaxPending = 50
+                },
+                Prompt = {
+                    Gate = {
+                        MinSessionSeconds = 900,
+                        MaxPerSession = 2,
+                        MinWorkbenchTier = 2,
+                        MinSecondsBetweenPrompts = 600
+                    }
+                },
+                TradeWatch = {
+                    CoinsToReport = 50000000,
+                    BatchSeconds = 15,
+                    ItemsToReport = 1000,
+                    WindowSeconds = 1800,
+                    TopItems = 4
+                },
+                GuestBook = {
+                    MaxStored = 9999,
+                    HeartsLiftStuds = 3,
+                    Tiers = {
+                        "VideoStar",
+                        "Dev",
+                        "Verified",
+                        "VIP",
+                        "Other"
+                    },
+                    ResolveTimeoutSeconds = 3,
+                    sortTier = function(arg1, arg2)
+                        --[[Name: sortTier | Line: 42
+                        Upvalues: 0
+                        Function Hash: 5d6a3b913814d81d9e4ba5847fae4098240ba6056a39ba983d86d2cccb63b608abc9b65515c263b9e280a7db9a775bd8
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    Groups = {
+                        VideoStar = 4199740
+                    },
+                    isDetectable = function(arg1)
+                        --[[Name: isDetectable | Line: 75
+                        Upvalues: 1
+                        Function Hash: 0badaf214fb0b6ed507ce6e139c1efd1de6116075ce7008c7f5016d40c1118df71c5b77849661292a6decdc4570418ef
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    rankOf = function(arg1)
+                        --[[Name: rankOf | Line: 64
+                        Upvalues: 1
+                        Function Hash: 77d05f0cc7ff3610a58e47de27ad8d48068f2fd2fa9f119d4b526db01e6d9fae11dbddb02482ae07012bc4c92c2c77b9
+                        LuaEncode: Unable to serialize function]]
+                        return
+                    end,
+                    HeartsVisibleStuds = 80,
+                    PageSize = 100,
+                    Visits = {
+                        DailyMax = 5000,
+                        SignScale = 3.8999999999999999,
+                        ForgetSeconds = 120,
+                        Eye = "\xF0\x9F\x91\x81",
+                        CheckSeconds = 5
+                    }
+                }
+            },
+            {
+                suppressPickup = function()
+                    --[[Name: suppressPickup | Line: 140
+                    Upvalues: 1
+                    Function Hash: 568d1ea0944a1a974464762439758d86932e7ea8c01c17632d1eb8419dfde7b7af5480a60b3fd522bcf74e9eb20eaaf7
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                pickupSuppressed = function()
+                    --[[Name: pickupSuppressed | Line: 144
+                    Upvalues: 1
+                    Function Hash: cca5151811f85e4ee44e318ad98a9409b23a22432c21f41a14cff238d96d3ad864b5a53f1b790434e04fd56c095deaf6
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                play = function(arg1, arg2)
+                    --[[Name: play | Line: 192
+                    Upvalues: 6
+                    Function Hash: 7651192e2d12ae2b7fe430123ce529f7a1971f0973618dd18f29f38f0d2d68d431be03140adab50faebc041486ecfb39
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                setZone = function(arg1)
+                    --[[Name: setZone | Line: 155
+                    Upvalues: 1
+                    Function Hash: 698c0b00f03a35513c7f233b963c145b2854d8beb8aa0a82b07f15236dc403fec2359b7572fd789ba3b9a9022d176c10
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                start = function()
+                    --[[Name: start | Line: 368
+                    Upvalues: 11
+                    Function Hash: 897df1fed7a86e2ad509687c185ef50440a020ec1270fdf8f03f59b21d5c2c98d8ca53c4c15a363881509549e0ac763b
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                musicGroup = function()
+                    --[[Name: musicGroup | Line: 41
+                    Upvalues: 1
+                    Function Hash: c8cc072be20d6544758cf689f51c3b49a9b48551b1e5164609f6187710fdca40b5b135e46f259cc3f563336723269a5a
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                playSfx = function(arg1)
+                    --[[Name: playSfx | Line: 57
+                    Upvalues: 2
+                    Function Hash: 98272f6e31e8b054f91b33f8fd355575ded14bf0913d39c98f9a251cb7302d7a7fc42af11aef38994287a6a3ebe7ea99
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end,
+                sfxGroup = function()
+                    --[[Name: sfxGroup | Line: 37
+                    Upvalues: 1
+                    Function Hash: c8cc072be20d6544758cf689f51c3b49a9b48551b1e5164609f6187710fdca40b5b135e46f259cc3f563336723269a5a
+                    LuaEncode: Unable to serialize function]]
+                    return
+                end
+            },
+            game:GetService("Debris"),
+            game:GetService("Players").LocalPlayer,
+            function(arg1, arg2, arg3)
+                --[[Name: sparkle | Line: 80
+                Upvalues: 6
+                Function Hash: 6c533ceedbde829bdd3504daa70c4038677fe104b9e53ebf2c7770a3adce210775378ac6dd813f1d19cf65cd1e630151
+                LuaEncode: Unable to serialize function]]
+                return
+            end,
+            function(arg1, arg2, arg3)
+                --[[Name: callout | Line: 143
+                Upvalues: 5
+                Function Hash: 1cdd51fd43fa95b41b811da1047e1daf2bf06479cc93b20bd6245cab6aa3d4ff9a6f36321a8e90531208460861051705
+                LuaEncode: Unable to serialize function]]
+                return
+            end
+        },
+        Arguments = {
+            "WheatSeeds",
+            "Bonus",
+            Vector3.new(15, 201, 3021)
+        },
+        Constants = {
+            "type",
+            nil,
+            "string",
+            "SpecialDrop",
+            "tierFor",
+            "Rare",
+            "play",
+            "SpecialFind",
+            "suppressPickup",
+            "soundId",
+            "",
+            "Instance",
+            "new",
+            nil,
+            "Sound",
+            "SoundId",
+            "volume",
+            "Volume",
+            "pitch",
+            "PlaybackSpeed",
+            "playSfx",
+            "AddItem",
+            "Character",
+            "HumanoidRootPart",
+            "FindFirstChild",
+            "BasePart",
+            "IsA",
+            "Position"
+        }
+    },
+    Script = game:GetService("Players").LocalPlayer.PlayerScripts.Client
+}
