@@ -1,0 +1,1733 @@
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Config.BushConfig
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Config.BushConfig
+-- Decompile time: 1.13 ms
+
+local u0 = {
+    Bushes = {
+        BerryBush = {
+            id = "BerryBush",
+            seed = "BerryBushSeed",
+            produce = "Berries",
+            yieldMin = 2,
+            yieldMax = 3,
+            growSeconds = 270,
+            regrowMinSeconds = 250,
+            regrowMaxSeconds = 280,
+            seedChance = 0.011111111111111112,
+            rareItemId = "JumboBerry",
+            rareChance = 0.001,
+        },
+    },
+    GroundBlocks = {GrassBlock = true, FarmSoil = true, DirtBlock = true},
+    Harvesters = {BerryHarvester = "BerryBush"},
+    HarvesterActionSeconds = 40,
+}
+
+function u0.bushForHarvester(a1) -- Line: 101; upvalues: u0 (val); types: a1: string?
+    if a1 then
+        return u0.Harvesters[a1]
+    end
+
+    return nil
+end
+
+function u0.bushForSeed(a1) -- Line: 106; upvalues: u0 (val); types: a1: string?
+    if not a1 then
+        return nil
+    end
+
+    for i, j in u0.Bushes do
+        if j.seed == a1 then
+            return j
+        end
+    end
+
+    return nil
+end
+
+function u0.isSeed(a1) -- Line: 118; upvalues: u0 (val); types: a1: string
+    return u0.bushForSeed(a1) ~= nil
+end
+
+function u0.itemIds() -- Line: 123; upvalues: u0 (val)
+    local v1 = {}
+
+    for i, j in u0.Bushes do
+        table.insert(v1, j.seed)
+        table.insert(v1, j.produce)
+        table.insert(v1, j.rareItemId)
+    end
+
+    table.sort(v1)
+
+    return v1
+end
+
+u0.RipeArtName = "Berries"
+u0.GrowthVisualStages = 6
+
+return u0
+
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Config.BuildConfig
+-- Took 0.01s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Config.BuildConfig
+-- Decompile time: 10.07 ms
+
+local Blocks, Blocks_2, Blocks_3, Blocks_4, Blocks_5, Blocks_6, v1
+local u0 = {
+    Expansion = {
+        {tier = 0, widthCells = 51, blockCapacity = 4000, coins = 0},
+        {tier = 1, widthCells = 63, blockCapacity = 6000, coins = 10000},
+        {tier = 2, widthCells = 79, blockCapacity = 8000, coins = 75000},
+        {tier = 3, widthCells = 103, blockCapacity = 11000, coins = 500000},
+        {tier = 4, widthCells = 127, blockCapacity = 14000, coins = 5000000},
+        {tier = 5, widthCells = 151, blockCapacity = 17000, coins = 50000000},
+        {tier = 6, widthCells = 175, blockCapacity = 20000, coins = 100000000},
+        {tier = 7, widthCells = 199, blockCapacity = 25000, coins = 250000000},
+    },
+    MaxPlacedBlocks = 25000,
+    VerticalBounds = {below = 80, above = 440},
+}
+
+function u0.boundsForTier(a1) -- Line: 50; upvalues: u0 (val); types: a1: number
+    return {
+        horizontal = (u0.Expansion[math.clamp(a1, 0, #u0.Expansion - 1) + 1].widthCells - 1)
+            // 2,
+        below = u0.VerticalBounds.below,
+        above = u0.VerticalBounds.above,
+    }
+end
+
+function u0.expansionForTier(a1) -- Line: 59; upvalues: u0 (val); types: a1: number
+    return u0.Expansion[math.clamp(a1, 0, #u0.Expansion - 1) + 1]
+end
+
+u0.MaxExpansionTier = #u0.Expansion - 1
+u0.MaxFunctionalEntities = 500
+u0.MachineLimitExempt = {
+    StorageChest = true,
+    LargeChest = true,
+    InputChest = true,
+    OutputChest = true,
+    OverflowChest = true,
+    Splitter = true,
+    VendingMachine = true,
+    BulkVendingMachine = true,
+    WeaponDisplay = true,
+    WeaponStand = true,
+    ArmorStand = true,
+    ShinyTank = true,
+    FlowerPot = true,
+    LargeFlowerPot = true,
+    PlateDisplay = true,
+    SlimeBeacon = true,
+    Incubator = true,
+    HenHouse = true,
+    ChickenFeeder = true,
+    HayFeeder = true,
+}
+u0.MaxHarvesters = 250
+u0.VendingMachineId = "VendingMachine"
+u0.LooseItemHardCap = 200
+u0.LooseStackMax = 50
+u0.LooseMerge = {
+    AfterSeconds = 1,
+    RestingSpeed = 0.75,
+    TouchWidths = 2.5,
+    IntervalSeconds = 0.5,
+    GridStuds = 4,
+}
+u0.LooseAnchor = {
+    AfterSeconds = 3,
+    WakeStuds = 2.5,
+    ProbeSeconds = 30,
+    SupportCheckSeconds = 2,
+    SupportStuds = 0.5,
+}
+u0.LooseItemStuds = 1.35
+u0.LooseBlockStuds = 0.9
+
+function u0.looseStudsFor(a1) -- Line: 188; upvalues: u0 (val); types: a1: string
+    if u0.Blocks[a1] then
+        return u0.LooseBlockStuds
+    end
+
+    return u0.LooseItemStuds
+end
+
+u0.PlayerDropHardCap = 50
+u0.LooseFillAttributes = {World = "LooseItemsFill", PlayerDrops = "DroppedItemsFill"}
+u0.LooseFillStep = 0.02
+u0.LooseFillColors = {Yellow = 0.5, Orange = 0.75, Red = 1}
+
+function u0.looseBudgetOf(a1) -- Line: 225; types: a1: string
+    if a1 == "PlayerDropped" then
+        return "PlayerDrops"
+    end
+
+    return "World"
+end
+
+function u0.looseCapFor(a1) -- Line: 229; upvalues: u0 (val); types: a1: string
+    if a1 == "PlayerDrops" then
+        return u0.PlayerDropHardCap
+    end
+
+    return u0.LooseItemHardCap
+end
+
+u0.CapPressure = {
+    DespawnEligible = "All",
+    DespawnOrder = "OldestFirst",
+    UniqueItemsExempt = false,
+    PauseProducers = false,
+    AlertId = "ITEM_LIMIT_REACHED",
+    ShowLiveCount = true,
+    AlertEverySeconds = 1,
+    DespawnClassOrder = {"FactoryOutput", "HarvesterOutput", "PlayerDropped", "MonsterDrop"},
+}
+u0.LooseItemTTLSeconds = 300
+u0.PlayerDropsExpire = false
+u0.VoidKillPlaneDepthStuds = 300
+u0.Pickup = {
+    RadiusStuds = 14,
+    AimConeDegrees = 22,
+    TouchRadiusStuds = 7.5,
+    TouchFrontBiasStuds = 3,
+    ScanIntervalSeconds = 0.25,
+    RepeatSeconds = 0.16666666666666666,
+    RequestBurst = 20,
+    RequestsPerSecond = 10,
+    CountLabelStuds = 8,
+    CountLabelMax = 12,
+}
+u0.Blocks = {
+    GrassBlock = {id = "GrassBlock", hp = 50, burns = false},
+    DirtBlock = {id = "DirtBlock", hp = 50, burns = false, dropsAs = "GrassBlock"},
+    Wood = {id = "Wood", hp = 75, burns = true, tilts = true},
+    WoodBlock = {id = "WoodBlock", hp = 50, burns = true},
+    PineWood = {id = "PineWood", hp = 75, burns = true, tilts = true},
+    PineWoodBlock = {id = "PineWoodBlock", hp = 50, burns = true},
+    StoneBlock = {id = "StoneBlock", hp = 75, burns = false},
+    SandBlock = {id = "SandBlock", hp = 50, burns = false},
+    ClayBlock = {id = "ClayBlock", hp = 75, burns = false},
+    WoolBlock = {id = "WoolBlock", hp = 40, burns = true},
+    HayBale = {id = "HayBale", hp = 40, burns = true},
+    BrickBlock = {id = "BrickBlock", hp = 100, burns = false},
+    CoalBlock = {id = "CoalBlock", hp = 75, burns = true},
+    WoodFence = {id = "WoodFence", hp = 50, burns = true, shape = "Fence"},
+    StoneBrickFence = {id = "StoneBrickFence", hp = 100, burns = false, shape = "Fence"},
+    WoodFenceGate = {id = "WoodFenceGate", hp = 50, burns = true, shape = "Gate"},
+    PineWoodFence = {id = "PineWoodFence", hp = 50, burns = true, shape = "Fence"},
+    PineWoodFenceGate = {id = "PineWoodFenceGate", hp = 50, burns = true, shape = "Gate"},
+    WoodTrapdoor = {id = "WoodTrapdoor", hp = 50, burns = true, shape = "Trapdoor"},
+    WoodChair = {id = "WoodChair", hp = 50, burns = true, keepsGrass = true},
+    DVPlush = {id = "DVPlush", hp = 50, burns = true, keepsGrass = true},
+    MortenPlush = {id = "MortenPlush", hp = 50, burns = true, keepsGrass = true},
+    Radio = {id = "Radio", hp = 50, burns = false, keepsGrass = true},
+    PictureFrame = {id = "PictureFrame", hp = 50, burns = true, keepsGrass = true},
+    FriendTotem = {id = "FriendTotem", hp = 50, burns = true, keepsGrass = true},
+    TipJar = {id = "TipJar", hp = 50, burns = false, keepsGrass = true},
+    WoodTable = {id = "WoodTable", hp = 50, burns = true, keepsGrass = true},
+    WoodDoor = {id = "WoodDoor", hp = 50, burns = true, shape = "Door"},
+    VaultDoor = {
+        id = "VaultDoor",
+        hp = 150,
+        burns = false,
+        shape = "Door",
+        vault = true,
+    },
+    Sign = {id = "Sign", hp = 50, burns = true, shape = "Sign"},
+    WaterPipe = {id = "WaterPipe", hp = 50, burns = false, shape = "Pipe"},
+    WaterPipeCorner = {id = "WaterPipeCorner", hp = 50, burns = false, shape = "PipeCorner"},
+    WaterSpout = {id = "WaterSpout", hp = 50, burns = false, shape = "Pipe"},
+    ArcanePipe = {
+        id = "ArcanePipe",
+        hp = 50,
+        burns = false,
+        shape = "Pipe",
+        tilts = true,
+        tag = "ArcanePipe",
+    },
+    ArcanePipeCorner = {
+        id = "ArcanePipeCorner",
+        hp = 50,
+        burns = false,
+        shape = "PipeCorner",
+        tag = "ArcanePipe",
+    },
+    ArcanePipeMerge = {
+        id = "ArcanePipeMerge",
+        hp = 50,
+        burns = false,
+        shape = "PipeCorner",
+        tag = "ArcanePipe",
+        pipeArms = {{x = 0, y = 0, z = 1}, {x = 1, y = 0, z = 0}, {x = -1, y = 0, z = 0}},
+    },
+    ArcanePipeRiser = {
+        id = "ArcanePipeRiser",
+        hp = 50,
+        burns = false,
+        shape = "PipeCorner",
+        tilts = true,
+        tag = "ArcanePipe",
+    },
+    Rail = {id = "Rail", hp = 50, burns = false, shape = "Rail"},
+    RailCorner = {id = "RailCorner", hp = 50, burns = false, shape = "Rail"},
+    RailRamp = {id = "RailRamp", hp = 50, burns = false, shape = "RailRamp"},
+    RailBooster = {id = "RailBooster", hp = 50, burns = false, shape = "Rail"},
+    RailRampBooster = {id = "RailRampBooster", hp = 50, burns = false, shape = "RailRamp"},
+    IronBlock = {id = "IronBlock", hp = 150, burns = false},
+    GoldBlock = {id = "GoldBlock", hp = 150, burns = false},
+    BoneBlock = {id = "BoneBlock", hp = 75, burns = false},
+    WaterBlock = {id = "WaterBlock", hp = 40, burns = false, walkThrough = true},
+    FarmSoil = {id = "FarmSoil", hp = 50, burns = false, dropsAs = "GrassBlock"},
+    Torch = {id = "Torch", hp = 15, burns = false, keepsGrass = true},
+    Lantern = {id = "Lantern", hp = 25, burns = false, keepsGrass = true},
+    WallLantern = {id = "WallLantern", hp = 25, burns = false, keepsGrass = true},
+    WildGrass = {id = "WildGrass", hp = 5, burns = true, keepsGrass = true},
+    WoodSlab = {id = "WoodSlab", hp = 50, burns = true, shape = "Slab"},
+    WoodStairs = {id = "WoodStairs", hp = 50, burns = true, shape = "Stairs"},
+    PineWoodSlab = {id = "PineWoodSlab", hp = 50, burns = true, shape = "Slab"},
+    PineWoodStairs = {id = "PineWoodStairs", hp = 50, burns = true, shape = "Stairs"},
+    StoneSlab = {id = "StoneSlab", hp = 75, burns = false, shape = "Slab"},
+    StoneStairs = {id = "StoneStairs", hp = 75, burns = false, shape = "Stairs"},
+    StoneBrick = {id = "StoneBrick", hp = 100, burns = false},
+    StoneBrickSlab = {id = "StoneBrickSlab", hp = 100, burns = false, shape = "Slab"},
+    StoneBrickStairs = {id = "StoneBrickStairs", hp = 100, burns = false, shape = "Stairs"},
+    IronSlab = {id = "IronSlab", hp = 150, burns = false, shape = "Slab"},
+    IronStairs = {id = "IronStairs", hp = 150, burns = false, shape = "Stairs"},
+    GoldSlab = {id = "GoldSlab", hp = 150, burns = false, shape = "Slab"},
+    GoldStairs = {id = "GoldStairs", hp = 150, burns = false, shape = "Stairs"},
+    BoneSlab = {id = "BoneSlab", hp = 75, burns = false, shape = "Slab"},
+    BoneStairs = {id = "BoneStairs", hp = 75, burns = false, shape = "Stairs"},
+    BrickSlab = {id = "BrickSlab", hp = 100, burns = false, shape = "Slab"},
+    BrickStairs = {id = "BrickStairs", hp = 100, burns = false, shape = "Stairs"},
+    CoalSlab = {id = "CoalSlab", hp = 75, burns = true, shape = "Slab"},
+    CoalStairs = {id = "CoalStairs", hp = 75, burns = true, shape = "Stairs"},
+    SandSlab = {id = "SandSlab", hp = 50, burns = false, shape = "Slab"},
+    SandStairs = {id = "SandStairs", hp = 50, burns = false, shape = "Stairs"},
+    GlassBlock = {id = "GlassBlock", hp = 50, burns = false},
+    GlassPane = {id = "GlassPane", hp = 25, burns = false, shape = "Pane"},
+    GreenSlimeBlock = {id = "GreenSlimeBlock", hp = 50, burns = false, bounceCells = 4},
+    BlueSlimeBlock = {id = "BlueSlimeBlock", hp = 50, burns = false, bounceCells = 6},
+    OrangeSlimeBlock = {id = "OrangeSlimeBlock", hp = 50, burns = false, bounceCells = 8},
+    PinkSlimeBlock = {id = "PinkSlimeBlock", hp = 50, burns = false, bounceCells = 10},
+    TNT = {id = "TNT", hp = 25, burns = true},
+}
+u0.Tnt = {
+    ItemId = "TNT",
+    FuseSeconds = 2,
+    RadiusCells = 2.5,
+    CooldownSeconds = 2,
+    MaxLitPerIsland = 4,
+    BlastRadiusStuds = 8,
+}
+u0.DyeColors = {"Red", "Yellow", "Blue", "White", "Orange", "Pink", "Purple", "Green", "Sky", "Lime", "Black"}
+
+for i, j in u0.DyeColors do
+    Blocks_3 = u0.Blocks
+    v1 = ("%*ClayBlock"):format(j)
+    Blocks_3[v1] = {hp = 75, burns = false, id = ("%*ClayBlock"):format(j)}
+    Blocks_4 = u0.Blocks
+    v1 = ("%*NeonBlock"):format(j)
+    Blocks_4[v1] = {hp = 50, burns = false, id = ("%*NeonBlock"):format(j)}
+    Blocks_5 = u0.Blocks
+    v1 = ("%*GlassBlock"):format(j)
+    Blocks_5[v1] = {hp = 50, burns = false, id = ("%*GlassBlock"):format(j)}
+    Blocks_6 = u0.Blocks
+    v1 = ("%*Tile"):format(j)
+    Blocks_6[v1] = {hp = 25, burns = false, shape = "Tile", id = ("%*Tile"):format(j)}
+end
+
+u0.WoolColors = {
+    "Pink",
+    "Red",
+    "DarkRed",
+    "Purple",
+    "DarkPurple",
+    "Lavender",
+    "DarkBlue",
+    "Blue",
+    "Cyan",
+    "LightBlue",
+    "Green",
+    "DarkGreen",
+    "LimeGreen",
+    "Orange",
+    "LightOrange",
+    "Yellow",
+    "LightYellow",
+    "Brown",
+    "Tan",
+    "Black",
+    "Gray",
+}
+u0.Blocks.WoolCarpet = {id = "WoolCarpet", hp = 15, burns = true, shape = "Tile"}
+
+for k, n in u0.WoolColors do
+    Blocks = u0.Blocks
+    v1 = ("%*WoolBlock"):format(n)
+    Blocks[v1] = {hp = 40, burns = true, id = ("%*WoolBlock"):format(n)}
+    Blocks_2 = u0.Blocks
+    v1 = ("%*Carpet"):format(n)
+    Blocks_2[v1] = {hp = 15, burns = true, shape = "Tile", id = ("%*Carpet"):format(n)}
+end
+
+u0.Slime = {Restitution = 0.8, MaxBounceMultiplier = 2, MinImpactSpeed = 8}
+u0.Placement = {
+    PlaneLockEnabled = true,
+    EdgeMarginFraction = 0.12,
+    AllowDiagonal = true,
+    BoundaryMessage = "Boundary reached: visit the Landman to expand",
+    BoundaryAlertSeconds = 2,
+    HubMessage = "You can't build at the Hub: build on an island",
+    CooldownSeconds = 0.2,
+    PredictSeconds = 30,
+    ConfirmedHoldSeconds = 5,
+    ServerBacklogSeconds = 10,
+    ClientPaceMarginSeconds = 0.04,
+    MaxQueuedSeconds = 1,
+    SeedCooldownSeconds = 0.15,
+    ArrivalSlackSeconds = 0.03,
+    RequireAdjacency = true,
+    SnapRadiusCells = 2,
+}
+u0.SignCommits = {Burst = 1, PerSecond = 0.5}
+
+function u0.isProtectedCell(a1, a2, a3) -- Line: 815; upvalues: u0 (val); types: a1: number, a2: number, a3: number
+    local v1
+
+    for i, j in u0.ProtectedAnchors do
+        v1 = u0.ProtectedVolumes[j.radiusKey]
+
+        if v1
+            and math.abs(a1 - j.x) <= v1
+            and math.abs(a2 - j.y) <= v1
+            and math.abs(a3 - j.z) <= v1 then
+            return true
+        end
+    end
+
+    return false
+end
+
+u0.BoundaryGuide = {HeightStuds = 24, ThicknessStuds = 0.5, Transparency = 0.82, FlashSeconds = 5}
+u0.ProtectedVolumes = {}
+u0.IslandRadiusCells = 14
+u0.IslandTopCellY = -1
+u0.HubPortalCell = {x = 15, y = 0, z = -6}
+u0.SpawnSettledCellY = -1
+u0.ProtectedAnchors = {}
+u0.HeavyMachineHP = 150
+u0.MachineHP = {
+    Conveyor = 50,
+    ConveyorCorner = 50,
+    ConveyorCornerLeft = 50,
+    ConveyorMerge = 50,
+    ConveyorRampUp = 50,
+    ConveyorRampDown = 50,
+    StorageChest = 75,
+    WeaponDisplay = 75,
+    WeaponStand = 75,
+    ArmorStand = 75,
+    ShinyTank = 75,
+    FlowerPot = 75,
+    LargeFlowerPot = 75,
+    PlateDisplay = 75,
+    LargeChest = 75,
+    InputChest = 75,
+    InventoryHopper = 75,
+    OutputChest = 75,
+}
+
+function u0.machineHPOf(a1) -- Line: 957; upvalues: u0 (val); types: a1: string
+    return u0.MachineHP[a1] or u0.HeavyMachineHP
+end
+
+u0.Footprints = {
+    ConveyorRampUp = {x = 1, y = 1, z = 2},
+    ConveyorRampDown = {x = 1, y = 1, z = 2},
+    WoodDoor = {x = 1, y = 2, z = 1},
+    ArmorStand = {x = 1, y = 2, z = 1},
+    VaultDoor = {x = 1, y = 2, z = 1},
+    Workbench = {x = 2, y = 1, z = 1},
+    CookingStation = {x = 2, y = 1, z = 1},
+    BuilderBench = {x = 2, y = 1, z = 1},
+    LightingBench = {x = 2, y = 1, z = 1},
+    Toolsmith = {x = 2, y = 1, z = 1},
+    Fabricator = {x = 2, y = 1, z = 1},
+    Furnace = {x = 2, y = 1, z = 1},
+    Recycler = {x = 2, y = 1, z = 1},
+    VendingMachine = {x = 1, y = 3, z = 1},
+    BulkVendingMachine = {x = 1, y = 3, z = 1},
+    FriendTotem = {x = 1, y = 3, z = 1},
+    HenHouse = {x = 3, y = 3, z = 3},
+}
+u0.Shapes = {
+    FencePostStuds = 0.9,
+    FenceRailStuds = 0.4,
+    GateStiles = 3,
+    GateStileOverhangStuds = 0.2,
+    TrapdoorThicknessStuds = 0.5,
+    DoorThicknessStuds = 0.3,
+    PaneThicknessStuds = 0.2,
+    DoorOpenDegrees = 90,
+    DoorKnobStuds = 0.35,
+    DoorKnobInsetStuds = 0.4,
+    DoorKnobHeightStuds = 2.7,
+    DoorKnobMaterial = "Plastic",
+    PipeStuds = 1.1,
+    RailPlateStuds = 0.3,
+    TileThicknessStuds = 0.2,
+    SignStakeStuds = 0.3,
+    StairSteps = 2,
+    FenceRailHeights = {0.85, -0.45},
+    TrapdoorBattenStuds = {width = 0.35, proud = 0.12, inset = 0.75},
+    DoorKnobColor = {r = 58, g = 60, b = 66},
+    SignBoardStuds = {x = 2.6, y = 1.4, z = 0.2},
+}
+u0.Vault = {
+    MinimumRole = "Builder",
+    WindowHeightStuds = 4.4,
+    Bars = 2,
+    BarStuds = 0.07,
+    Window = {x = 0.9, y = 0.36},
+}
+
+function u0.stairSteps(a1, a2, a3) -- Line: 1121; upvalues: u0 (val); types: a1: number, a2: string?, a3: number?
+    local v1, v2, v3
+    local StairSteps = u0.Shapes.StairSteps
+    local v4 = a1 / StairSteps
+    local v5 = a3 or 1
+    local v6 = {}
+    local v7, v8 = a1, a2
+
+    for i = 1, StairSteps do
+        v1 = v7 - (i - 1) * v4
+        v2 = -v7 / 2 + (i - 0.5) * v4
+
+        if v8 ~= "Outer" then
+            table.insert(
+                v6,
+                {
+                    size = {x = v7, y = v4, z = v1},
+                    offset = {x = 0, y = v2, z = v7 / 2 - v1 / 2},
+                }
+            )
+
+            v3 = v7 - v1
+
+            if v8 == "Inner" and v3 > 0 then
+                table.insert(
+                    v6,
+                    {
+                        size = {x = v1, y = v4, z = v3},
+                        offset = {
+                            x = v5 * (v7 / 2 - v1 / 2),
+                            y = v2,
+                            z = -v7 / 2 + v3 / 2,
+                        },
+                    }
+                )
+            end
+        else
+            table.insert(
+                v6,
+                {
+                    size = {x = v1, y = v4, z = v1},
+                    offset = {x = v5 * (v7 / 2 - v1 / 2), y = v2, z = v7 / 2 - v1 / 2},
+                }
+            )
+        end
+    end
+
+    return v6
+end
+
+function u0.stairShape(a1, a2) -- Line: 1179; types: a1: table, a2: function
+    local v1, v2
+
+    local function across(a1_2) -- Line: 1180; upvalues: a1 (val); types: a1_2: table
+        return a1_2.x * a1.x + a1_2.z * a1.z == 0
+    end
+
+    local function same(a1_2) -- Line: 1183; upvalues: a1 (val); types: a1_2: table?
+        local v1 = false
+
+        if a1_2 ~= nil then
+            v1 = false
+
+            if a1_2.x == a1.x then
+                v1 = a1_2.z == a1.z
+            end
+        end
+
+        return v1
+    end
+
+    local function sideOf(a1_2) -- Line: 1187; upvalues: a1 (val); types: a1_2: table
+        if 0 < a1_2.x * a1.z - a1_2.z * a1.x then
+            return 1
+        end
+
+        return -1
+    end
+
+    local v3 = a2(a1.x, a1.z)
+
+    if v3 then
+        v1 = v3.x * a1.x + v3.z * a1.z == 0
+
+        if v1 then
+            v2 = a2(-v3.x, -v3.z)
+            v1 = false
+
+            if v2 ~= nil then
+                v1 = false
+
+                if v2.x == a1.x then
+                    v1 = v2.z == a1.z
+                end
+            end
+
+            if not v1 then
+                v1 = "Outer"
+
+                if 0 < v3.x * a1.z - v3.z * a1.x then
+                    return v1, 1
+                end
+
+                return v1, -1
+            end
+        end
+    end
+
+    v3 = a2(-a1.x, -a1.z)
+
+    if v3 then
+        v1 = v3.x * a1.x + v3.z * a1.z == 0
+
+        if v1 then
+            v2 = a2(v3.x, v3.z)
+            v1 = false
+
+            if v2 ~= nil then
+                v1 = false
+
+                if v2.x == a1.x then
+                    v1 = v2.z == a1.z
+                end
+            end
+
+            if not v1 then
+                v1 = "Inner"
+
+                if 0 < v3.x * a1.z - v3.z * a1.x then
+                    return v1, 1
+                end
+
+                return v1, -1
+            end
+        end
+    end
+
+    return "Straight", 0
+end
+
+function u0.gateBars(a1) -- Line: 1206; upvalues: u0 (val); types: a1: number
+    local Shapes = u0.Shapes
+    local v1 = a1 / 3
+    local v2 = Shapes.FenceRailStuds * v1
+    local v3 = {}
+    local v4 = (1 / 0)
+    local v5 = (-1 / 0)
+
+    for i, j in Shapes.FenceRailHeights do
+        table.insert(
+            v3,
+            {size = {x = a1, y = v2, z = v2}, offset = {x = 0, z = 0, y = j * v1}}
+        )
+
+        v4 = math.min(v4, j * v1)
+        v5 = math.max(v5, j * v1)
+    end
+
+    local v6 = Shapes.GateStileOverhangStuds * v1
+    v1 = v4 - v2 / 2 - v6
+    v4 = v5 + v2 / 2 + v6
+    local v7 = Shapes.GateStiles - 1
+
+    for k = 0, v7 do
+        v6 = -a1 / 2 + v2 / 2
+            + k * (a1 - v2) / (math.max(Shapes.GateStiles - 1, 1))
+        table.insert(
+            v3,
+            {
+                size = {x = v2, y = v4 - v1, z = v2},
+                offset = {z = 0, x = v6, y = (v4 + v1) / 2},
+            }
+        )
+    end
+
+    return v3
+end
+
+function u0.shapeSize(a1, a2) -- Line: 1247; upvalues: u0 (val); types: a1: string?, a2: number
+    local v1
+    local Shapes = u0.Shapes
+
+    if a1 == "Slab" then
+        return {x = a2, y = a2 / 2, z = a2}
+    end
+
+    if a1 == "Pane" then
+        return {x = a2, y = a2, z = Shapes.PaneThicknessStuds / 3 * a2}
+    end
+
+    if a1 == "Fence" then
+        v1 = Shapes.FencePostStuds / 3 * a2
+        return {x = v1, y = a2, z = v1}
+    end
+
+    if a1 == "Gate" then
+        return {x = a2, y = a2, z = Shapes.FenceRailStuds / 3 * a2}
+    end
+
+    if a1 == "Trapdoor" then
+        return {x = a2, y = Shapes.TrapdoorThicknessStuds / 3 * a2, z = a2}
+    end
+
+    if a1 == "Door" then
+        return {x = a2, y = a2 * 2, z = Shapes.DoorThicknessStuds / 3 * a2}
+    end
+
+    if a1 == "Sign" then
+        local SignBoardStuds = Shapes.SignBoardStuds
+        return {
+            x = SignBoardStuds.x / 3 * a2,
+            y = SignBoardStuds.y / 3 * a2,
+            z = SignBoardStuds.z / 3 * a2,
+        }
+    end
+
+    if a1 == "Pipe" then
+        v1 = Shapes.PipeStuds / 3 * a2
+        return {x = v1, y = v1, z = a2}
+    end
+
+    if a1 == "PipeCorner" then
+        v1 = Shapes.PipeStuds / 3 * a2
+        return {x = v1, y = v1, z = v1}
+    end
+
+    if a1 == "Rail" then
+        return {x = a2, y = Shapes.RailPlateStuds / 3 * a2, z = a2}
+    end
+
+    if a1 == "Tile" then
+        return {x = a2, y = Shapes.TileThicknessStuds / 3 * a2, z = a2}
+    end
+
+    return {x = a2, y = a2, z = a2}
+end
+
+function u0.shapePieces(a1, a2) -- Line: 1281; upvalues: u0 (val); types: a1: string?, a2: number
+    if a1 == "Stairs" then
+        return u0.stairSteps(a2)
+    end
+
+    if a1 == "Gate" then
+        return u0.gateBars(a2)
+    end
+
+    return nil
+end
+
+local u233 = {x = 1, y = 1, z = 1}
+
+function u0.tilts(a1) -- Line: 1302; upvalues: u0 (val); types: a1: string?
+    local v1 = if not a1 then nil else u0.Blocks[a1]
+    local v2 = false
+
+    if v1 ~= nil then
+        v2 = true
+
+        if v1.tilts ~= true then
+            v2 = v1.shape == "Slab"
+        end
+    end
+
+    return v2
+end
+
+u0.FlipShapes = {Slab = true, Stairs = true, Trapdoor = true, Tile = true}
+
+function u0.flipsShape(a1) -- Line: 1313; upvalues: u0 (val); types: a1: string?
+    local v1 = false
+
+    if a1 ~= nil then
+        v1 = u0.FlipShapes[a1] == true
+    end
+
+    return v1
+end
+
+u0.TiltRadians = 1.5707963267948966
+
+function u0.footprintOf(a1) -- Line: 1322; upvalues: u0 (val), u233 (val); types: a1: string
+    return u0.Footprints[a1] or u233
+end
+
+u0.Plantables = {
+    TreeSapling = {node = "Tree", growthSeconds = 90},
+    PineTreeSapling = {node = "Pine", growthSeconds = 90},
+}
+u0.Fillables = {Bucket = {fromBlock = "WaterBlock", becomes = "WaterBucket"}}
+u0.Containers = {WaterBucket = {places = "WaterBlock", empties = "Bucket"}}
+u0.WellSourceBlock = "WaterBlock"
+u0.Converters = {Plow = {from = {GrassBlock = "FarmSoil", FarmSoil = "GrassBlock", DirtBlock = "FarmSoil"}}}
+u0.Farm = {
+    HydrationRadiusCells = 3,
+    HighlightFloorCells = 1,
+    WaterTintRadiusCells = 12,
+    WaterMinHeightFraction = 0.2,
+    WaterUses = 28,
+    RainRefillSeconds = 15,
+    WateringCan = {ItemId = "WateringCan", Uses = 10, WetSeconds = 600},
+}
+
+function u0.breakDropOf(a1) -- Line: 1446; upvalues: u0 (val); types: a1: string
+    local v1 = u0.Blocks[a1]
+
+    if v1 and v1.dropsAs then
+        return v1.dropsAs
+    end
+
+    return a1
+end
+
+function u0.conversionFor(a1, a2) -- Line: 1452; upvalues: u0 (val); types: a1: string, a2: string?
+    local v1 = u0.Converters[a1]
+
+    if v1 and a2 then
+        return v1.from[a2]
+    end
+
+    return nil
+end
+
+function u0.blockNeedsContainer(a1) -- Line: 1462; upvalues: u0 (val); types: a1: string?
+    if not a1 then
+        return false
+    end
+
+    for i, j in u0.Fillables do
+        if j.fromBlock == a1 then
+            return true
+        end
+    end
+
+    return false
+end
+
+function u0.worldOnly(a1) -- Line: 1478; upvalues: u0 (val); types: a1: string?
+    if u0.blockNeedsContainer(a1) then
+        return true
+    end
+
+    local v1 = if not a1 then nil else u0.Blocks[a1]
+    local v2 = false
+
+    if v1 ~= nil then
+        v2 = false
+
+        if v1.dropsAs ~= nil then
+            v2 = v1.dropsAs ~= a1
+        end
+    end
+
+    return v2
+end
+
+function u0.containerForBlock(a1) -- Line: 1487; upvalues: u0 (val); types: a1: string?
+    if not a1 then
+        return nil
+    end
+
+    for i, j in u0.Fillables do
+        if j.fromBlock == a1 then
+            return i
+        end
+    end
+
+    return nil
+end
+
+local v2 = {requiresSupport = false, supportMustBeStructural = false}
+local v3 = {requiresSupport = true, supportMustBeStructural = true}
+u0.PlacementRuleDefaults = {Block = v2, Machine = v3}
+u0.PlacementRuleOverrides = {
+    Conveyor = v2,
+    ConveyorCorner = v2,
+    ConveyorCornerLeft = v2,
+    ConveyorMerge = v2,
+    ConveyorRampUp = v2,
+    ConveyorRampDown = v2,
+    TreeSapling = v3,
+    PineTreeSapling = v3,
+    WaterBlock = v3,
+    ShinyTank = v2,
+}
+u0.MayFloatWhenUndermined = {StorageChest = true, LargeChest = true, WaterBlock = true, ShinyTank = true}
+
+function u0.placementRuleFor(a1, a2) -- Line: 1565; upvalues: u0 (val); types: a1: string, a2: boolean
+    local v1 = u0.PlacementRuleOverrides[a1]
+
+    if v1 then
+        return v1
+    end
+
+    if a2 then
+        return u0.PlacementRuleDefaults.Machine
+    end
+
+    return u0.PlacementRuleDefaults.Block
+end
+
+return u0
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Config.CropConfig
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Config.CropConfig
+-- Decompile time: 1.19 ms
+
+local u0 = {
+    Crops = {
+        Wheat = {
+            id = "Wheat",
+            seed = "WheatSeeds",
+            growthSeconds = 90,
+            yieldMin = 2,
+            yieldMax = 3,
+            seedChance = 0.45,
+            rareItemId = "GoldenWheatSheaf",
+            rareChance = 0.0015,
+        },
+        Carrot = {
+            id = "Carrot",
+            seed = "CarrotSeeds",
+            growthSeconds = 180,
+            yieldMin = 1,
+            yieldMax = 3,
+            seedChance = 0.35,
+            rareItemId = "HeirloomCarrot",
+            rareChance = 0.0015,
+        },
+        Tomato = {
+            id = "Tomato",
+            seed = "TomatoSeeds",
+            growthSeconds = 215,
+            yieldMin = 1,
+            yieldMax = 3,
+            seedChance = 0.2,
+            rareItemId = "SunRipenedTomato",
+            rareChance = 0.0015,
+        },
+        Onion = {
+            id = "Onion",
+            seed = "OnionSeeds",
+            growthSeconds = 260,
+            yieldMin = 1,
+            yieldMax = 3,
+            seedChance = 0.05,
+            rareItemId = "PearlOnion",
+            rareChance = 0.0015,
+        },
+    },
+    RequiredGround = "FarmSoil",
+}
+local u7 = {}
+
+for i, j in u0.Crops do
+    u7[j.seed] = i
+end
+
+function u0.cropForSeed(a1) -- Line: 88; upvalues: u7 (val), u0 (val); types: a1: string?
+    local v1 = if not a1 then nil else u7[a1]
+
+    if v1 then
+        return u0.Crops[v1]
+    end
+
+    return nil
+end
+
+function u0.isSeed(a1) -- Line: 93; upvalues: u7 (val); types: a1: string
+    return u7[a1] ~= nil
+end
+
+function u0.itemIds() -- Line: 99; upvalues: u0 (val)
+    local v1 = {}
+
+    for i, j in u0.Crops do
+        table.insert(v1, i)
+        table.insert(v1, j.seed)
+        table.insert(v1, j.rareItemId)
+    end
+
+    table.sort(v1)
+
+    return v1
+end
+
+u0.Harvester = {
+    RadiusCells = 4,
+    ActionSeconds = 20,
+    SeedsPerReap = 1,
+    CropBuffer = 24,
+    StopHarvestingAt = 20,
+    ReplantReserveSeconds = 60,
+}
+
+function u0.harvesterFor(a1) -- Line: 157; types: a1: string
+    return (("%*Harvester"):format(a1))
+end
+
+u0.DebugWaterLog = false
+u0.TickSeconds = 3
+u0.SpareStageModels = 64
+local u28 = {}
+
+function u0.cropForHarvester(a1) -- Line: 182; upvalues: u28 (val), u0 (val); types: a1: string
+    local v1
+    local v2 = u28[a1]
+
+    if v2 ~= nil then
+        return v2 or nil
+    end
+
+    v2 = string.match(a1, "^(%a+)Harvester$")
+    u28[a1] = (if not v2 then nil else if not u0.Crops[v2] then nil else v2) or false
+
+    return v1
+end
+
+return u0
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Config.TimeConfig
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Config.TimeConfig
+-- Decompile time: 0.69 ms
+
+local u0 = {
+    {from = 1, to = 5, grey = 170},
+    {from = 6, to = 6, grey = 190},
+    {from = 7, to = 16, grey = 110},
+    {from = 17, to = 17, grey = 150},
+    {from = 18, to = 20, grey = 190},
+    {from = 21, to = 24, grey = 150},
+}
+return {
+    SecondsPerGameHour = 60,
+    DayStartHour = 6,
+    NightStartHour = 21,
+    DayGlyph = "☀",
+    NightGlyph = "🌙",
+    DayLengthSeconds = 900,
+    NightLengthSeconds = 540,
+    FullCycleSeconds = 1440,
+    LightingApplySeconds = 0.5,
+    LightingJumpSeconds = 5,
+    PowerToggleCooldownSeconds = 60,
+    OwnerDisconnectGraceSeconds = 300,
+    AmbientByHour = u0,
+    ambientGrey = function(a1) -- Line: 27; upvalues: u0 (val); types: a1: number
+        local v1 = math.floor(a1) % 24
+
+        if v1 == 0 then
+            v1 = 24
+        end
+
+        for i, j in u0 do
+            if j.from <= v1 and v1 <= j.to then
+                return j.grey
+            end
+        end
+
+        return 110
+    end,
+}
+-- Script Path: game:GetService("ReplicatedStorage").Shared.GrowTime
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.GrowTime
+-- Decompile time: 1.89 ms
+
+local u0 = {
+    LeftAttribute = "GrowLeft",
+    AtAttribute = "GrowAt",
+    RateAttribute = "GrowRate",
+    ItemAttribute = "GrowItem",
+}
+
+function u0.publish(a1, a2, a3, a4, a5)
+    -- Line: 20
+    -- upvalues: u0 (val)
+    -- types: a1: userdata, a2: string, a3: number, a4: number, a5: number
+    a1:SetAttribute(u0.LeftAttribute, (math.max(0, a3)))
+    a1:SetAttribute(u0.AtAttribute, a5)
+    a1:SetAttribute(u0.RateAttribute, a4)
+    a1:SetAttribute(u0.ItemAttribute, a2)
+end
+
+function u0.clear(a1) -- Line: 27; upvalues: u0 (val); types: a1: userdata
+    a1:SetAttribute(u0.LeftAttribute, nil)
+    a1:SetAttribute(u0.AtAttribute, nil)
+    a1:SetAttribute(u0.RateAttribute, nil)
+    a1:SetAttribute(u0.ItemAttribute, nil)
+end
+
+function u0.read(a1, a2) -- Line: 35; upvalues: u0 (val); types: a1: userdata, a2: number
+    local Attribute = a1:GetAttribute(u0.LeftAttribute)
+    local Attribute_2 = a1:GetAttribute(u0.AtAttribute)
+    local Attribute_3 = a1:GetAttribute(u0.RateAttribute)
+    local Attribute_4 = a1:GetAttribute(u0.ItemAttribute)
+
+    if type(Attribute) == "number"
+        and type(Attribute_2) == "number"
+        and type(Attribute_3) == "number"
+        and type(Attribute_4) == "string" then
+        if Attribute_3 <= 0 then
+            return Attribute, 0, Attribute_4
+        end
+
+        return math.max(0, Attribute - (a2 - Attribute_2) * Attribute_3) / Attribute_3, Attribute_3, Attribute_4
+    end
+
+    return nil, nil, nil
+end
+
+function u0.format(a1) -- Line: 50; types: a1: number
+    local v1 = math.max(0, (math.ceil(a1)))
+
+    if v1 >= 3600 then
+        return (("%*h %*m"):format(v1 // 3600, v1 % 3600 // 60))
+    end
+
+    if v1 >= 60 then
+        return (("%*m %*s"):format(v1 // 60, v1 % 60))
+    end
+
+    return (("%*s"):format(v1))
+end
+
+return u0
+-- Script Path: game:GetService("ReplicatedStorage").Shared.ItemKinds
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.ItemKinds
+-- Decompile time: 9.04 ms
+
+local u0 = {
+    Categories = {"Blocks", "Machines", "Items", "Farm", "Collectibles", "Tools"},
+    Overrides = {
+        IronIngot = "Items",
+        GoldIngot = "Items",
+        Bone = "Items",
+        SoulCrystal = "Items",
+        GoldCrystal = "Items",
+        ArcaneCoal = "Items",
+        ArcaneIron = "Items",
+        ArcaneGold = "Items",
+        ArcaneBone = "Items",
+        TomatoBasket = "Items",
+        OnionBasket = "Items",
+        CarrotBasket = "Items",
+        BerryBasket = "Items",
+        Gear = "Items",
+        TreeSapling = "Farm",
+        PineTreeSapling = "Farm",
+        Glass = "Items",
+        ArcanePipe = "Machines",
+        ArcanePipeCorner = "Machines",
+        ArcanePipeRiser = "Machines",
+        ArcanePipeMerge = "Machines",
+        ConveyorMerge = "Machines",
+        InventoryHopper = "Machines",
+        WaterPipe = "Machines",
+        WaterPipeCorner = "Machines",
+        WaterSpout = "Machines",
+        PlateDisplay = "Blocks",
+    },
+}
+local u9 = {}
+
+function u0.build(a1) -- Line: 131; upvalues: u9 (val), u0 (val); types: a1: table
+    local v1, v2, v3, v4
+    local v5 = u9[a1]
+
+    if v5 then
+        return v5
+    end
+
+    local Build = a1.Build
+    local Bush = a1.Bush
+    local Crop = a1.Crop
+    local Enemy = a1.Enemy
+    local Food = a1.Food
+    local Recipe = a1.Recipe
+    local Flower = a1.Flower
+    local Shiny = a1.Shiny
+    local Tool = a1.Tool
+    local u129 = {}
+    local u1481 = {}
+    local u1490 = {}
+
+    local function classify(a1, a2) -- Line: 152; upvalues: u129 (val); types: a1: string?, a2: string
+        if type(a1) == "string" and not u129[a1] then
+            u129[a1] = a2
+        end
+    end
+
+    local v6 = nil
+    local v7 = nil
+
+    for i, j in u0.Overrides, v6, v7 do
+        u129[i] = j
+    end
+
+    if a1.Animal then
+        local id
+
+        for k in a1.Animal.Eggs do
+            if type(k) == "string" and not u129[k] then
+                u129[k] = "Farm"
+            end
+        end
+
+        v6 = nil
+        v7 = nil
+        v1 = a1
+
+        for n, m in a1.Animal.Breeds, v6, v7 do
+            id = m.id
+
+            if type(id) == "string" and not u129[id] then
+                u129[id] = "Farm"
+            end
+
+            u1481[m.id] = true
+        end
+
+        local Livestock = v1.Animal.Livestock or {}
+        v6 = nil
+        v7 = nil
+
+        for i5 in Livestock, v6, v7 do
+            if type(i5) == "string" and not u129[i5] then
+                u129[i5] = "Farm"
+            end
+
+            u1481[i5] = true
+        end
+
+        for i6, i7 in v1.Animal.MilkIds or {} do
+            if type(i7) == "string" and not u129[i7] then
+                u129[i7] = "Farm"
+            end
+        end
+
+        if v1.Animal.Milk then
+            local HayBale = v1.Animal.Milk.HayBale
+
+            if type(HayBale) == "string" and not u129[HayBale] then
+                u129[HayBale] = "Farm"
+            end
+        end
+    end
+
+    for i8 in Build.Blocks do
+        if type(i8) == "string" and not u129[i8] then
+            u129[i8] = "Blocks"
+        end
+    end
+
+    for i9 in Build.Plantables do
+        if type(i9) == "string" and not u129[i9] then
+            u129[i9] = "Blocks"
+        end
+    end
+
+    for i10, i11 in Recipe.Machines do
+        v3 = i11.output
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Machines"
+        end
+    end
+
+    for i12, i13 in Recipe.HarvesterMerges do
+        v3 = i13.output
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Machines"
+        end
+    end
+
+    for i14 in Recipe.CropHarvesterIds do
+        if type(i14) == "string" and not u129[i14] then
+            u129[i14] = "Machines"
+        end
+    end
+
+    for i15 in Recipe.HarvesterIds do
+        if type(i15) == "string" and not u129[i15] then
+            u129[i15] = "Machines"
+        end
+    end
+
+    for i16 in Recipe.BoughtMachines do
+        if type(i16) == "string" and not u129[i16] then
+            u129[i16] = "Machines"
+        end
+    end
+
+    for i17 in Recipe.DroppedMachines or {} do
+        if type(i17) == "string" and not u129[i17] then
+            u129[i17] = "Machines"
+        end
+    end
+
+    local v8 = {Recipe.Tools, Recipe.Weapons, Recipe.Utility}
+    v6 = nil
+    v7 = nil
+
+    for i18, i19 in v8, v6, v7 do
+        for i20, i21 in i19 do
+            v4 = i21.output
+
+            if type(v4) == "string" and not u129[v4] then
+                u129[v4] = "Tools"
+            end
+        end
+    end
+
+    if v1.Weapon then
+        for i22 in v1.Weapon.Weapons do
+            if type(i22) == "string" and not u129[i22] then
+                u129[i22] = "Tools"
+            end
+        end
+    end
+
+    for i23 in Tool.Tools do
+        if type(i23) == "string" and not u129[i23] then
+            u129[i23] = "Tools"
+        end
+    end
+
+    for i24 in Tool.Novelties or {} do
+        if type(i24) == "string" and not u129[i24] then
+            u129[i24] = "Tools"
+        end
+    end
+
+    for i25 in Build.Containers do
+        if type(i25) == "string" and not u129[i25] then
+            u129[i25] = "Tools"
+        end
+    end
+
+    if v1.Wearable then
+        for i26 in v1.Wearable.Items do
+            if type(i26) == "string" and not u129[i26] then
+                u129[i26] = "Tools"
+            end
+        end
+
+        for i27, i28 in v1.Wearable.RetiredItems or {} do
+            if type(i28) == "string" and not u129[i28] then
+                u129[i28] = "Collectibles"
+            end
+        end
+    end
+
+    for i29, i30 in Crop.Crops do
+        v3 = i30.seed
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+    end
+
+    if Recipe.Compost then
+        v8 = Recipe.Compost.Output
+
+        if type(v8) == "string" and not u129[v8] then
+            u129[v8] = "Farm"
+        end
+    end
+
+    if Flower.Beehive then
+        v8 = Flower.Beehive.Output
+
+        if type(v8) == "string" and not u129[v8] then
+            u129[v8] = "Farm"
+        end
+    end
+
+    for i31, i32 in Bush.Bushes do
+        v3 = i32.seed
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i33, i34 in Crop.Crops, v6, v7 do
+        v3 = i34.id
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+
+        v3 = i34.rareItemId
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i35, i36 in Bush.Bushes, v6, v7 do
+        v3 = i36.produce
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+
+        v3 = i36.rareItemId
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i37 in Flower.Flowers, v6, v7 do
+        if type(i37) == "string" and not u129[i37] then
+            u129[i37] = "Farm"
+        end
+
+        u1481[i37] = true
+    end
+
+    for i38 in Shiny.PieceFamily do
+        if type(i38) == "string" and not u129[i38] then
+            u129[i38] = "Collectibles"
+        end
+    end
+
+    for i39, i40 in Recipe.Food do
+        v3 = i40.output
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Farm"
+        end
+    end
+
+    for i41 in Food.Foods do
+        if type(i41) == "string" and not u129[i41] then
+            u129[i41] = "Farm"
+        end
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i42, i43 in Tool.Nodes, v6, v7 do
+        v3 = i43.resource
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Items"
+        end
+
+        if i43.bonusDrop then
+            v3 = i43.bonusDrop.itemId
+
+            if type(v3) == "string" and not u129[v3] then
+                u129[v3] = "Items"
+            end
+        end
+    end
+
+    for i44, i45 in Enemy.Enemies do
+        v3 = i45.dropId
+
+        if type(v3) == "string" and not u129[v3] then
+            u129[v3] = "Items"
+        end
+    end
+
+    for i46 in Build.Blocks do
+        u1481[i46] = true
+    end
+
+    v8 = {Recipe.Machines, Recipe.HarvesterMerges}
+    v6 = nil
+    v7 = nil
+
+    for i47, i48 in v8, v6, v7 do
+        for i49, i50 in i48 do
+            u1481[i50.output] = true
+        end
+    end
+
+    for i51 in Recipe.HarvesterIds do
+        u1481[i51] = true
+    end
+
+    for i52 in Recipe.BoughtMachines do
+        u1481[i52] = true
+    end
+
+    for i53 in Recipe.DroppedMachines or {} do
+        u1481[i53] = true
+    end
+
+    for i54 in Recipe.CropHarvesterIds do
+        u1481[i54] = true
+    end
+
+    for i55 in Build.Plantables do
+        u1481[i55] = true
+    end
+
+    for i56 in Build.Containers do
+        u1481[i56] = true
+    end
+
+    for i57, i58 in Bush.Bushes do
+        u1481[i58.seed] = true
+    end
+
+    for i59, i60 in Crop.Crops do
+        u1481[i60.seed] = true
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i61, i62 in Recipe.Tools, v6, v7 do
+        v2 = Tool.Tools[i62.output]
+        v3 = i62.output
+        u1490[v3] = if not v2 then "Pickaxe" else v2.class
+    end
+
+    v6 = nil
+    v7 = nil
+
+    for i63, i64 in Recipe.Weapons, v6, v7 do
+        u1490[i64.output] = "Weapon"
+    end
+
+    if v1.Weapon then
+        v6 = nil
+        v7 = nil
+
+        for i65, i66 in v1.Weapon.Weapons, v6, v7 do
+            v3 = if not i66.lasso then "Weapon" else nil
+            u1490[i65] = v3
+        end
+    end
+
+    for i67, i68 in Tool.Tools do
+        if not i68.craftable then
+            u1490[i67] = i68.class
+        end
+    end
+
+    u1490.WoodSword = "Weapon"
+    local v9 = {
+        categoryOf = function(a1) -- Line: 414; upvalues: u129 (val); types: a1: string?
+            if type(a1) == "string" then
+                return u129[a1]
+            end
+
+            return nil
+        end,
+        isPlaceable = function(a1) -- Line: 418; upvalues: u1481 (val); types: a1: string?
+            local v1 = false
+
+            if type(a1) == "string" then
+                v1 = u1481[a1] == true
+            end
+
+            return v1
+        end,
+        equipSlotOf = function(a1) -- Line: 422; upvalues: u1490 (val); types: a1: string?
+            if type(a1) == "string" then
+                return u1490[a1]
+            end
+
+            return nil
+        end,
+        equipmentFor = function(a1) -- Line: 427; upvalues: u1490 (val); types: a1: string
+            local v1 = {}
+
+            for i, j in u1490 do
+                if j == a1 then
+                    table.insert(v1, i)
+                end
+            end
+
+            table.sort(v1)
+
+            return v1
+        end,
+    }
+    u9[v1] = v9
+
+    return v9
+end
+
+return u0
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Validate
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Validate
+-- Decompile time: 1.28 ms
+
+local u0 = {}
+
+function u0.finite(a1) -- Line: 26
+    if type(a1) ~= "number" then
+        return nil
+    end
+
+    if a1 == a1 and a1 ~= (1 / 0) and a1 ~= (-1 / 0) then
+        return a1
+    end
+
+    return nil
+end
+
+function u0.integer(a1, a2, a3) -- Line: 41; upvalues: u0 (val); types: a2: number, a3: number
+    local v1 = u0.finite(a1)
+
+    if not v1 then
+        return nil
+    end
+
+    v1 = math.floor(v1)
+
+    if not (v1 < a2) and not (a3 < v1) then
+        return v1
+    end
+
+    return nil
+end
+
+function u0.wholeNumber(a1, a2, a3) -- Line: 56; upvalues: u0 (val); types: a2: number, a3: number
+    local v1 = u0.finite(a1)
+
+    if v1 and v1 == math.floor(v1) and not (v1 < a2) and not (a3 < v1) then
+        return v1
+    end
+
+    return nil
+end
+
+function u0.cutText(a1, a2) -- Line: 73; types: a1: string, a2: number
+    local v1, v2
+    local v3 = string.sub(a1, 1, a2 + 4)
+    local v4 = #v3
+
+    for i = 1, v4 do
+        v1, v2 = utf8.len(v3)
+
+        if v1 then
+            break
+        end
+
+        v3 = (string.sub(v3, 1, v2 - 1)) .. "?" .. string.sub(v3, v2 + 1)
+    end
+
+    v4 = if not (a2 < #v3) then v3 else string.sub(v3, 1, a2)
+
+    for j = 1, 4 do
+        if utf8.len(v4) then
+            return v4
+        end
+
+        v4 = string.sub(v4, 1, #v4 - 1)
+    end
+
+    return v4
+end
+
+u0.MaxStackKey = 160
+
+function u0.stackKey(a1) -- Line: 104; upvalues: u0 (val)
+    if type(a1) ~= "string" then
+        return nil
+    end
+
+    if #a1 ~= 0 and not (u0.MaxStackKey < #a1) then
+        if not string.match(a1, "^%w[%w _;=%.%-@]*$") then
+            return nil
+        end
+
+        return a1
+    end
+
+    return nil
+end
+
+return u0
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Config.AssociateConfig
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Config.AssociateConfig
+-- Decompile time: 0.22 ms
+
+return {
+    StoreName = "AboveAssociates_v1",
+    Keep = 50,
+    FlushSeconds = 300,
+    VisitTickSeconds = 60,
+    QuickRevokeSeconds = 1800,
+    ReportTop = 6,
+    Weights = {
+        coop = 40,
+        coopMinute = 0.1,
+        grant = 25,
+        quickRevoke = 15,
+        trade = 3,
+        pickup = 3,
+        chest = 2,
+        place = 0.5,
+        visitMinute = 0.05,
+        follow = 5,
+        valuePerThousand = 2,
+    },
+}
