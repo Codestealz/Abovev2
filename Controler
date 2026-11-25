@@ -1,1 +1,3773 @@
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.GrowTimeController
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.GrowTimeController
+-- Decompile time: 4.79 ms
+
+local GuiService = game:GetService("GuiService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local DisplayNames = require(Shared.DisplayNames)
+local Grid = require(Shared.Grid)
+local GrowTime = require(Shared.GrowTime)
+local u46 = require(script.Parent.TutorialController)
+local Ui = require(script.Parent.Parent.Ui)
+local v1 = {}
+local LocalPlayer = Players.LocalPlayer
+local u61 = Config.Player.PromptReachCells * Grid.CellSize
+    + Config.Player.IndustrialPromptBonusStuds
+local u66 = Vector2.new(18, 20)
+local u69 = RaycastParams.new()
+u69.FilterType = Enum.RaycastFilterType.Exclude
+
+local function usingMouse() -- Line: 43; upvalues: UserInputService (val)
+    local LastInputType = UserInputService:GetLastInputType()
+    local MouseEnabled = UserInputService.MouseEnabled
+
+    if MouseEnabled then
+        MouseEnabled = false
+
+        if LastInputType ~= Enum.UserInputType.Touch then
+            MouseEnabled = not string.find(LastInputType.Name, "Gamepad", 1, true)
+        end
+    end
+
+    return MouseEnabled
+end
+
+local function plantUnderPointer()
+    -- Line: 51
+    -- upvalues: UserInputService (val), u69 (val), LocalPlayer (val), u61 (val), GrowTime (val)
+    local CurrentCamera = workspace.CurrentCamera
+
+    if not CurrentCamera then
+        return nil
+    end
+
+    local MouseLocation = UserInputService:GetMouseLocation()
+    local v1 = CurrentCamera:ViewportPointToRay(MouseLocation.X, MouseLocation.Y)
+    u69.FilterDescendantsInstances = if not LocalPlayer.Character then {} else {LocalPlayer.Character}
+    local v2 = workspace:Raycast(v1.Origin, v1.Direction * 80, u69)
+    local Character = LocalPlayer.Character
+        and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+    if v2
+        and Character
+        and Character:IsA("BasePart")
+        and not (u61 < (v2.Position - Character.Position).Magnitude) then
+        local Instance_2 = v2.Instance
+
+        for i = 1, 4 do
+            if Instance_2 and Instance_2 ~= workspace then
+                if Instance_2:GetAttribute(GrowTime.LeftAttribute) == nil then
+                    continue
+                end
+
+                return Instance_2
+            end
+
+            return nil
+        end
+
+        return nil
+    end
+
+    return nil
+end
+
+local function overlaps(a1, a2, a3, a4) -- Line: 77; types: a1: userdata, a2: userdata, a3: userdata, a4: userdata
+    local v1 = false
+
+    if a1.X < a3.X + a4.X then
+        v1 = false
+
+        if a3.X < a1.X + a2.X then
+            v1 = false
+
+            if a1.Y < a3.Y + a4.Y then
+                v1 = a3.Y < a1.Y + a2.Y
+            end
+        end
+    end
+
+    return v1
+end
+
+function v1.start()
+    -- Line: 84
+    -- upvalues: LocalPlayer (val), Ui (val), RunService (val), UserInputService (val), plantUnderPointer (val)
+    -- upvalues: GrowTime (val), DisplayNames (val), GuiService (val), u66 (val), u46 (val)
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "GrowTime"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.IgnoreGuiInset = false
+    ScreenGui.DisplayOrder = 5
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    local Frame = Instance.new("Frame")
+    Frame.Name = "Box"
+    Frame.AutomaticSize = Enum.AutomaticSize.XY
+    Frame.Size = UDim2.fromOffset(0, 0)
+    Frame.BackgroundColor3 = Color3.fromRGB(16, 20, 37)
+    Frame.BackgroundTransparency = 0.1
+    Frame.BorderSizePixel = 0
+    Frame.Active = false
+    Frame.Visible = false
+    Frame.Parent = ScreenGui
+
+    Ui.corner(Frame, 6)
+
+    local UIPadding = Instance.new("UIPadding")
+    UIPadding.PaddingTop = UDim.new(0, 4)
+    UIPadding.PaddingBottom = UDim.new(0, 4)
+    UIPadding.PaddingLeft = UDim.new(0, 8)
+    UIPadding.PaddingRight = UDim.new(0, 8)
+    UIPadding.Parent = Frame
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.AutomaticSize = Enum.AutomaticSize.XY
+    TextLabel.Size = UDim2.fromOffset(0, 0)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.FontFace = Ui.Font.Bold
+    TextLabel.TextSize = 14
+    TextLabel.TextColor3 = Ui.Tone.Info
+    TextLabel.Parent = Frame
+    local u70 = nil
+    local u71 = 0
+
+    RunService.RenderStepped:Connect(function()
+        -- Line: 123
+        -- upvalues: u71 (ref), u70 (ref), UserInputService (upval), plantUnderPointer (upval), Frame (val)
+        -- upvalues: GrowTime (upval), DisplayNames (upval), TextLabel (val), GuiService (upval), u66 (upval)
+        -- upvalues: ScreenGui (val), u46 (upval)
+        local v1 = os.clock()
+
+        if 0.06666666666666667 <= v1 - u71 then
+            u71 = v1
+            local LastInputType = UserInputService:GetLastInputType()
+            local MouseEnabled = UserInputService.MouseEnabled
+
+            if MouseEnabled then
+                MouseEnabled = false
+
+                if LastInputType ~= Enum.UserInputType.Touch then
+                    MouseEnabled = not string.find(LastInputType.Name, "Gamepad", 1, true)
+                end
+            end
+
+            u70 = if not MouseEnabled then nil else plantUnderPointer()
+        end
+
+        v1 = u70
+
+        if v1 and v1.Parent then
+            local v2, v3, v4 = GrowTime.read(v1, workspace:GetServerTimeNow())
+
+            if v2 and v4 then
+                local v5
+
+                if v3 ~= 0 and v2 <= 0 then
+                    Frame.Visible = false
+                    return
+                end
+
+                v1 = DisplayNames.of(v4)
+                local v6 = if v3 ~= 0 then
+                    ("%*: %*"):format(v1, (GrowTime.format(v2)))
+                else
+                    ("%*: needs water"):format(v1)
+                TextLabel.Text = v6
+                local GuiInset = GuiService:GetGuiInset()
+                v3 = UserInputService:GetMouseLocation() - GuiInset + u66
+                local AbsoluteSize = Frame.AbsoluteSize
+                local AbsoluteSize_2 = ScreenGui.AbsoluteSize
+                v3 = Vector2.new(math.min(v3.X, AbsoluteSize_2.X - AbsoluteSize.X - 4), (math.min(v3.Y, AbsoluteSize_2.Y - AbsoluteSize.Y - 4)))
+                v5, v6 = u46.cardRect()
+
+                if v5 and v6 then
+                    local v7 = false
+
+                    if v3.X < v5.X + v6.X then
+                        v7 = false
+
+                        if v5.X < v3.X + AbsoluteSize.X then
+                            v7 = false
+
+                            if v3.Y < v5.Y + v6.Y then
+                                v7 = v5.Y < v3.Y + AbsoluteSize.Y
+                            end
+                        end
+                    end
+
+                    if v7 then
+                        v3 = Vector2.new(v3.X, v3.Y - AbsoluteSize.Y - u66.Y * 2)
+                        v7 = false
+
+                        if v3.X < v5.X + v6.X then
+                            v7 = false
+
+                            if v5.X < v3.X + AbsoluteSize.X then
+                                v7 = false
+
+                                if v3.Y < v5.Y + v6.Y then
+                                    v7 = v5.Y < v3.Y + AbsoluteSize.Y
+                                end
+                            end
+                        end
+
+                        if v7 then
+                            Frame.Visible = false
+                            return
+                        end
+                    end
+                end
+
+                Frame.Position = UDim2.fromOffset(v3.X, v3.Y)
+                Frame.Visible = true
+
+                return
+            end
+
+            Frame.Visible = false
+
+            return
+        end
+
+        Frame.Visible = false
+    end)
+end
+
+return v1
+
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.ChickenController
+-- Took 0.02s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.ChickenController
+-- Decompile time: 24.63 ms
+
+local CollectionService = game:GetService("CollectionService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local Remotes = require(Shared.Remotes)
+local AnimalConfig = require(Shared.Config.AnimalConfig)
+local AnimalPath = require(Shared.AnimalPath)
+local HorseCoat = require(Shared.HorseCoat)
+local Palette = require(Shared.Palette)
+local Prefabs = require(Shared.Prefabs)
+local u57 = require(script.Parent.Parent.Ui)
+local AudioController = require(script.Parent.AudioController)
+local WaitingIcon = require(script.Parent.WaitingIcon)
+local v1 = {}
+local Wander = Config.Animal.Wander
+local Wild = Config.Animal.Wild
+local NameLabel = Config.Animal.NameLabel
+
+local function grownHeight(a1) -- Line: 59; upvalues: AnimalConfig (val); types: a1: string
+    return AnimalConfig.BodyStuds[a1] or 2
+end
+
+local u76 = {}
+local u80 = setmetatable(
+    {},
+    {__mode = "k"}
+)
+local u81 = nil
+local Sound = Config.Sound
+local u83 = (-1 / 0)
+
+local function callGap() -- Line: 120; upvalues: Sound (val)
+    local AnimalCallGapSeconds = Sound.AnimalCallGapSeconds
+    return AnimalCallGapSeconds.Min
+        + math.random() * (AnimalCallGapSeconds.Max - AnimalCallGapSeconds.Min)
+end
+
+local function soundAt(a1) -- Line: 125; types: a1: table
+    return a1.body.PrimaryPart or a1.at
+end
+
+local function stopGraze(a1) -- Line: 130; types: a1: table
+    local graze = a1.graze
+
+    if not graze then
+        return
+    end
+
+    local Parent = graze.Parent
+    graze:Destroy()
+
+    if Parent and Parent:IsA("Attachment") then
+        Parent:Destroy()
+    end
+
+    a1.graze = nil
+end
+
+local function decided(a1, a2, a3)
+    -- Line: 147
+    -- upvalues: Sound (val), AudioController (val), u83 (ref)
+    -- types: a1: table, a2: string, a3: number
+    local action = a1.action
+
+    if action ~= a2 then
+        local Parent, graze, v1
+
+        if action == "Reeled" then
+            v1 = Sound.AnimalCaught[a1.species]
+
+            if v1 then
+                AudioController.play(v1, a1.body.PrimaryPart or a1.at)
+            end
+        elseif action == "Run" then
+            v1 = Sound.AnimalScared[a1.species]
+
+            if v1 then
+                AudioController.play(v1, a1.body.PrimaryPart or a1.at)
+            end
+        end
+
+        v1 = false
+
+        if action == "Graze" then
+            v1 = Sound.GrazeLoopSpecies[a1.species] == true
+        end
+
+        if not v1 then
+            if not v1 and a1.graze then
+                graze = a1.graze
+
+                if graze then
+                    Parent = graze.Parent
+                    graze:Destroy()
+
+                    if Parent and Parent:IsA("Attachment") then
+                        Parent:Destroy()
+                    end
+
+                    a1.graze = nil
+                end
+            end
+        elseif not a1.graze then
+            a1.graze = AudioController.play("AnimalGraze", a1.body.PrimaryPart or a1.at)
+        elseif not v1 and a1.graze then
+            graze = a1.graze
+
+            if graze then
+                Parent = graze.Parent
+                graze:Destroy()
+
+                if Parent and Parent:IsA("Attachment") then
+                    Parent:Destroy()
+                end
+
+                a1.graze = nil
+            end
+        end
+    end
+
+    if action ~= "Reeled"
+        and not (a3 < a1.nextCallAt)
+        and not (a3 - u83 < Sound.AnimalCallSpacingSeconds) then
+        local AnimalCalls = Sound.AnimalCalls
+        local v2 = AnimalCalls[if a1.species ~= "Chicken" then a1.species else if a1.grown then a1.species else "Chick"]
+
+        if v2 then
+            AudioController.play(v2, a1.body.PrimaryPart or a1.at)
+
+            u83 = a3
+        end
+
+        local AnimalCallGapSeconds = Sound.AnimalCallGapSeconds
+        a1.nextCallAt = a3
+            + (AnimalCallGapSeconds.Min
+                + math.random() * (AnimalCallGapSeconds.Max - AnimalCallGapSeconds.Min))
+    end
+end
+
+local function chickArt(a1) -- Line: 185; upvalues: Prefabs (val); types: a1: string
+    return Prefabs.animal((("%*Chick"):format(a1)))
+end
+
+local function makeBody(a1, a2)
+    -- Line: 189
+    -- upvalues: Prefabs (val), Config (val), Palette (val)
+    -- types: a1: string, a2: boolean
+    local new, v1, v2, v3, v4, v5
+    local v6 = (if not a2 then Prefabs.animal((("%*Chick"):format(a1))) else nil)
+        or Prefabs.animal(a1)
+
+    if v6 and v6:IsA("Model") then
+        v5 = true
+
+        if v6:FindFirstChildWhichIsA("Humanoid", true) == nil then
+            v5 = v6:FindFirstChildWhichIsA("AnimationController", true) ~= nil
+        end
+
+        if not v6.PrimaryPart then
+            local HumanoidRootPart = v6:FindFirstChild("HumanoidRootPart")
+                or v6:FindFirstChildWhichIsA("BasePart", true)
+            v6.PrimaryPart = HumanoidRootPart
+        end
+
+        for i, j in v6:GetDescendants() do
+            if j:IsA("BasePart") then
+                v1 = not v5 or j == v6.PrimaryPart
+                j.Anchored = v1
+                j.CanCollide = false
+                j.CanQuery = false
+                j.CanTouch = false
+
+                if v5 then
+                    j.Massless = true
+                end
+            elseif j:IsA("Humanoid") then
+                j.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+            end
+        end
+
+        return v6, v4 ~= nil
+    end
+
+    v6 = Prefabs.clone(Config.Enemy.ArtCategory, Config.Enemy.ArtName)
+
+    if not v6 or not v6:IsA("Model") then
+        v5 = Instance.new("Model")
+        v4 = Instance.new("Part")
+        v4.Name = "Outside"
+        v4.Shape = Enum.PartType.Ball
+        v4.Size = Vector3.new(2, 2, 2)
+        v4.Parent = v5
+        v5.PrimaryPart = v4
+    else
+        v5 = v6
+    end
+
+    v6 = Palette.colorFor(a1)
+
+    for k, n in v5:GetDescendants() do
+        if n:IsA("BasePart") then
+            n.Anchored = true
+            n.CanCollide = false
+            n.CanQuery = false
+            n.CanTouch = false
+
+            if table.find(Config.Enemy.TintedParts, n.Name) then
+                n.Color = v6
+            end
+
+            v1 = Config.Enemy.ShadedParts[n.Name]
+
+            if v1 then
+                new = Color3.new
+                v2 = v6.R * v1
+                v3 = v6.G * v1
+                n.Color = new(v2, v3, v6.B * v1)
+            end
+        end
+    end
+
+    return v5, false
+end
+
+local function loadTracks(a1) -- Line: 249; types: a1: userdata
+    local Animations = a1:FindFirstChild("Animations")
+    local Humanoid = a1:FindFirstChildWhichIsA("Humanoid", true)
+        or a1:FindFirstChildWhichIsA("AnimationController", true)
+
+    if Animations and Humanoid then
+        local success
+        local Animator = Humanoid:FindFirstChildOfClass("Animator")
+
+        if not Animator then
+            Animator = Instance.new("Animator")
+            Animator.Parent = Humanoid
+        end
+
+        local v1 = {}
+
+        for i, j in Animations:GetChildren() do
+            if j:IsA("Animation") then
+                success, err = pcall(function() -- Line: 264; upvalues: Animator (ref), j (val)
+                    return Animator:LoadAnimation(j)
+                end)
+
+                if success and err then
+                    if j.Name ~= "Reeled" then
+                        u57 = true
+                    else
+                        local u57 = false
+                    end
+
+                    err.Looped = u57
+                    ;(err:GetPropertyChangedSignal("Length")):Once(function()
+                        -- Line: 273
+                        -- upvalues: err (val), u57 (val)
+                        err.Looped = u57
+                    end)
+
+                    v1[j.Name] = err
+                end
+            end
+        end
+
+        return if not next(v1) then nil else v1
+    end
+
+    return nil
+end
+
+local u91 = {Peck = true, Graze = true, Reeled = true}
+
+local function play(a1, a2) -- Line: 287; upvalues: u91 (val); types: a1: table, a2: string
+    local tracks = a1.tracks
+
+    if not tracks then
+        return false
+    end
+
+    local v1 = if not tracks[a2] then
+        if a2 ~= "Run" then
+            if not u91[a2] then nil else if not tracks.Idle then nil else "Idle"
+        else
+            if not tracks.Walk then
+                if not u91[a2] then nil else if not tracks.Idle then nil else "Idle"
+            else
+                "Walk"
+    else
+        a2
+
+    if v1 ~= a1.playing then
+        local playing = a1.playing
+
+        if playing and tracks[playing] then
+            tracks[playing]:Stop(0.2)
+        end
+
+        a1.playing = v1
+    end
+
+    if v1 and not tracks[v1].IsPlaying then
+        local v2 = tracks[v1]
+        v2.Looped = v1 ~= "Reeled"
+
+        tracks[v1]:Play(0.2)
+    end
+
+    return v1 ~= nil
+end
+
+local function fit(a1) -- Line: 313; upvalues: AnimalConfig (val), Wander (val); types: a1: table
+    local BoundingBox_2
+    _, BoundingBox_2 = a1.body:GetBoundingBox()
+    local v1 = (AnimalConfig.BodyStuds[a1.species] or 2)
+        * (if not a1.grown then Wander.ChickScale else 1)
+
+    if 0 < BoundingBox_2.Y then
+        a1.body:ScaleTo(a1.body:GetScale() * v1 / BoundingBox_2.Y)
+    end
+
+    a1.height = v1
+    local BoundingBox_3 = a1.body:GetBoundingBox()
+    a1.middle = (a1.body:GetPivot()):PointToObjectSpace(BoundingBox_3.Position)
+end
+
+local function makeLabel(a1) -- Line: 327; upvalues: u57 (val); types: a1: table
+    local BillboardGui = Instance.new("BillboardGui")
+    BillboardGui.Size = UDim2.fromOffset(60, 20)
+    BillboardGui.AlwaysOnTop = false
+    BillboardGui.MaxDistance = 40
+    BillboardGui.LightInfluence = 0
+    BillboardGui.Adornee = a1.body.PrimaryPart
+    BillboardGui.StudsOffsetWorldSpace = Vector3.new(0, 1.600000023841858, 0)
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Size = UDim2.fromScale(1, 1)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextColor3 = u57.Tone.Info
+    TextLabel.TextStrokeTransparency = 0.4
+    TextLabel.FontFace = u57.Font.Bold
+    TextLabel.TextSize = 14
+    TextLabel.Parent = BillboardGui
+    BillboardGui.Parent = a1.body
+    a1.label = BillboardGui
+    a1.text = TextLabel
+end
+
+local function makeName(a1) -- Line: 351; upvalues: u57 (val); types: a1: table
+    if a1.wild then
+        return
+    end
+
+    local BillboardGui = Instance.new("BillboardGui")
+    BillboardGui.Name = "AnimalName"
+    BillboardGui.Size = UDim2.fromOffset(120, 16)
+    BillboardGui.AlwaysOnTop = true
+    BillboardGui.MaxDistance = 60
+    BillboardGui.LightInfluence = 0
+    BillboardGui.Enabled = false
+    BillboardGui.Adornee = a1.body.PrimaryPart
+    BillboardGui.StudsOffsetWorldSpace = Vector3.new(0, a1.height / 2 + 0.25, 0)
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.AutoLocalize = false
+    TextLabel.Size = UDim2.fromScale(1, 1)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextColor3 = u57.Tone.Info
+    TextLabel.TextTransparency = 0.15
+    TextLabel.TextStrokeTransparency = 0.65
+    TextLabel.FontFace = u57.Font.Regular
+    TextLabel.TextSize = 13
+    TextLabel.Parent = BillboardGui
+    BillboardGui.Parent = a1.body
+    a1.nameLabel = BillboardGui
+    a1.nameText = TextLabel
+end
+
+local function add(a1)
+    -- Line: 382
+    -- upvalues: u76 (val), CollectionService (val), Wild (val), Config (val), u80 (val), Players (val)
+    -- upvalues: AnimalConfig (val), Wander (val), Sound (val), makeBody (val), fit (val), u81 (ref), loadTracks (val)
+    -- upvalues: makeLabel (val), makeName (val), HorseCoat (val)
+    -- types: a1: userdata
+    if a1:IsA("BasePart") and not u76[a1] then
+        local u13 = CollectionService:HasTag(a1, Wild.Tag)
+        local Attribute = a1:GetAttribute(if not u13 then "MachineId" else "Breed")
+        local u29 = if type(Attribute) ~= "string" then
+            nil
+        else
+            Config.Animal.speciesOf(Attribute)
+
+        if type(Attribute) == "string" and u29 then
+            a1.LocalTransparencyModifier = 1
+
+            for i, j in a1:GetDescendants() do
+                if j:IsA("BasePart") then
+                    j.LocalTransparencyModifier = 1
+                end
+            end
+
+            if not u80[a1] then
+                u80[a1] = true
+                a1.DescendantAdded:Connect(function(a1) -- Line: 403
+                    if a1:IsA("BasePart") then
+                        a1.LocalTransparencyModifier = 1
+                    end
+                end)
+            end
+
+            if u13 and not Config.Release.featureOn("Animals", Players.LocalPlayer) then
+                return
+            end
+
+            local Attribute_2 = a1:GetAttribute("AnimalHome")
+            local v1 = if typeof(Attribute_2) ~= "Vector3" then
+                a1.Position - Vector3.new(0, a1.Size.Y / 2, 0)
+            else
+                Attribute_2
+
+            if not u13 then
+                a1:SetAttribute("AnimalHome", v1)
+            end
+
+            local u96 = {
+                chickModel = false,
+                middle = Vector3.new(0, 0, 0),
+                action = "Idle",
+                textAt = 0,
+                nameAt = 0,
+            }
+            u96.cell = a1
+            u96.body = Instance.new("Model")
+            u96.height = AnimalConfig.BodyStuds[u29] or 2
+            local v2 = u13
+
+            if not v2 then
+                v2 = true
+
+                if u29 == "Chicken" then
+                    v2 = a1:GetAttribute(Wander.GrownAttribute) == true
+                end
+            end
+
+            u96.grown = v2
+            u96.home = v1
+            u96.at = v1
+            u96.restUntil = os.clock() + math.random() * 2
+            u96.yaw = math.random() * 3.141592653589793 * 2
+            u96.wild = u13
+            u96.species = u29
+            u96.routine = AnimalConfig.newRoutineState(os.clock(), math.random)
+            local v3 = os.clock()
+            local AnimalCallGapSeconds = Sound.AnimalCallGapSeconds
+            u96.nextCallAt = v3
+                + (AnimalCallGapSeconds.Min
+                    + math.random() * (AnimalCallGapSeconds.Max - AnimalCallGapSeconds.Min))
+            u96.connections = {}
+            v2, v3 = makeBody(Attribute, u96.grown)
+            u96.body = v2
+            u96.chickModel = v3
+
+            fit(u96)
+
+            u96.body.Parent = u81
+            u96.tracks = loadTracks(u96.body)
+
+            makeLabel(u96)
+            makeName(u96)
+
+            u76[a1] = u96
+
+            if u29 == Config.Animal.Mount.Species then
+                local Attribute_3 = a1:GetAttribute(Config.Cosmetic.HorseCoatAttribute)
+                HorseCoat.apply(u96.body, if type(Attribute_3) ~= "string" then nil else Attribute_3)
+
+                table.insert(
+                    u96.connections,
+                    ((a1:GetAttributeChangedSignal(Config.Cosmetic.HorseCoatAttribute)):Connect(function()
+                        -- Line: 457
+                        -- upvalues: a1 (val), Config (upval), HorseCoat (upval), u96 (val)
+                        local Attribute = a1:GetAttribute(Config.Cosmetic.HorseCoatAttribute)
+                        HorseCoat.apply(u96.body, if type(Attribute) ~= "string" then nil else Attribute)
+                    end))
+                )
+            end
+
+            table.insert(
+                u96.connections,
+                ((a1:GetAttributeChangedSignal(Wander.GrownAttribute)):Connect(function()
+                    -- Line: 469
+                    -- upvalues: u96 (val), u13 (val), u29 (val), a1 (val), Wander (upval), makeBody (upval)
+                    -- upvalues: Attribute (val), fit (upval), u81 (upval), loadTracks (upval), makeLabel (upval)
+                    -- upvalues: makeName (upval)
+                    local v1 = u13
+
+                    if not v1 then
+                        v1 = true
+
+                        if u29 == "Chicken" then
+                            v1 = a1:GetAttribute(Wander.GrownAttribute) == true
+                        end
+                    end
+
+                    u96.grown = v1
+                    u96.drawn = nil
+                    u96.textAt = 0
+
+                    if u96.grown and u96.chickModel then
+                        local Parent = u96.body.Parent
+                        u96.body:Destroy()
+
+                        local v2, v3 = makeBody(Attribute, true)
+                        u96.body = v2
+                        u96.chickModel = v3
+
+                        fit(u96)
+
+                        u96.body.Parent = u81
+                        u96.tracks = (loadTracks(u96.body))
+                        u96.playing = nil
+                        u96.body.Parent = Parent
+
+                        makeLabel(u96)
+                        makeName(u96)
+
+                        return
+                    end
+
+                    fit(u96)
+                end))
+            )
+        end
+    end
+end
+
+local function remove(a1) -- Line: 493; upvalues: u76 (val); types: a1: userdata
+    local v1 = u76[a1]
+
+    if v1 then
+        for i, j in v1.connections do
+            j:Disconnect()
+        end
+
+        local graze = v1.graze
+
+        if graze then
+            local Parent = graze.Parent
+            graze:Destroy()
+
+            if Parent and Parent:IsA("Attachment") then
+                Parent:Destroy()
+            end
+
+            v1.graze = nil
+        end
+
+        v1.body:Destroy()
+
+        u76[a1] = nil
+    end
+end
+
+local function countdown(a1) -- Line: 506; upvalues: Wander (val), Workspace (val); types: a1: userdata
+    local Attribute = a1:GetAttribute(Wander.MaturesAtAttribute)
+
+    if type(Attribute) ~= "number" then
+        return nil
+    end
+
+    local v1 = math.max(0, (math.ceil(Attribute - (Workspace:GetServerTimeNow()))))
+
+    return string.format("%d:%02d", v1 // 60, v1 % 60)
+end
+
+local function baleNear(a1) -- Line: 518; upvalues: Config (val), CollectionService (val); types: a1: table
+    local Magnitude
+    local v1 = nil
+    local HayReachStuds = Config.Animal.Milk.HayReachStuds
+
+    for i, j in CollectionService:GetTagged(Config.Animal.Milk.FeederTag) do
+        if j:IsA("BasePart") then
+            Magnitude = (j.Position - a1.home).Magnitude
+
+            if Magnitude <= HayReachStuds then
+                v1 = j
+                HayReachStuds = Magnitude
+            end
+        end
+    end
+
+    return v1
+end
+
+local u101 = RaycastParams.new()
+u101.FilterType = Enum.RaycastFilterType.Exclude
+
+local function groundIdAt(a1, a2) -- Line: 535; upvalues: u101 (val), Workspace (val); types: a1: vector, a2: table
+    u101.FilterDescendantsInstances = a2
+    local v1 = Workspace:Raycast(a1 + Vector3.new(0, 2, 0), Vector3.new(0, -6, 0), u101)
+    local Attribute = if not v1 then nil else v1.Instance:GetAttribute("BlockId")
+
+    if type(Attribute) == "string" then
+        return Attribute
+    end
+
+    return nil
+end
+
+local function walkIgnore() -- Line: 547; upvalues: u81 (ref), u76 (val), Players (val)
+    local v1 = {u81}
+
+    for i in u76 do
+        table.insert(v1, i)
+    end
+
+    local Character = Players.LocalPlayer.Character
+
+    if Character then
+        table.insert(v1, Character)
+    end
+
+    return v1
+end
+
+local function walkTo(a1, a2)
+    -- Line: 560
+    -- upvalues: AnimalPath (val), u81 (ref), u76 (val), Players (val)
+    -- types: a1: table, a2: vector
+    local v1
+    local walk = AnimalPath.walk
+    local at = a1.at
+    local v2 = Vector3.new(a2.X, a1.at.Y, a2.Z)
+    local v3 = {u81}
+
+    for i in u76 do
+        table.insert(v3, i)
+    end
+
+    local Character = Players.LocalPlayer.Character
+
+    if Character then
+        table.insert(v3, Character)
+    end
+
+    v1, _, v2 = walk(at, v2, v3)
+
+    if 1 < Vector3.new(v1.X - a2.X, 0, v1.Z - a2.Z).Magnitude then
+        return false
+    end
+
+    a1.goal = v1
+    a1.from = a1.at
+    a1.rises = v2
+    a1.action = "Walk"
+
+    return true
+end
+
+local function startVisit(a1, a2)
+    -- Line: 577
+    -- upvalues: u76 (val), walkTo (val)
+    -- types: a1: userdata?, a2: userdata?
+    if typeof(a1) == "Instance" and typeof(a2) == "Instance" then
+        local v1 = if not a1:IsA("BasePart") then nil else u76[a1]
+
+        if v1 and not v1.wild and v1.grown and not v1.visit and a2:IsA("BasePart") then
+            local LookVector = a2.CFrame.LookVector
+            local v2 = a2.Position
+                + (Vector3.new(LookVector.X, 0, LookVector.Z))
+                    * (a2.Size.Z / 2 + 1)
+                - Vector3.new(0, a2.Size.Y / 2, 0)
+
+            if 25
+                < Vector3.new(v2.X - v1.at.X, 0, v2.Z - v1.at.Z).Magnitude then
+                return
+            end
+
+            if walkTo(v1, v2) then
+                v1.visit = {phase = "Going", door = v2}
+            end
+        end
+    end
+end
+
+local function nextAction(a1, a2)
+    -- Line: 600
+    -- upvalues: AnimalConfig (val), u81 (ref), u76 (val), Players (val), Config (val), baleNear (val), Wander (val)
+    -- upvalues: u101 (val), Workspace (val), AnimalPath (val)
+    -- types: a1: table, a2: number
+    local v1, v2, v3, v4
+    local v5, v6, v7 = AnimalConfig.nextAction(a1.species, a1.routine, a2, math.random)
+    a1.action = v5
+    a1.restUntil = a2 + v6
+
+    if v5 ~= "Walk" then
+        return
+    end
+
+    v6 = {u81}
+
+    for i in u76 do
+        table.insert(v6, i)
+    end
+
+    local Character = Players.LocalPlayer.Character
+
+    if Character then
+        table.insert(v6, Character)
+    end
+
+    local v8 = true
+
+    if a1.species ~= "Cow" then
+        v8 = a1.species == "Horse"
+    end
+
+    local v9 = if not v8 then
+        nil
+    else
+        if not (math.random() < Config.Animal.Milk.BaleWalkChance) then
+            nil
+        else
+            baleNear(a1)
+    local X = nil
+    local Z_3 = nil
+
+    if not v9 then
+        local Attribute, v10, v11, v12, v13
+        local v14 = if not v8 then 1 else 4
+        v1 = a1
+
+        for j = 1, v14 do
+            v10 = math.random() * 3.141592653589793 * 2
+            v11 = v1.at.X + math.cos(v10) * v7
+            v12 = v1.at.Z + math.sin(v10) * v7
+            v10 = Vector3.new(v11 - v1.home.X, 0, v12 - v1.home.Z)
+
+            if Wander.Studs < v10.Magnitude then
+                v10 = v10.Unit * Wander.Studs
+                v11 = v1.home.X + v10.X
+                v12 = v1.home.Z + v10.Z
+            end
+
+            X = v11
+            Z_3 = v12
+
+            if j == v4 then
+                break
+            end
+
+            v13 = Vector3.new(v11, v1.at.Y, v12)
+            u101.FilterDescendantsInstances = v6
+            v10 = Workspace:Raycast(v13 + Vector3.new(0, 2, 0), Vector3.new(0, -6, 0), u101)
+            Attribute = if not v10 then nil else v10.Instance:GetAttribute("BlockId")
+
+            if (if type(Attribute) ~= "string" then nil else Attribute) == "GrassBlock" then
+                break
+            end
+        end
+    else
+        v4 = Vector3.new(a1.at.X - v9.Position.X, 0, a1.at.Z - v9.Position.Z)
+        v4 = v9.Position
+            + (if not (0.01 < v4.Magnitude) then Vector3.new(1, 0, 0) else v4.Unit)
+                * (v9.Size.X / 2 + 1.5)
+        X = v4.X
+        Z_3 = v4.Z
+        v1, v2 = a1, a2
+    end
+
+    v4, _, v3 = AnimalPath.walk(v1.at, Vector3.new(X, v1.at.Y, Z_3), v6)
+
+    if not (0.5
+        <= Vector3.new(v4.X - v1.at.X, 0, v4.Z - v1.at.Z).Magnitude) then
+        v1.action = "Idle"
+        v1.restUntil = v2 + 1
+
+        return
+    end
+
+    v1.goal = v4
+    v1.from = v1.at
+    v1.rises = v3
+end
+
+local function step(a1)
+    -- Line: 646
+    -- upvalues: Workspace (val), Players (val), u76 (val), remove (val), Wander (val), u81 (ref), decided (val)
+    -- upvalues: AnimalConfig (val), walkTo (val), nextAction (val), play (val), NameLabel (val), Config (val)
+    -- upvalues: WaitingIcon (val)
+    -- types: a1: number
+    local Attribute, Attribute_2, Attribute_3, Attribute_4, Enabled, Magnitude, Magnitude_2, MaturesAtAttribute,
+        Position_3, PrimaryPart, PrimaryPart_2, Unit, Y, Y_2, action, action_2, action_3, from, goal, graze, height_2,
+        home, icon, nameLabel, nameText, sync, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15,
+        visit, visit_2
+    local CurrentCamera = Workspace.CurrentCamera
+
+    if not CurrentCamera then
+        return
+    end
+
+    local Position = CurrentCamera.CFrame.Position
+    local v16 = os.clock()
+    local Character = Players.LocalPlayer.Character
+    local HumanoidRootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+    local Position_2 = if not HumanoidRootPart then
+        nil
+    else
+        if not HumanoidRootPart:IsA("BasePart") then nil else HumanoidRootPart.Position
+    local v17 = nil
+    local v18 = nil
+
+    for i, j in u76, v17, v18 do
+        if i.Parent then
+            if j.wild then
+                Position_3 = i.Position
+                v5 = i.Size.Y / 2
+                j.home = Position_3 - Vector3.new(0, v5, 0)
+            end
+
+            v15 = true
+
+            if not ((j.home - Position).Magnitude <= Wander.DrawStuds) then
+                v15 = false
+
+                if Position_2 ~= nil then
+                    v15 = (j.home - Position_2).Magnitude <= Wander.DrawStuds
+                end
+            end
+
+            v1 = if not v15 then
+                nil
+            else
+                if not j.visit then u81 else if j.visit.phase == "Inside" then nil else u81
+
+            if j.body.Parent ~= v1 then
+                j.body.Parent = v1
+                graze = j.graze
+
+                if v1 and graze and not graze.IsPlaying then
+                    graze:Play()
+                end
+            end
+
+            if v15 then
+                v1 = false
+
+                if not j.wild then
+                    goal = j.goal
+
+                    if goal then
+                        v3 = Vector3.new(goal.X - j.at.X, 0, goal.Z - j.at.Z)
+                        Magnitude = v3.Magnitude
+                        v5 = AnimalConfig.WalkSpeed * a1
+
+                        if not (Magnitude <= v5) then
+                            Unit = v3.Unit
+                            v8 = -Unit.X
+                            v9 = -Unit.Z
+                            j.yaw = math.atan2(v8, v9)
+                            v7 = j.at + Unit * v5
+                            from = j.from or j.at
+                            Magnitude_2 = Vector3.new(v7.X - from.X, 0, v7.Z - from.Z).Magnitude
+                            Y = from.Y
+
+                            for k, n in j.rises or {} do
+                                if not (n.along <= Magnitude_2) then
+                                    v6 = Magnitude_2 - (n.along - 1.5)
+
+                                    if not (v6 > 0) then
+                                        break
+                                    end
+
+                                    v12 = v6 / 1.5
+                                    v13 = n.y - Y
+                                    v14 = (math.max(0, v13) * 0.4 + 0.8) * j.height
+                                        / (AnimalConfig.BodyStuds[j.species] or 2)
+                                    Y = Y + v13 * v12 + v14 * 4 * v12 * (1 - v12)
+                                    break
+                                else
+                                    Y = n.y
+                                end
+                            end
+
+                            j.at = Vector3.new(v7.X, Y, v7.Z)
+                            v1 = true
+                        else
+                            j.at = goal
+                            j.goal = nil
+                            j.restUntil = v16
+                            visit = j.visit
+
+                            if not visit then
+                                if visit and visit.phase == "Home" then
+                                    j.visit = nil
+                                end
+                            elseif visit.phase == "Going" then
+                                visit.phase = "Inside"
+                                j.action = "Idle"
+                                j.restUntil = v16 + 3
+                            elseif visit and visit.phase == "Home" then
+                                j.visit = nil
+                            end
+                        end
+                    elseif j.restUntil <= v16 then
+                        action_2 = j.action
+                        visit_2 = j.visit
+
+                        if not visit_2 or visit_2.phase ~= "Inside" then
+                            j.visit = nil
+                            nextAction(j, v16)
+                        else
+                            visit_2.phase = "Home"
+
+                            if not walkTo(j, j.home) then
+                                j.visit = nil
+                                nextAction(j, v16)
+                            end
+                        end
+
+                        decided(j, action_2, v16)
+                    end
+                else
+                    home = j.home
+                    v2 = Vector3.new(home.X - j.at.X, 0, home.Z - j.at.Z)
+
+                    if 0.02 < v2.Magnitude then
+                        v4 = -v2.X
+                        v5 = -v2.Z
+                        j.yaw = math.atan2(v4, v5)
+                        v1 = true
+                    end
+
+                    j.at = home
+                    Attribute = i:GetAttribute("Action")
+                    action = j.action
+                    v3 = if type(Attribute) ~= "string" then "Idle" else Attribute
+                    j.action = v3
+
+                    if j.action ~= action then
+                        decided(j, action, v16)
+                    end
+                end
+
+                action_3 = if not v1 then
+                    j.action
+                else
+                    if j.action == "Run" then
+                        j.action
+                    else
+                        if j.action == "Reeled" then j.action else "Walk"
+                v3 = play(j, action_3)
+                v2 = false
+
+                if j.tracks ~= nil then
+                    v2 = next(j.tracks) ~= nil
+                end
+
+                v4 = j.height / (AnimalConfig.BodyStuds[j.species] or 2)
+                v5 = if j.action ~= "Run" then 9 else 16
+                v6 = if not v1 or v3 or v2 then
+                    0
+                else
+                    math.abs((math.sin(v16 * v5))) * 0.35 * v4
+                v5 = 0
+                v4 = not v1 and not v3 and not v2
+
+                if not v4 then
+                    if v4 and j.action == "Graze" then
+                        v5 = math.sin(v16 * 2) * 0.08726646259971647 + 0.4363323129985824
+                    end
+                elseif j.action == "Peck" then
+                    v5 = math.max(0, (math.sin(v16 * 10))) * 0.6981317007977318
+                elseif v4 and j.action == "Graze" then
+                    v5 = math.sin(v16 * 2) * 0.08726646259971647 + 0.4363323129985824
+                end
+
+                v6 = (CFrame.new(j.at + (Vector3.new(0, j.height / 2 + v6, 0))))
+                    * CFrame.Angles(0, j.yaw, 0)
+                    * CFrame.Angles(-v5, 0, 0)
+                    * CFrame.new(-j.middle)
+
+                if v6 ~= j.drawn then
+                    j.body:PivotTo(v6)
+
+                    j.drawn = v6
+
+                    if not j.wild then
+                        j.cell.CFrame = CFrame.new(j.at + Vector3.new(0, j.cell.Size.Y / 2, 0))
+                    end
+                end
+
+                nameLabel = j.nameLabel
+                nameText = j.nameText
+
+                if nameLabel and nameText and j.nameAt <= v16 then
+                    j.nameAt = v16 + NameLabel.CheckSeconds
+                    Attribute_2 = NameLabel.Attribute
+                    v6 = i:GetAttribute(Attribute_2)
+                    v5 = false
+
+                    if type(v6) == "string" then
+                        v5 = v6 ~= ""
+                    end
+
+                    v4 = v5
+
+                    if v4 then
+                        v4 = false
+
+                        if Position_2 ~= nil then
+                            v4 = (j.at + Vector3.new(0, j.height / 2, 0) - Position_2).Magnitude
+                                <= NameLabel.ShowStuds
+                        end
+                    end
+
+                    if v4 then
+                        if nameText.Text ~= v6 then
+                            nameText.Text = v6
+                        end
+
+                        height_2 = j.height
+                        v5 = height_2 * (if not j.grown then Wander.ChickScale else 1)
+                            * (NameLabel.HeightShare[j.species] or 1)
+                        PrimaryPart = j.body.PrimaryPart
+                        Y_2 = if not PrimaryPart then
+                            j.at.Y + v5 / 2
+                        else
+                            PrimaryPart.Position.Y
+                        nameLabel.StudsOffsetWorldSpace = Vector3.new(0, j.at.Y + v5 + 0.25 - Y_2, 0)
+                    end
+
+                    if nameLabel.Enabled ~= v4 then
+                        nameLabel.Enabled = v4
+                    end
+                end
+
+                if j.text and j.label and j.textAt <= v16 then
+                    j.textAt = v16 + 1
+
+                    if not j.grown then
+                        MaturesAtAttribute = Wander.MaturesAtAttribute
+                        v7 = i:GetAttribute(MaturesAtAttribute)
+
+                        if type(v7) == "number" then
+                            v1 = math.max(0, (math.ceil(v7 - (Workspace:GetServerTimeNow()))))
+                            v8 = string.format("%d:%02d", v1 // 60, v1 % 60)
+                        else
+                            v8 = nil
+                        end
+                    else
+                        v8 = nil
+                    end
+
+                    Enabled = j.label.Enabled
+
+                    if Enabled ~= (v8 ~= nil) then
+                        j.label.Enabled = v8 ~= nil
+                    end
+
+                    if v8 and j.text.Text ~= v8 then
+                        j.text.Text = v8
+                    end
+
+                    PrimaryPart_2 = j.body.PrimaryPart
+
+                    if not j.wild then
+                        Attribute_3 = Config.Animal.Waiting.Attribute
+                        Attribute_4 = i:GetAttribute(Attribute_3)
+                    else
+                        Attribute_4 = nil
+                    end
+
+                    if PrimaryPart_2 then
+                        sync = WaitingIcon.sync
+                        icon = j.icon
+                        v10 = j.height / 2 + 1
+                        v11 = if type(Attribute_4) ~= "string" then nil else Attribute_4
+                        j.icon = sync(icon, PrimaryPart_2, v10, v11, j.body)
+                    end
+                end
+            end
+        else
+            remove(i)
+        end
+    end
+end
+
+function v1.start()
+    -- Line: 856
+    -- upvalues: u81 (ref), Workspace (val), Wander (val), Wild (val), CollectionService (val), add (val), remove (val)
+    -- upvalues: RunService (val), step (val), Remotes (val), startVisit (val)
+    u81 = Instance.new("Folder")
+    u81.Name = "AboveChickens"
+    u81.Parent = Workspace
+    local v1 = {Wander.Tag, Wild.Tag}
+    local v2 = nil
+    local v3 = nil
+
+    for i, j in v1, v2, v3 do
+        for k, n in CollectionService:GetTagged(j) do
+            add(n)
+        end
+
+        ;(CollectionService:GetInstanceAddedSignal(j)):Connect(add)
+        ;(CollectionService:GetInstanceRemovedSignal(j)):Connect(remove)
+    end
+
+    RunService.RenderStepped:Connect(step)
+    Remotes.get(Remotes.ChickenLaid).OnClientEvent:Connect(startVisit)
+end
+
+return v1
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.ComposterController
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.ComposterController
+-- Decompile time: 6.82 ms
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local DeviceMode = require(script.Parent.DeviceMode)
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local Format = require(Shared.Format)
+local Palette = require(Shared.Palette)
+local Remotes = require(Shared.Remotes)
+local u42 = require(script.Parent.Parent.Theme)
+local Ui = require(script.Parent.Parent.Ui)
+local BuildController = require(script.Parent.BuildController)
+local ControlGlyphs = require(script.Parent.ControlGlyphs)
+local ItemIcon = require(script.Parent.ItemIcon)
+local ItemTooltip = require(script.Parent.ItemTooltip)
+local u69 = {}
+local LocalPlayer = Players.LocalPlayer
+local u74 = Remotes.get(Remotes.RequestCompost)
+local u77 = Ui.tap(44)
+local u79 = DeviceMode.touchOnly()
+local u80 = nil
+local u81 = nil
+local u82 = nil
+local u83 = nil
+local u84 = nil
+local u85 = nil
+local u86 = nil
+local u87 = nil
+local u88 = nil
+
+function u69.close() -- Line: 68; upvalues: u88 (ref), u80 (ref), BuildController (val)
+    u88 = nil
+
+    if u80 then
+        u80.Visible = false
+    end
+
+    BuildController.setUiOpen("Composter", false)
+end
+
+local function feed(a1, a2) -- Line: 76; upvalues: u88 (ref), u74 (val); types: a1: string, a2: number
+    local v1 = u88
+
+    if v1 then
+        u74:FireServer(v1.cellKey, a1, a2)
+    end
+end
+
+local function render()
+    -- Line: 83
+    -- upvalues: u88 (ref), u81 (ref), u83 (ref), u84 (ref), Ui (val), u79 (val), ControlGlyphs (val), u82 (ref)
+    -- upvalues: u87 (ref), u85 (ref), u77 (val), ItemIcon (val), Palette (val), Format (val), u74 (val), u86 (ref)
+    local Frame, TextLabel, TextLabel_2
+    local v1 = u88
+
+    if not v1 then
+        return
+    end
+
+    local v2 = if not (0 < v1.threshold) then
+        0
+    else
+        math.clamp(v1.points / v1.threshold, 0, 1)
+    u81.Size = UDim2.fromScale(v2, 1)
+    u83.Text = ("%* / %*"):format(v1.points, v1.threshold)
+    u84.Text = if not v1.working then
+        "Fill seeds until composter is 100% to create fertilizer."
+    else
+        "Composting…"
+    local v3 = u84
+    local Gain = if not v1.working then Ui.Palette.Dim else Ui.Tone.Gain
+    v3.TextColor3 = Gain
+
+    if u79 then
+        v2 = {{"Tap", "Add one"}, {"Hold", "Add as many as it needs"}}
+    elseif not ControlGlyphs.usingGamepad() then
+        v2 = {{"Click", "Add one"}, {"Shift + Click", "Add as many as it needs"}}
+    else
+        v2 = {
+            {ControlGlyphs.say("{A}"), "Add one"},
+            {ControlGlyphs.say("{Y} + {A}"), "Add as many as it needs"},
+        }
+    end
+
+    Ui.hintChips(u82, v2)
+    u87.hide()
+
+    for i, j in u85:GetChildren() do
+        if j:IsA("TextButton") then
+            j:Destroy()
+        end
+    end
+
+    for k, n in v1.seeds do
+        local u127 = Instance.new("TextButton")
+        u127.LayoutOrder = k
+        u127.Size = UDim2.new(1, -6, 0, u77)
+        u127.AutoButtonColor = false
+        u127.Text = ""
+        u127.Parent = u85
+
+        Ui.restyle(u127, "Slot")
+
+        u127.MouseEnter:Connect(function() -- Line: 121; upvalues: Ui (upval), u127 (val)
+            Ui.restyle(u127, "SlotHover")
+        end)
+
+        u127.MouseLeave:Connect(function() -- Line: 124; upvalues: Ui (upval), u127 (val)
+            Ui.restyle(u127, "Slot")
+        end)
+
+        Frame = Instance.new("Frame")
+        Frame.Name = "Holder"
+        Frame.Size = UDim2.fromOffset(32, 32)
+        Frame.Position = UDim2.new(0, 6, 0.5, -16)
+        Frame.BackgroundTransparency = 1
+        Frame.Parent = u127
+
+        ItemIcon.render(Frame, n.id, 32, 4)
+        u87.attach(u127, n.id, Frame)
+
+        TextLabel = Instance.new("TextLabel")
+        TextLabel.Size = UDim2.new(1, -110, 1, 0)
+        TextLabel.Position = UDim2.fromOffset(44, 0)
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel.TextTruncate = Enum.TextTruncate.AtEnd
+        TextLabel.Text = ("%*  x%*"):format(Palette.displayName(n.id), (Format.count(n.count)))
+        TextLabel.TextColor3 = Ui.Tone.Info
+        TextLabel.TextSize = Ui.tapText(13)
+        TextLabel.FontFace = Ui.Font.Medium
+        TextLabel.Parent = u127
+        TextLabel_2 = Instance.new("TextLabel")
+        TextLabel_2.AnchorPoint = Vector2.new(1, 0)
+        TextLabel_2.Size = UDim2.new(0, 60, 1, 0)
+        TextLabel_2.Position = UDim2.new(1, -10, 0, 0)
+        TextLabel_2.BackgroundTransparency = 1
+        TextLabel_2.TextXAlignment = Enum.TextXAlignment.Right
+        TextLabel_2.Text = ("+%*"):format(n.points)
+        TextLabel_2.TextColor3 = Ui.Tone.Gain
+        TextLabel_2.TextSize = Ui.tapText(13)
+        TextLabel_2.FontFace = Ui.Font.Bold
+        TextLabel_2.Parent = u127
+        local id = n.id
+        local u259 = Ui.holdForStack(
+            u127,
+            function() -- Line: 163; upvalues: id (val), u88 (upval), u74 (upval)
+                local v1 = u88
+
+                if v1 then
+                    u74:FireServer(v1.cellKey, id, 10000)
+                end
+            end
+        )
+
+        u127.Activated:Connect(function()
+            -- Line: 166
+            -- upvalues: u259 (val), ControlGlyphs (upval), id (val), u88 (upval), u74 (upval)
+            if u259() then
+                return
+            end
+
+            local v1 = if not ControlGlyphs.bulkHeld() then 1 else 10000
+            local v2 = u88
+
+            if v2 then
+                u74:FireServer(v2.cellKey, id, v1)
+            end
+        end)
+    end
+
+    u86.Visible = #v1.seeds == 0
+    u85.CanvasSize = UDim2.fromOffset(0, #v1.seeds * (u77 + 4))
+end
+
+function u69.start()
+    -- Line: 178
+    -- upvalues: BuildController (val), u69 (val), LocalPlayer (val), u80 (ref), Ui (val), Palette (val), Config (val)
+    -- upvalues: u81 (ref), u42 (val), u83 (ref), ItemIcon (val), u87 (ref), ItemTooltip (val), u84 (ref), u82 (ref)
+    -- upvalues: u85 (ref), u86 (ref), Remotes (val), u88 (ref), render (val), RunService (val)
+    BuildController.registerMenu("Composter", u69.close)
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "AboveComposter"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    u80 = Instance.new("Frame")
+    u80.ClipsDescendants = true
+    u80.Size = UDim2.fromOffset(320, 310)
+    u80.Position = UDim2.new(0.5, -160, 0.5, -155)
+
+    Ui.fitToScreen(u80)
+
+    u80.Visible = false
+    u80.Active = false
+    u80.Parent = ScreenGui
+
+    Ui.restyle(u80, "Window")
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Size = UDim2.new(1, -24, 0, 24)
+    TextLabel.Position = UDim2.fromOffset(12, 8)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TextLabel.Text = Palette.displayName(Config.Recipe.Compost.Machine)
+    TextLabel.TextColor3 = Ui.Tone.Info
+    TextLabel.TextSize = 20
+    TextLabel.FontFace = Ui.Font.Bold
+    TextLabel.Parent = u80
+
+    Ui.closeButton(u80, 8, u69.close)
+
+    u81 = Ui.bar(u80, UDim2.new(1, -64, 0, 18), UDim2.fromOffset(12, 52), u42.ButtonFaces.Go)
+    local Parent = u81.Parent
+    u83 = Instance.new("TextLabel")
+    u83.Size = UDim2.fromScale(1, 1)
+    u83.BackgroundTransparency = 1
+    u83.Text = ""
+    u83.TextColor3 = Ui.Tone.Info
+    u83.TextSize = 12
+    u83.FontFace = Ui.Font.Bold
+    u83.ZIndex = 3
+    u83.Parent = Parent
+    local Frame = Instance.new("Frame")
+    Frame.Name = "Result"
+    Frame.AnchorPoint = Vector2.new(1, 0.5)
+    Frame.Position = UDim2.new(1, -12, 0, 61)
+    Frame.Size = UDim2.fromOffset(32, 32)
+    Frame.Parent = u80
+
+    Ui.restyle(Frame, "Slot")
+    ItemIcon.render(Frame, Config.Recipe.Compost.Output, 26, 4)
+
+    u87 = ItemTooltip.new(u80)
+    u87.attach(Frame, Config.Recipe.Compost.Output, Frame)
+
+    u84 = Instance.new("TextLabel")
+    u84.Size = UDim2.new(1, -24, 0, 30)
+    u84.Position = UDim2.fromOffset(12, 80)
+    u84.BackgroundTransparency = 1
+    u84.TextXAlignment = Enum.TextXAlignment.Left
+    u84.TextWrapped = true
+    u84.Text = ""
+    u84.TextSize = 12
+    u84.FontFace = Ui.Font.Regular
+    u84.Parent = u80
+    u82 = Instance.new("Frame")
+    u82.Name = "Hints"
+    u82.BackgroundTransparency = 1
+    u82.Size = UDim2.new(1, -24, 0, 20)
+    u82.Position = UDim2.new(0, 12, 1, -28)
+    u82.Parent = u80
+    u85 = Instance.new("ScrollingFrame")
+    u85.Size = UDim2.new(1, -18, 1, -148)
+    u85.Position = UDim2.fromOffset(12, 112)
+    u85.BackgroundTransparency = 1
+    u85.BorderSizePixel = 0
+    u85.ScrollBarThickness = 6
+    u85.ScrollBarImageColor3 = u42.current.Colors.ScrollThumb
+    u85.Parent = u80
+    local UIListLayout = Instance.new("UIListLayout")
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 4)
+    UIListLayout.Parent = u85
+
+    u87.hideOnScroll(u85)
+
+    u86 = Instance.new("TextLabel")
+    u86.Size = UDim2.new(1, -24, 0, 40)
+    u86.Position = UDim2.fromOffset(12, 110)
+    u86.BackgroundTransparency = 1
+    u86.Text = "No seeds in your backpack. Any seed will do."
+    u86.TextColor3 = Ui.Palette.Dim
+    u86.TextSize = 13
+    u86.FontFace = Ui.Font.Medium
+    u86.TextWrapped = true
+    u86.Visible = false
+    u86.Parent = u80
+
+    ;(Remotes.get(Remotes.CompostState)).OnClientEvent:Connect(function(a1, a2)
+        -- Line: 290
+        -- upvalues: u88 (upval), render (upval), u80 (upval), Ui (upval), BuildController (upval)
+        if type(a2) == "table" and type(a2.cellKey) == "string" then
+            if a1 then
+                u88 = a2
+                render()
+
+                if a1 and not u80.Visible then
+                    u80.Visible = true
+                    Ui.appear(u80)
+                    BuildController.setUiOpen("Composter", true)
+                end
+
+                return
+            end
+
+            if u88 and u88.cellKey == a2.cellKey then
+                u88 = a2
+                render()
+
+                if a1 and not u80.Visible then
+                    u80.Visible = true
+                    Ui.appear(u80)
+                    BuildController.setUiOpen("Composter", true)
+                end
+            end
+        end
+    end)
+
+    local u315 = 0
+    RunService.Heartbeat:Connect(function(a1)
+        -- Line: 309
+        -- upvalues: u315 (ref), u88 (upval), LocalPlayer (upval), u80 (upval), u69 (upval)
+        u315 = u315 + a1
+
+        if u315 < 0.3 then
+            return
+        end
+
+        u315 = 0
+        local v1 = u88
+        local Character = LocalPlayer.Character
+        local HumanoidRootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+
+        if v1
+            and u80.Visible
+            and HumanoidRootPart
+            and HumanoidRootPart:IsA("BasePart")
+            and 26 < (HumanoidRootPart.Position - v1.position).Magnitude then
+            u69.close()
+        end
+    end)
+end
+
+return u69
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.FeederController
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.FeederController
+-- Decompile time: 5.05 ms
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local Format = require(Shared.Format)
+local Palette = require(Shared.Palette)
+local Remotes = require(Shared.Remotes)
+local u37 = require(script.Parent.Parent.Theme)
+local Ui = require(script.Parent.Parent.Ui)
+local BuildController = require(script.Parent.BuildController)
+local ItemIcon = require(script.Parent.ItemIcon)
+local ItemTooltip = require(script.Parent.ItemTooltip)
+local u59 = {}
+local LocalPlayer = Players.LocalPlayer
+local u64 = Remotes.get(Remotes.RequestFeeder)
+local u67 = Ui.tap(44)
+local u68 = nil
+local u69 = nil
+local u70 = nil
+local u71 = nil
+local u72 = nil
+local u73 = nil
+local u74 = nil
+
+function u59.close() -- Line: 45; upvalues: u74 (ref), u68 (ref), BuildController (val)
+    u74 = nil
+
+    if u68 then
+        u68.Visible = false
+    end
+
+    BuildController.setUiOpen("ChickenFeeder", false)
+end
+
+local function add(a1, a2) -- Line: 53; upvalues: u74 (ref), u64 (val); types: a1: string, a2: number
+    local v1 = u74
+
+    if v1 then
+        u64:FireServer(v1.cellKey, a1, a2)
+    end
+end
+
+local function render()
+    -- Line: 60
+    -- upvalues: u74 (ref), u69 (ref), u70 (ref), u73 (ref), u71 (ref), u67 (val), Ui (val), ItemIcon (val)
+    -- upvalues: Palette (val), Format (val), u64 (val), u72 (ref)
+    local Frame, Frame_2, TextLabel, v1
+    local u0 = u74
+
+    if not u0 then
+        return
+    end
+
+    u69.Size = UDim2.fromScale(math.clamp(u0.seeds / math.max(u0.capacity, 1), 0, 1), 1)
+    u70.Text = ("%* / %* seeds"):format(u0.seeds, u0.capacity)
+
+    u73.hide()
+
+    for i, j in u71:GetChildren() do
+        if j:IsA("Frame") then
+            j:Destroy()
+        end
+    end
+
+    for k, n in u0.carried do
+        Frame = Instance.new("Frame")
+        Frame.LayoutOrder = k
+        Frame.Size = UDim2.new(1, -6, 0, u67)
+        Frame.Parent = u71
+
+        Ui.restyle(Frame, "Slot")
+
+        Frame_2 = Instance.new("Frame")
+        Frame_2.Size = UDim2.fromOffset(32, 32)
+        Frame_2.Position = UDim2.new(0, 6, 0.5, -16)
+        Frame_2.BackgroundTransparency = 1
+        Frame_2.Parent = Frame
+
+        ItemIcon.render(Frame_2, n.id, 32, 4)
+        u73.attach(Frame, n.id, Frame_2)
+
+        TextLabel = Instance.new("TextLabel")
+        TextLabel.Size = UDim2.new(1, -200, 1, 0)
+        TextLabel.Position = UDim2.fromOffset(42, 0)
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel.TextTruncate = Enum.TextTruncate.AtEnd
+        TextLabel.Text = ("%*  x%*"):format(Palette.displayName(n.id), (Format.count(n.count)))
+        TextLabel.TextColor3 = Ui.Tone.Info
+        TextLabel.TextSize = Ui.tapText(13)
+        TextLabel.FontFace = Ui.Font.Medium
+        TextLabel.Parent = Frame
+        local id = n.id
+        v1 = Ui.button(Frame, "Add All", "Go", 70)
+        v1.AnchorPoint = Vector2.new(1, 0.5)
+        v1.Position = UDim2.new(1, -8, 0.5, 0)
+
+        v1.Activated:Connect(function() -- Line: 107; upvalues: id (val), u0 (val), u74 (upval), u64 (upval)
+            local v1 = u74
+
+            if v1 then
+                u64:FireServer(v1.cellKey, id, u0.capacity)
+            end
+        end)
+
+        v1 = Ui.button(Frame, ("Add %*"):format(10), "Plain", 70)
+        v1.AnchorPoint = Vector2.new(1, 0.5)
+        v1.Position = UDim2.new(1, -84, 0.5, 0)
+
+        v1.Activated:Connect(function() -- Line: 113; upvalues: id (val), u74 (upval), u64 (upval)
+            local v1 = u74
+
+            if v1 then
+                u64:FireServer(v1.cellKey, id, 10)
+            end
+        end)
+    end
+
+    u72.Visible = #u0.carried == 0
+    u71.CanvasSize = UDim2.fromOffset(0, #u0.carried * (u67 + 4))
+end
+
+function u59.start()
+    -- Line: 121
+    -- upvalues: BuildController (val), u59 (val), LocalPlayer (val), u68 (ref), Ui (val), Palette (val), Config (val)
+    -- upvalues: u69 (ref), u70 (ref), u71 (ref), u37 (val), u73 (ref), ItemTooltip (val), u72 (ref), Remotes (val)
+    -- upvalues: u74 (ref), render (val), RunService (val)
+    BuildController.registerMenu("ChickenFeeder", u59.close)
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "AboveChickenFeeder"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    u68 = Instance.new("Frame")
+    u68.ClipsDescendants = true
+    u68.Size = UDim2.fromOffset(340, 300)
+    u68.Position = UDim2.new(0.5, -170, 0.5, -150)
+
+    Ui.fitToScreen(u68)
+
+    u68.Visible = false
+    u68.Active = false
+    u68.Parent = ScreenGui
+
+    Ui.restyle(u68, "Window")
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Size = UDim2.new(1, -24, 0, 24)
+    TextLabel.Position = UDim2.fromOffset(12, 8)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+    TextLabel.Text = Palette.displayName(Config.Animal.Farm.Feeder)
+    TextLabel.TextColor3 = Ui.Tone.Info
+    TextLabel.TextSize = 20
+    TextLabel.FontFace = Ui.Font.Bold
+    TextLabel.Parent = u68
+
+    Ui.closeButton(u68, 8, u59.close)
+
+    u69 = Ui.bar(u68, UDim2.new(1, -24, 0, 14), UDim2.fromOffset(12, 42), Ui.Palette.Green)
+    u70 = Instance.new("TextLabel")
+    u70.Size = UDim2.fromScale(1, 1)
+    u70.BackgroundTransparency = 1
+    u70.Text = ""
+    u70.TextColor3 = Ui.Tone.Info
+    u70.TextSize = 11
+    u70.FontFace = Ui.Font.Bold
+    u70.ZIndex = 3
+    u70.Parent = u69.Parent
+    local TextLabel_2 = Instance.new("TextLabel")
+    TextLabel_2.Size = UDim2.new(1, -24, 0, 30)
+    TextLabel_2.Position = UDim2.fromOffset(12, 60)
+    TextLabel_2.BackgroundTransparency = 1
+    TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+    TextLabel_2.TextWrapped = true
+    TextLabel_2.Text = "Chickens nearby eat one seed for each egg they lay."
+    TextLabel_2.TextColor3 = Ui.Palette.Dim
+    TextLabel_2.TextSize = 12
+    TextLabel_2.FontFace = Ui.Font.Regular
+    TextLabel_2.Parent = u68
+    u71 = Instance.new("ScrollingFrame")
+    u71.Size = UDim2.new(1, -18, 1, -102)
+    u71.Position = UDim2.fromOffset(12, 94)
+    u71.BackgroundTransparency = 1
+    u71.BorderSizePixel = 0
+    u71.ScrollBarThickness = 6
+    u71.ScrollBarImageColor3 = u37.current.Colors.ScrollThumb
+    u71.Parent = u68
+    local UIListLayout = Instance.new("UIListLayout")
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 4)
+    UIListLayout.Parent = u71
+    u73 = ItemTooltip.new(u68)
+
+    u73.hideOnScroll(u71)
+
+    u72 = Instance.new("TextLabel")
+    u72.Size = UDim2.new(1, -24, 0, 40)
+    u72.Position = UDim2.fromOffset(12, 100)
+    u72.BackgroundTransparency = 1
+    u72.Text = "No seeds in your backpack. Any seed will do."
+    u72.TextColor3 = Ui.Palette.Dim
+    u72.TextSize = 13
+    u72.FontFace = Ui.Font.Medium
+    u72.TextWrapped = true
+    u72.Visible = false
+    u72.Parent = u68
+
+    ;(Remotes.get(Remotes.FeederState)).OnClientEvent:Connect(function(a1, a2)
+        -- Line: 202
+        -- upvalues: u74 (upval), render (upval), u68 (upval), Ui (upval), BuildController (upval)
+        if type(a2) == "table" and type(a2.cellKey) == "string" then
+            if a1 then
+                u74 = a2
+                render()
+
+                if a1 and not u68.Visible then
+                    u68.Visible = true
+                    Ui.appear(u68)
+                    BuildController.setUiOpen("ChickenFeeder", true)
+                end
+
+                return
+            end
+
+            if u74 and u74.cellKey == a2.cellKey then
+                u74 = a2
+                render()
+
+                if a1 and not u68.Visible then
+                    u68.Visible = true
+                    Ui.appear(u68)
+                    BuildController.setUiOpen("ChickenFeeder", true)
+                end
+            end
+        end
+    end)
+
+    local u243 = 0
+    RunService.Heartbeat:Connect(function(a1)
+        -- Line: 219
+        -- upvalues: u243 (ref), u74 (upval), LocalPlayer (upval), u68 (upval), u59 (upval)
+        u243 = u243 + a1
+
+        if u243 < 0.3 then
+            return
+        end
+
+        u243 = 0
+        local v1 = u74
+        local Character = LocalPlayer.Character
+        local HumanoidRootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+
+        if v1
+            and u68.Visible
+            and HumanoidRootPart
+            and HumanoidRootPart:IsA("BasePart")
+            and 26 < (HumanoidRootPart.Position - v1.position).Magnitude then
+            u59.close()
+        end
+    end)
+end
+
+return u59
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.AnimalManageController
+-- Took 0.01s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.AnimalManageController
+-- Decompile time: 12.13 ms
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local Grid = require(Shared.Grid)
+local Remotes = require(Shared.Remotes)
+local u34 = require(script.Parent.Parent.Kit)
+local Theme = require(script.Parent.Parent.Theme)
+local Ui = require(script.Parent.Parent.Ui)
+local BuildController = require(script.Parent.BuildController)
+local SignController = require(script.Parent.SignController)
+local u57 = {}
+local LocalPlayer = Players.LocalPlayer
+local u62 = Remotes.get(Remotes.RequestAnimalManage)
+local u66 = 62 + Ui.ButtonHeight + 14
+local u67 = {
+    Chicken = {
+        {id = "nearHouse", label = "Near a Hen House"},
+        {id = "housed", label = "In a Hen House"},
+        {id = "nearFood", label = "Near Food"},
+        {id = "fed", label = "Fed"},
+    },
+    Cow = {{id = "nearHay", label = "Near a Hay Feeder"}, {id = "fed", label = "Fed"}},
+    Sheep = {{id = "grass", label = "Grass Nearby"}},
+}
+local u78 = {
+    Chicken = {room = "Hen House full, collect the eggs", food = "Waiting for seeds", house = "Needs a Hen House"},
+    Cow = {room = "Full, milk it", food = "Waiting for hay"},
+    Sheep = {room = "Full, shear it", food = "Waiting for grass"},
+}
+local u82 = nil
+local u83 = nil
+local u84 = nil
+local u85 = nil
+local u86 = nil
+local u87 = nil
+local u88 = nil
+local u89 = nil
+local u90 = nil
+local u91 = {}
+local u92 = nil
+local u93 = {}
+local u94 = nil
+
+local function blocks(a1) -- Line: 105; upvalues: Grid (val); types: a1: number
+    return (math.floor(a1 / Grid.CellSize))
+end
+
+local function clock(a1) -- Line: 110; types: a1: number
+    local v1 = math.max(0, (math.ceil(a1)))
+
+    if v1 >= 3600 then
+        return (("%*h %*m"):format(v1 // 3600, v1 % 3600 // 60))
+    end
+
+    if v1 >= 60 then
+        return (("%*m %*s"):format(v1 // 60, v1 % 60))
+    end
+
+    return (("%*s"):format(v1))
+end
+
+local function tipFor(a1, a2) -- Line: 121; upvalues: Config (val), Grid (val); types: a1: string, a2: table
+    local Farm = Config.Animal.Farm
+
+    if a1 == "Chicken" then
+        if not a2.grown then
+            return "Still a chick. It starts laying once it grows up.", false
+        end
+
+        if not a2.nearHouse then
+            return (("Chickens only lay in a Hen House. Place one within %* blocks."):format((math.floor(Farm.HouseReachStuds / Grid.CellSize)))),
+                false
+        end
+
+        if not a2.housed then
+            return (("That Hen House is full (%* chickens). Place another nearby."):format(Farm.HenHouseOccupants)),
+                false
+        end
+
+        if not a2.nearFood then
+            return (("Place a Chicken Feeder within %* blocks."):format((math.floor(Farm.FeederReachStuds / Grid.CellSize)))),
+                false
+        end
+
+        if not a2.fed then
+            return "Its feeder is empty. Fill it with seeds.", false
+        end
+
+        return "Laying eggs in its Hen House.", true
+    end
+
+    if a1 == "Cow" then
+        if not a2.nearHay then
+            return (("Place a Hay Feeder within %* blocks."):format((math.floor(Config.Animal.Milk.HayReachStuds / Grid.CellSize)))),
+                false
+        end
+
+        if not a2.fed then
+            return "Its Hay Feeder is empty. Fill it with Hay Bales.", false
+        end
+
+        return "Eating hay and making milk.", true
+    end
+
+    if a1 ~= "Sheep" then
+        return "", true
+    end
+
+    if not a2.grass then
+        return "No grass to graze nearby. Eaten grass grows back over time, and all at once in the rain.", false
+    end
+
+    return "Grazing and growing wool.", true
+end
+
+local function drawTimer() -- Line: 153; upvalues: u94 (ref), u78 (val), u85 (ref), Ui (val), u87 (ref)
+    local v1 = u94
+    local timer = v1 and v1.timer
+
+    if v1 and timer then
+        local Gain, species, v2
+        local v3 = math.max(0, timer.left - ((os.clock()) - v1.receivedAt))
+        local waiting = timer.waiting
+
+        if waiting then
+            species = waiting
+                and v1.species and u78[v1.species] and u78[v1.species][waiting]
+            u85.Text = ("%*: %*"):format(timer.label, species or "Any moment")
+            v2 = u85
+            Gain = if waiting ~= "room" then
+                if not waiting then Ui.Tone.Info else Ui.Tone.Bad
+            else
+                Ui.Tone.Gain
+            v2.TextColor3 = Gain
+        elseif not (v3 <= 0) then
+            local v4 = u85
+            local label = timer.label
+            local v5 = math.max(0, (math.ceil(v3)))
+            v4.Text = ("%*: %*"):format(label, if v5 >= 3600 then ("%*h %*m"):format(v5 // 3600, v5 % 3600 // 60) else if not (v5 >= 60) then ("%*s"):format(v5) else ("%*m %*s"):format(v5 // 60, v5 % 60))
+            u85.TextColor3 = Ui.Tone.Info
+        else
+            species = waiting
+                and v1.species and u78[v1.species] and u78[v1.species][waiting]
+            u85.Text = ("%*: %*"):format(timer.label, species or "Any moment")
+            v2 = u85
+            Gain = if waiting ~= "room" then
+                if not waiting then Ui.Tone.Info else Ui.Tone.Bad
+            else
+                Ui.Tone.Gain
+            v2.TextColor3 = Gain
+        end
+
+        local v6 = if not (0 < timer.total) then 1 else 1 - v3 / timer.total
+        u87.Size = UDim2.fromScale(math.clamp(v6, 0, 1), 1)
+    end
+end
+
+function u57.close() -- Line: 173; upvalues: u94 (ref), u82 (ref), BuildController (val)
+    u94 = nil
+
+    if u82 then
+        u82.Visible = false
+    end
+
+    BuildController.setUiOpen("AnimalManage", false)
+end
+
+local function render()
+    -- Line: 181
+    -- upvalues: u94 (ref), u83 (ref), u84 (ref), u85 (ref), u86 (ref), drawTimer (val), u67 (val), u88 (ref), u89 (ref)
+    -- upvalues: u93 (val), Theme (val), Ui (val), tipFor (val), u90 (ref), u92 (ref), u91 (ref), u66 (val), u82 (ref)
+    local new, v1, v2
+    local v3 = u94
+
+    if not v3 then
+        return
+    end
+
+    local v4 = false
+
+    if v3.name ~= nil then
+        v4 = v3.name ~= ""
+    end
+
+    local v5 = u83
+    local name = if not v4 then v3.kind else v3.name
+    v5.Text = name
+    u84.Text = if not v4 then "No name yet" else v3.kind
+    v4 = 62
+    local timer = v3.timer
+    u85.Visible = timer ~= nil
+    u86.Visible = timer ~= nil
+
+    if timer then
+        u85.Position = UDim2.fromOffset(12, v4)
+        u86.Position = UDim2.fromOffset(12, v4 + 22)
+
+        drawTimer()
+
+        v4 = v4 + 40
+    end
+
+    local checks = v3.checks
+    local v6 = if not checks then nil else if not v3.species then nil else u67[v3.species]
+    u88.Visible = v6 ~= nil
+    u89.Visible = v6 ~= nil
+
+    if checks and v6 and v3.species then
+        local Checkmark, Gain_2, Info, icon, icon_2, label, v7, v8
+        u88.Position = UDim2.fromOffset(12, v4)
+        local v9 = nil
+        local v10 = nil
+
+        for i, j in u93, v9, v10 do
+            v8 = v6[i]
+            j.frame.Visible = v8 ~= nil
+
+            if v8 then
+                v1 = checks[v8.id] == true
+                j.label.Text = v8.label
+                icon = j.icon
+                Checkmark = if not v1 then Theme.Icons.Cancel else Theme.Icons.Checkmark
+                icon.Image = Checkmark
+                icon_2 = j.icon
+                Gain_2 = if not v1 then Ui.Tone.Bad else Ui.Tone.Gain
+                icon_2.ImageColor3 = Gain_2
+                label = j.label
+                Info = if not v1 then Ui.Palette.Dim else Ui.Tone.Info
+                label.TextColor3 = Info
+            end
+        end
+
+        v4 = v4 + #v6 * 22
+        v7, v9 = tipFor(v3.species, checks)
+        u89.Text = v7
+        v10 = u89
+        local Gain = if not v9 then Ui.Tone.Info else Ui.Tone.Gain
+        v10.TextColor3 = Gain
+        u89.Position = UDim2.fromOffset(12, v4)
+        v4 = v4 + 34
+    end
+
+    u90.Position = UDim2.fromOffset(12, v4 + 4)
+    u92.Visible = v3.coats
+    v6 = if not v3.coats then 2 else 3
+
+    for k, n in u91 do
+        new = UDim2.new
+        v1 = 1 / v6
+        v2 = (v6 - 1) * -8 / v6
+        n.Size = new(v1, v2, 1, 0)
+    end
+
+    v6 = if not (v4 > 62) then u66 else v4 + Ui.ButtonHeight + 18
+    u82.Size = UDim2.fromOffset(300, v6)
+    u82.Position = UDim2.new(0.5, -150, 0.5, -v6 / 2)
+end
+
+function u57.start()
+    -- Line: 238
+    -- upvalues: BuildController (val), u57 (val), LocalPlayer (val), u82 (ref), u66 (val), Ui (val), u83 (ref)
+    -- upvalues: u84 (ref), u85 (ref), u87 (ref), u86 (ref), u88 (ref), u34 (val), Theme (val), u93 (val), u89 (ref)
+    -- upvalues: u90 (ref), u94 (ref), SignController (val), u92 (ref), u62 (val), u91 (ref), Remotes (val), u67 (val)
+    -- upvalues: render (val), RunService (val), drawTimer (val)
+    local TextLabel, v1, v2
+    BuildController.registerMenu("AnimalManage", u57.close)
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "AboveAnimalManage"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+    u82 = Instance.new("Frame")
+    u82.ClipsDescendants = true
+    u82.Size = UDim2.fromOffset(300, u66)
+    u82.Position = UDim2.new(0.5, -150, 0.5, -u66 / 2)
+
+    Ui.fitToScreen(u82)
+
+    u82.Visible = false
+    u82.Active = false
+    u82.Parent = ScreenGui
+
+    Ui.restyle(u82, "Window")
+
+    u83 = Instance.new("TextLabel")
+    u83.AutoLocalize = false
+    u83.Size = UDim2.new(1, -60, 0, 24)
+    u83.Position = UDim2.fromOffset(12, 8)
+    u83.BackgroundTransparency = 1
+    u83.TextXAlignment = Enum.TextXAlignment.Left
+    u83.TextTruncate = Enum.TextTruncate.AtEnd
+    u83.Text = ""
+    u83.TextColor3 = Ui.Tone.Info
+    u83.TextSize = 20
+    u83.FontFace = Ui.Font.Bold
+    u83.Parent = u82
+
+    Ui.closeButton(u82, 8, u57.close)
+
+    u84 = Instance.new("TextLabel")
+    u84.Size = UDim2.new(1, -24, 0, 18)
+    u84.Position = UDim2.fromOffset(12, 36)
+    u84.BackgroundTransparency = 1
+    u84.TextXAlignment = Enum.TextXAlignment.Left
+    u84.Text = ""
+    u84.TextColor3 = Ui.Palette.Dim
+    u84.TextSize = 13
+    u84.FontFace = Ui.Font.Medium
+    u84.Parent = u82
+    u85 = Instance.new("TextLabel")
+    u85.Size = UDim2.new(1, -24, 0, 18)
+    u85.Position = UDim2.fromOffset(12, 62)
+    u85.BackgroundTransparency = 1
+    u85.TextXAlignment = Enum.TextXAlignment.Left
+    u85.Text = ""
+    u85.TextSize = 14
+    u85.FontFace = Ui.Font.Medium
+    u85.Visible = false
+    u85.Parent = u82
+    u87 = Ui.bar(u82, UDim2.new(1, -24, 0, 8), UDim2.fromOffset(12, 84), Ui.Palette.Green)
+    u87.Parent.Visible = false
+    u88 = Instance.new("Frame")
+    u88.Size = UDim2.new(1, -24, 0, 88)
+    u88.Position = UDim2.fromOffset(12, 62)
+    u88.BackgroundTransparency = 1
+    u88.Visible = false
+    u88.Parent = u82
+
+    for i = 1, 4 do
+        v1 = Instance.new("Frame")
+        v1.Size = UDim2.new(1, 0, 0, 22)
+        v1.Position = UDim2.fromOffset(0, (i - 1) * 22)
+        v1.BackgroundTransparency = 1
+        v1.Parent = u88
+        v2 = u34.icon(v1, Theme.Icons.Checkmark, 16, "None")
+        v2.AnchorPoint = Vector2.new(0, 0.5)
+        v2.Position = UDim2.fromScale(0, 0.5)
+        TextLabel = Instance.new("TextLabel")
+        TextLabel.Size = UDim2.new(1, -24, 1, 0)
+        TextLabel.Position = UDim2.fromOffset(24, 0)
+        TextLabel.BackgroundTransparency = 1
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+        TextLabel.Text = ""
+        TextLabel.TextSize = 14
+        TextLabel.FontFace = Ui.Font.Medium
+        TextLabel.Parent = v1
+        u93[i] = {frame = v1, icon = v2, label = TextLabel}
+    end
+
+    u89 = Instance.new("TextLabel")
+    u89.Size = UDim2.new(1, -24, 0, 34)
+    u89.BackgroundTransparency = 1
+    u89.TextXAlignment = Enum.TextXAlignment.Left
+    u89.TextYAlignment = Enum.TextYAlignment.Center
+    u89.TextWrapped = true
+    u89.Text = ""
+    u89.TextSize = 13
+    u89.FontFace = Ui.Font.Regular
+    u89.Visible = false
+    u89.Parent = u82
+    u90 = Instance.new("Frame")
+    u90.Size = UDim2.new(1, -24, 0, Ui.ButtonHeight)
+    u90.Position = UDim2.fromOffset(12, 62)
+    u90.BackgroundTransparency = 1
+    u90.Parent = u82
+    local UIListLayout = Instance.new("UIListLayout")
+    UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+    UIListLayout.Padding = UDim.new(0, 8)
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Parent = u90
+    local v3 = Ui.button(u90, "Rename", "Plain", 1)
+    v3.Size = UDim2.new(0.5, -4, 1, 0)
+    v3.LayoutOrder = 1
+
+    v3.Activated:Connect(function() -- Line: 354; upvalues: u94 (upval), SignController (upval)
+        local v1 = u94
+
+        if v1 then
+            SignController.open(v1.cellKey, v1.name or "", "Animal")
+        end
+    end)
+
+    u92 = Ui.button(u90, "Coat", "Plain", 1)
+    u92.Size = UDim2.new(0.5, -4, 1, 0)
+    u92.LayoutOrder = 2
+    u92.Visible = false
+
+    u92.Activated:Connect(function() -- Line: 368; upvalues: u94 (upval), u62 (upval)
+        local v1 = u94
+
+        if v1 then
+            u62:FireServer(v1.cellKey, "coats")
+        end
+    end)
+
+    local v4 = Ui.button(u90, "Pick Up", "Go", 1)
+    v4.Size = UDim2.new(0.5, -4, 1, 0)
+    v4.LayoutOrder = 3
+
+    v4.Activated:Connect(function() -- Line: 378; upvalues: u94 (upval), u62 (upval), u57 (upval)
+        local v1 = u94
+
+        if v1 then
+            u62:FireServer(v1.cellKey, "pickup")
+            u57.close()
+        end
+    end)
+
+    u91 = {v3, u92, v4}
+    ;(Remotes.get(Remotes.AnimalManageState)).OnClientEvent:Connect(function(a1)
+        -- Line: 387
+        -- upvalues: u94 (upval), u82 (upval), u67 (upval), render (upval), Ui (upval), BuildController (upval)
+        if type(a1) == "table"
+            and type(a1.cellKey) == "string"
+            and type(a1.kind) == "string" then
+            local id, species_2, timer, v1, v2, v3, v4, v5, v6
+
+            if a1.refresh ~= true then
+                species_2 = if type(a1.species) ~= "string" then
+                    nil
+                else
+                    if not u67[a1.species] then nil else a1.species
+                v2 = nil
+
+                if not species_2 or type(a1.checks) ~= "table" then
+                    v1 = a1
+                else
+                    v3 = {}
+                    v4 = u67[species_2]
+                    v5 = nil
+                    v6 = nil
+                    v1 = a1
+
+                    for k, n in v4, v5, v6 do
+                        id = n.id
+                        v3[id] = v1.checks[n.id] == true
+                    end
+
+                    v4 = true
+
+                    if v1.checks.grown ~= true then
+                        v4 = species_2 ~= "Chicken"
+                    end
+
+                    v3.grown = v4
+                    v2 = v3
+                end
+
+                v3 = nil
+                timer = v1.timer
+
+                if type(timer) == "table"
+                    and type(timer.label) == "string"
+                    and type(timer.left) == "number"
+                    and type(timer.total) == "number" then
+                    v3 = {
+                        label = timer.label,
+                        left = timer.left,
+                        total = timer.total,
+                        waiting = if type(timer.waiting) ~= "string" then nil else timer.waiting,
+                    }
+                end
+
+                u94 = {
+                    cellKey = v1.cellKey,
+                    position = if typeof(v1.position) ~= "Vector3" then
+                        Vector3.new(0, 0, 0)
+                    else
+                        v1.position,
+                    name = if type(v1.name) ~= "string" then nil else v1.name,
+                    kind = v1.kind,
+                    species = species_2,
+                    checks = v2,
+                    timer = v3,
+                    receivedAt = os.clock(),
+                    coats = v1.coats == true,
+                }
+                render()
+
+                if not u82.Visible then
+                    u82.Visible = true
+                    Ui.appear(u82)
+                    BuildController.setUiOpen("AnimalManage", true)
+                end
+
+                return
+            end
+
+            local v7 = u94
+
+            if v7 and v7.cellKey == a1.cellKey and u82.Visible then
+                species_2 = if type(a1.species) ~= "string" then
+                    nil
+                else
+                    if not u67[a1.species] then nil else a1.species
+                v2 = nil
+
+                if not species_2 or type(a1.checks) ~= "table" then
+                    v1 = a1
+                else
+                    v3 = {}
+                    v4 = u67[species_2]
+                    v5 = nil
+                    v6 = nil
+                    v1 = a1
+
+                    for i, j in v4, v5, v6 do
+                        id = j.id
+                        v3[id] = v1.checks[j.id] == true
+                    end
+
+                    v4 = true
+
+                    if v1.checks.grown ~= true then
+                        v4 = species_2 ~= "Chicken"
+                    end
+
+                    v3.grown = v4
+                    v2 = v3
+                end
+
+                v3 = nil
+                timer = v1.timer
+
+                if type(timer) == "table"
+                    and type(timer.label) == "string"
+                    and type(timer.left) == "number"
+                    and type(timer.total) == "number" then
+                    v3 = {
+                        label = timer.label,
+                        left = timer.left,
+                        total = timer.total,
+                        waiting = if type(timer.waiting) ~= "string" then nil else timer.waiting,
+                    }
+                end
+
+                u94 = {
+                    cellKey = v1.cellKey,
+                    position = if typeof(v1.position) ~= "Vector3" then
+                        Vector3.new(0, 0, 0)
+                    else
+                        v1.position,
+                    name = if type(v1.name) ~= "string" then nil else v1.name,
+                    kind = v1.kind,
+                    species = species_2,
+                    checks = v2,
+                    timer = v3,
+                    receivedAt = os.clock(),
+                    coats = v1.coats == true,
+                }
+                render()
+
+                if not u82.Visible then
+                    u82.Visible = true
+                    Ui.appear(u82)
+                    BuildController.setUiOpen("AnimalManage", true)
+                end
+            end
+        end
+    end)
+
+    local u401 = 0
+    RunService.Heartbeat:Connect(function(a1)
+        -- Line: 445
+        -- upvalues: u401 (ref), u94 (upval), u82 (upval), drawTimer (upval), LocalPlayer (upval), u57 (upval)
+        u401 = u401 + a1
+
+        if u401 < 0.3 then
+            return
+        end
+
+        u401 = 0
+        local v1 = u94
+
+        if v1 and u82.Visible then
+            drawTimer()
+
+            local Character = LocalPlayer.Character
+            local HumanoidRootPart = Character and Character:FindFirstChild("HumanoidRootPart")
+
+            if HumanoidRootPart
+                and HumanoidRootPart:IsA("BasePart")
+                and 30 < (HumanoidRootPart.Position - v1.position).Magnitude then
+                u57.close()
+            end
+        end
+    end)
+end
+
+return u57
+-- Script Path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.SlimeFarmController
+-- Took 0.01s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("StarterPlayer").StarterPlayerScripts.Client.Controllers.SlimeFarmController
+-- Decompile time: 10.58 ms
+
+local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local Shared = (game:GetService("ReplicatedStorage")):WaitForChild("Shared")
+local Config = require(Shared.Config)
+local Grid = require(Shared.Grid)
+local Prefabs = require(Shared.Prefabs)
+local Remotes = require(Shared.Remotes)
+local u41 = require(script.Parent.AudioController)
+local BuildController = require(script.Parent.BuildController)
+local GatherFxController = require(script.Parent.GatherFxController)
+local v1 = {}
+local SlimeFarm = Config.Factory.SlimeFarm
+local u59 = Color3.fromRGB(196, 170, 255)
+local u64 = Color3.fromRGB(60, 230, 110)
+local BoltSpeed = SlimeFarm.BoltSpeed
+local BoltMaxSeconds = SlimeFarm.BoltMaxSeconds
+
+local function trail(a1) -- Line: 39; upvalues: u59 (val); types: a1: userdata
+    local Attachment = Instance.new("Attachment")
+    Attachment.Position = Vector3.new(0, 0.11999999731779099, 0)
+    Attachment.Parent = a1
+    local Attachment_2 = Instance.new("Attachment")
+    Attachment_2.Position = Vector3.new(0, -0.11999999731779099, 0)
+    Attachment_2.Parent = a1
+    local Trail = Instance.new("Trail")
+    Trail.Attachment0 = Attachment
+    Trail.Attachment1 = Attachment_2
+    Trail.FaceCamera = true
+    Trail.Lifetime = 0.3
+    Trail.LightEmission = 1
+    Trail.Color = ColorSequence.new(u59)
+    Trail.Transparency = NumberSequence.new(0.15, 1)
+    Trail.WidthScale = NumberSequence.new(1, 0.2)
+    Trail.Parent = a1
+end
+
+local function landed(a1) -- Line: 59; types: a1: userdata
+    for i, j in a1:GetDescendants() do
+        if j:IsA("BasePart") then
+            j.LocalTransparencyModifier = 1
+        end
+    end
+
+    a1.LocalTransparencyModifier = 1
+    task.delay(
+        0.3,
+        function() -- Line: 66; upvalues: a1 (val)
+            a1:Destroy()
+        end
+    )
+end
+
+local function impact(a1)
+    -- Line: 73
+    -- upvalues: u59 (val), CollectionService (val), Config (val), GatherFxController (val), u41 (val)
+    -- types: a1: vector
+    local Magnitude, v1
+    local v2 = u59
+    local v3 = 4
+
+    for i, j in CollectionService:GetTagged("Enemy") do
+        if j:IsA("BasePart") then
+            Magnitude = (j.Position - a1).Magnitude
+            v1 = Config.Enemy.Enemies[j:GetAttribute("EnemyId")]
+
+            if Magnitude < v3 and v1 and v1.color then
+                v3 = Magnitude
+                v2 = Color3.fromRGB(v1.color.r, v1.color.g, v1.color.b)
+            end
+        end
+    end
+
+    GatherFxController.burstAt(v2, a1, 10)
+    u41.play("ArrowHit", a1)
+end
+
+local function drawBolt(a1, a2)
+    -- Line: 90
+    -- upvalues: SlimeFarm (val), u59 (val), trail (val), BoltSpeed (val), BoltMaxSeconds (val), TweenService (val)
+    -- upvalues: impact (val), landed (val)
+    -- types: a1: vector, a2: vector
+    local CurrentCamera = workspace.CurrentCamera
+
+    if CurrentCamera
+        and SlimeFarm.ShotDrawStuds < (CurrentCamera.CFrame.Position - a1).Magnitude then
+        return
+    end
+
+    local Magnitude_2 = (a2 - a1).Magnitude
+
+    if Magnitude_2 < 0.1 then
+        return
+    end
+
+    local Part = Instance.new("Part")
+    Part.Name = "BallistaBolt"
+    Part.Anchored = true
+    Part.CanCollide = false
+    Part.CanQuery = false
+    Part.CanTouch = false
+    Part.CastShadow = false
+    Part.Material = Enum.Material.Neon
+    Part.Color = u59
+    Part.Size = Vector3.new(0.25, 0.25, 1.600000023841858)
+    Part.CFrame = CFrame.lookAt(a1, a2)
+
+    trail(Part)
+
+    Part.Parent = workspace
+    local v1 = math.min(Magnitude_2 / BoltSpeed, BoltMaxSeconds)
+    local v2 = TweenService:Create(
+        Part,
+        TweenInfo.new(v1, Enum.EasingStyle.Linear),
+        {CFrame = CFrame.lookAt(a2, a2 + (a2 - a1).Unit)}
+    )
+
+    v2.Completed:Connect(function() -- Line: 116; upvalues: impact (upval), a2 (val), landed (upval), Part (val)
+        impact(a2)
+        landed(Part)
+    end)
+
+    v2:Play()
+end
+
+local BallistaArt = SlimeFarm.BallistaArt
+local u75 = setmetatable(
+    {},
+    {__mode = "k"}
+)
+
+local function turretOf(a1) -- Line: 141; upvalues: u75 (val), Prefabs (val), BallistaArt (val); types: a1: userdata
+    local ArtAttribute, Turret, v1, v2
+    local v3 = u75[a1]
+
+    if v3 and v3.model.Parent then
+        return v3
+    end
+
+    for i, j in a1:GetChildren() do
+        if j:IsA("Model") then
+            ArtAttribute = Prefabs.ArtAttribute
+
+            if j:GetAttribute(ArtAttribute) then
+                Turret = BallistaArt.Turret
+                v3 = j:FindFirstChild(Turret)
+
+                if v3 and v3:IsA("Model") then
+                    v1 = v3:FindFirstChild(BallistaArt.TurretBolt, true)
+                    v2 = {
+                        turn = 0,
+                        lastShotAt = 0,
+                        art = j,
+                        model = v3,
+                        home = v3:GetPivot(),
+                    }
+                    v2.bolt = if not v1 then nil else if not v1:IsA("BasePart") then nil else v1
+                    u75[a1] = v2
+
+                    return v2
+                end
+            end
+        end
+    end
+
+    return nil
+end
+
+local function aimed(a1, a2) -- Line: 169; upvalues: BallistaArt (val); types: a1: table, a2: vector
+    local Pivot = a1.art:GetPivot()
+    local v1 = Pivot:ToObjectSpace(a1.home)
+    local v2 = Pivot:VectorToObjectSpace(a2 - a1.home.Position)
+
+    if v2.Magnitude < 0.1 then
+        return a1.home
+    end
+
+    local Unit = v2.Unit
+    local v3 = math.atan2(-Unit.X, -Unit.Z)
+    local v4 = math.clamp(math.asin((math.clamp(Unit.Y, -1, 1))), math.rad(BallistaArt.MinPitch), (math.rad(BallistaArt.MaxPitch)))
+
+    return Pivot * CFrame.new(v1.Position) * CFrame.Angles(0, v3, 0)
+        * CFrame.Angles(v4, 0, 0)
+        * v1.Rotation
+end
+
+local function turnTo(a1, a2, a3, a4)
+    -- Line: 187
+    -- upvalues: RunService (val)
+    -- types: a1: table, a2: userdata, a3: number, a4: function?
+    a1.turn = a1.turn + 1
+    local turn = a1.turn
+    local Pivot = a1.model:GetPivot()
+    local u12 = os.clock()
+    local u13 = nil
+    u13 = (RunService.RenderStepped:Connect(function()
+        -- Line: 193
+        -- upvalues: a1 (val), turn (val), u13 (ref), a3 (val), u12 (val), Pivot (val), a2 (val), a4 (val)
+        if a1.turn == turn and a1.model.Parent then
+            local v1
+            a1.model:PivotTo((Pivot:Lerp(a2, if not (a3 > 0) then 1 else math.clamp((os.clock() - u12) / a3, 0, 1))))
+
+            if v1 >= 1 then
+                if u13 then
+                    u13:Disconnect()
+                end
+
+                if a4 then
+                    a4()
+                end
+            end
+
+            return
+        end
+
+        if u13 then
+            u13:Disconnect()
+        end
+    end))
+end
+
+local function flyRailBolt(a1, a2)
+    -- Line: 214
+    -- upvalues: drawBolt (val), trail (val), BoltSpeed (val), BoltMaxSeconds (val), TweenService (val), impact (val)
+    -- upvalues: landed (val), BallistaArt (val)
+    -- types: a1: table, a2: vector
+    local bolt = a1.bolt
+
+    if not bolt then
+        drawBolt(a1.model:GetPivot().Position, a2)
+        return
+    end
+
+    local u89 = bolt:Clone()
+
+    for i, j in u89:GetDescendants() do
+        if j:IsA("JointInstance") or j:IsA("WeldConstraint") or j:IsA("Constraint") then
+            j:Destroy()
+        end
+    end
+
+    u89.Anchored = true
+    u89.CanCollide = false
+    u89.CanQuery = false
+    u89.CanTouch = false
+
+    trail(u89)
+
+    u89.Parent = workspace
+    local CFrame_2 = bolt.CFrame
+    local v1 = a2 - CFrame_2.Position
+    local v2 = math.min(v1.Magnitude / BoltSpeed, BoltMaxSeconds)
+    local v3 = TweenService:Create(
+        u89,
+        TweenInfo.new(v2, Enum.EasingStyle.Linear),
+        {CFrame = CFrame_2 + v1}
+    )
+
+    v3.Completed:Connect(function() -- Line: 240; upvalues: impact (upval), a2 (val), landed (upval), u89 (val)
+        impact(a2)
+        landed(u89)
+    end)
+
+    v3:Play()
+
+    bolt.LocalTransparencyModifier = 1
+    task.delay(
+        BallistaArt.ReloadSeconds,
+        function() -- Line: 246; upvalues: bolt (val)
+            bolt.LocalTransparencyModifier = 0
+        end
+    )
+end
+
+local function shoot(a1, a2, a3)
+    -- Line: 253
+    -- upvalues: SlimeFarm (val), turretOf (val), drawBolt (val), turnTo (val), aimed (val), BallistaArt (val)
+    -- upvalues: flyRailBolt (val)
+    -- types: a1: userdata, a2: vector, a3: vector
+    local CurrentCamera = workspace.CurrentCamera
+
+    if CurrentCamera
+        and SlimeFarm.ShotDrawStuds
+            < (CurrentCamera.CFrame.Position - a1.Position).Magnitude then
+        return
+    end
+
+    local u15 = turretOf(a1)
+
+    if not u15 then
+        drawBolt(a2, a3)
+        return
+    end
+
+    local u23 = os.clock()
+    u15.lastShotAt = u23
+
+    turnTo(
+        u15,
+        aimed(u15, a3),
+        BallistaArt.TurnSeconds,
+        function() -- Line: 265; upvalues: flyRailBolt (upval), u15 (val), a3 (val)
+            flyRailBolt(u15, a3)
+        end
+    )
+
+    task.delay(
+        BallistaArt.IdleSeconds,
+        function() -- Line: 268; upvalues: u15 (val), u23 (val), turnTo (upval)
+            if u15.lastShotAt == u23 then
+                turnTo(u15, u15.home, 0.6, nil)
+            end
+        end
+    )
+end
+
+local u81 = nil
+
+local function ringPart() -- Line: 277; upvalues: u81 (ref), u64 (val), SlimeFarm (val)
+    local v1 = u81
+
+    if v1 then
+        return v1
+    end
+
+    local Part = Instance.new("Part")
+    Part.Name = "BallistaRange"
+    Part.Shape = Enum.PartType.Cylinder
+    Part.Anchored = true
+    Part.CanCollide = false
+    Part.CanQuery = false
+    Part.CanTouch = false
+    Part.CastShadow = false
+    Part.Material = Enum.Material.Neon
+    Part.Color = u64
+    Part.Transparency = 0.8
+    Part.Size = Vector3.new(0.15, SlimeFarm.RangeStuds * 2, SlimeFarm.RangeStuds * 2)
+    local Highlight = Instance.new("Highlight")
+    Highlight.FillTransparency = 1
+    Highlight.OutlineColor = u64
+    Highlight.OutlineTransparency = 0
+    Highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Highlight.Adornee = Part
+    Highlight.Parent = Part
+    u81 = Part
+
+    return Part
+end
+
+local function showRing(a1) -- Line: 307; upvalues: u81 (ref), ringPart (val), Grid (val); types: a1: vector?
+    if not a1 then
+        if u81 then
+            u81.Parent = nil
+        end
+
+        return
+    end
+
+    local v1 = ringPart()
+    v1.CFrame = (CFrame.new(a1 - Vector3.new(0, Grid.CellSize / 2 - 0.1, 0)))
+        * CFrame.Angles(0, 0, 1.5707963267948966)
+    v1.Parent = workspace
+end
+
+local function burstBeacon(a1) -- Line: 323; upvalues: SlimeFarm (val); types: a1: userdata
+    local v1
+    local CurrentCamera = workspace.CurrentCamera
+
+    if CurrentCamera
+        and SlimeFarm.PulseDrawStuds
+            < (CurrentCamera.CFrame.Position - a1.Position).Magnitude then
+        return
+    end
+
+    for i, j in a1:GetDescendants() do
+        if j:IsA("ParticleEmitter") then
+            v1 = SlimeFarm.PulseBurst[j.Name]
+
+            if v1 then
+                j:Emit(v1)
+            end
+        end
+    end
+end
+
+local function dotOf(a1) -- Line: 339; types: a1: userdata
+    for i, j in a1:GetDescendants() do
+        if j:IsA("ParticleEmitter") and j.Name == "Dot" then
+            return j
+        end
+    end
+
+    return nil
+end
+
+local u90 = Color3.fromRGB(0, 255, 81)
+
+local function firework(a1, a2)
+    -- Line: 352
+    -- upvalues: SlimeFarm (val), dotOf (val), u90 (val), RunService (val), GatherFxController (val), u41 (val)
+    -- types: a1: userdata, a2: vector
+    local CurrentCamera = workspace.CurrentCamera
+
+    if CurrentCamera then
+        local Magnitude = (CurrentCamera.CFrame.Position - a1.Position).Magnitude
+
+        if SlimeFarm.PulseDrawStuds < Magnitude then
+            return
+        end
+    end
+
+    local u21 = a1.Position + Vector3.new(0, a1.Size.Y / 2 + 1, 0)
+    local u24 = dotOf(a1)
+    local Value = if not u24 then u90 else u24.Color.Keypoints[1].Value
+    local Part = Instance.new("Part")
+    Part.Name = "BeaconFirework"
+    Part.Shape = Enum.PartType.Ball
+    Part.Anchored = true
+    Part.CanCollide = false
+    Part.CanQuery = false
+    Part.CanTouch = false
+    Part.CastShadow = false
+    Part.Material = Enum.Material.Neon
+    Part.Color = Value
+    Part.Size = Vector3.new(0.44999998807907104, 0.44999998807907104, 0.44999998807907104)
+    Part.CFrame = CFrame.new(u21)
+    local Attachment = Instance.new("Attachment")
+    Attachment.Position = Vector3.new(0, 0.15000000596046448, 0)
+    Attachment.Parent = Part
+    local Attachment_2 = Instance.new("Attachment")
+    Attachment_2.Position = Vector3.new(0, -0.15000000596046448, 0)
+    Attachment_2.Parent = Part
+    local Trail = Instance.new("Trail")
+    Trail.Attachment0 = Attachment
+    Trail.Attachment1 = Attachment_2
+    Trail.FaceCamera = true
+    Trail.Lifetime = 0.35
+    Trail.LightEmission = 1
+    Trail.Color = ColorSequence.new(Value)
+    Trail.Transparency = NumberSequence.new(0.1, 1)
+    Trail.WidthScale = NumberSequence.new(1, 0.1)
+    Trail.Parent = Part
+    Part.Parent = workspace
+    local u74 = os.clock()
+    local u75 = nil
+    u75 = (RunService.RenderStepped:Connect(function()
+        -- Line: 391
+        -- upvalues: u74 (val), SlimeFarm (upval), u21 (val), a2 (val), Part (val), u75 (ref), u24 (val)
+        -- upvalues: GatherFxController (upval), Value (val), u41 (upval)
+        local v1 = math.clamp((os.clock() - u74) / SlimeFarm.FireworkSeconds, 0, 1)
+        local v2 = (u21:Lerp(a2, v1))
+            + Vector3.new(0, (math.sin(v1 * 3.141592653589793)) * SlimeFarm.FireworkArcStuds, 0)
+        Part.CFrame = CFrame.new(v2)
+
+        if v1 < 1 then
+            return
+        end
+
+        if u75 then
+            u75:Disconnect()
+        end
+
+        Part.Transparency = 1
+        local Attachment = Instance.new("Attachment")
+        Attachment.WorldPosition = a2 + Vector3.new(0, 1, 0)
+        Attachment.Parent = workspace.Terrain
+
+        if u24 then
+            v1 = u24:Clone()
+            v1.Enabled = false
+            v1.Speed = NumberRange.new(8, 16)
+            v1.SpreadAngle = Vector2.new(180, 180)
+            v1.Acceleration = Vector3.new(0, -12, 0)
+            v1.Parent = Attachment
+
+            v1:Emit(SlimeFarm.FireworkSparks)
+        end
+
+        GatherFxController.burstAt(Value, a2 + Vector3.new(0, 1, 0), 14)
+        u41.play("MagicHit", a2)
+
+        task.delay(
+            2.5,
+            function() -- Line: 418; upvalues: Attachment (val), Part (upval)
+                Attachment:Destroy()
+                Part:Destroy()
+            end
+        )
+    end))
+end
+
+local u95 = setmetatable(
+    {},
+    {__mode = "k"}
+)
+
+local function watchBeacon(a1)
+    -- Line: 428
+    -- upvalues: u95 (val), SlimeFarm (val), firework (val), burstBeacon (val)
+    -- types: a1: userdata
+    if a1:IsA("BasePart") and not u95[a1] then
+        u95[a1] = true
+        ;(a1:GetAttributeChangedSignal(SlimeFarm.PulseAttribute)):Connect(function()
+            -- Line: 434
+            -- upvalues: a1 (val), SlimeFarm (upval), firework (upval), burstBeacon (upval)
+            local Attribute = a1:GetAttribute(SlimeFarm.SpawnAtAttribute)
+
+            if typeof(Attribute) == "Vector3" then
+                firework(a1, Attribute)
+                return
+            end
+
+            burstBeacon(a1)
+        end)
+    end
+end
+
+function v1.start()
+    -- Line: 444
+    -- upvalues: Remotes (val), shoot (val), drawBolt (val), CollectionService (val), SlimeFarm (val), watchBeacon (val)
+    -- upvalues: burstBeacon (val), RunService (val), BuildController (val), showRing (val), u81 (ref)
+    (Remotes.get(Remotes.BallistaShot)).OnClientEvent:Connect(function(a1, a2, a3)
+        -- Line: 445
+        -- upvalues: shoot (upval), drawBolt (upval)
+        if typeof(a1) == "Vector3" and typeof(a2) == "Vector3" then
+            if typeof(a3) == "Instance" and a3:IsA("BasePart") then
+                shoot(a3, a1, a2)
+                return
+            end
+
+            drawBolt(a1, a2)
+        end
+    end)
+
+    ;(CollectionService:GetInstanceAddedSignal(SlimeFarm.BeaconTag)):Connect(watchBeacon)
+
+    for i, j in CollectionService:GetTagged(SlimeFarm.BeaconTag) do
+        watchBeacon(j)
+    end
+
+    task.spawn(function() -- Line: 461; upvalues: SlimeFarm (upval), CollectionService (upval), burstBeacon (upval)
+        while true do
+            task.wait(SlimeFarm.PulseEverySeconds)
+
+            for i, j in CollectionService:GetTagged(SlimeFarm.BeaconTag) do
+                if j:IsA("BasePart") and j.Parent then
+                    burstBeacon(j)
+                end
+            end
+        end
+    end)
+
+    local u38 = 0
+    RunService.Heartbeat:Connect(function(a1)
+        -- Line: 473
+        -- upvalues: u38 (ref), BuildController (upval), SlimeFarm (upval), showRing (upval), u81 (upval)
+        u38 = u38 + a1
+
+        if u38 < 0.1 then
+            return
+        end
+
+        u38 = 0
+        local v1, v2 = BuildController.ghostAt()
+
+        if v1 == SlimeFarm.BallistaId and v2 then
+            showRing(v2)
+            return
+        end
+
+        v2 = BuildController.aimedInstance()
+
+        if v2 and v2:GetAttribute("RangeStuds") ~= nil then
+            showRing(v2.Position)
+            return
+        end
+
+        if u81 then
+            u81.Parent = nil
+        end
+    end)
+end
+
+return v1
+-- Script Path: game:GetService("ReplicatedStorage").Shared.StackKey
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.StackKey
+-- Decompile time: 2.16 ms
+
+local u0 = {}
+
+function u0.roll(a1, a2, a3, a4, a5, a6)
+    -- Line: 42
+    -- types: a1: string, a2: boolean, a3: table?, a4: number?, a5: string?, a6: string?
+    local v1
+    local v2 = {}
+
+    for i in a3 or {} do
+        table.insert(v2, i)
+    end
+
+    table.sort(v2)
+
+    local v3 = {if not a2 then a1 else ("Perfect %*"):format(a1)}
+
+    for j, k in v2 do
+        v1 = string.format("%.4f", a3[k])
+        table.insert(v3, (("%*=%*"):format(k, v1)))
+    end
+
+    if a4 then
+        table.insert(v3, (("charge=%*"):format((math.floor(a4)))))
+    end
+
+    if a6 then
+        table.insert(v3, (("coat=%*"):format(a6)))
+    end
+
+    if a5 then
+        table.insert(v3, (("name=%*"):format(a5)))
+    end
+
+    return table.concat(v3, ";")
+end
+
+function u0.of(a1, a2) -- Line: 72; types: a1: string, a2: string?
+    if a2 then
+        return a1 .. "@" .. a2
+    end
+
+    return a1
+end
+
+function u0.item(a1) -- Line: 77; types: a1: string
+    local v1 = string.find(a1, "@", 1, true)
+
+    if v1 then
+        return (string.sub(a1, 1, v1 - 1))
+    end
+
+    return a1
+end
+
+function u0.rollOf(a1) -- Line: 83; types: a1: string
+    local v1 = string.find(a1, "@", 1, true)
+
+    if v1 then
+        return (string.sub(a1, v1 + 1))
+    end
+
+    return nil
+end
+
+function u0.split(a1, a2) -- Line: 91; upvalues: u0 (val); types: a1: table, a2: table?
+    local v1, v2
+    local v3 = {}
+    local v4 = {}
+    local v5 = nil
+    local v6 = nil
+    local v7 = a2
+
+    for i, j in a1, v5, v6 do
+        v2 = if not v7 then nil else v7[i]
+
+        if type(v2) ~= "table" or not (#v2 > 0) then
+            v3[i] = j
+        else
+            for k, n in v2 do
+                if type(n) == "table"
+                    and type(n.roll) == "string"
+                    and type(n.count) == "number" then
+                    v1 = u0.of(i, n.roll)
+                    v3[v1] = (v3[v1] or 0) + n.count
+                    v4[v1] = n
+                end
+            end
+        end
+    end
+
+    return v3, v4
+end
+
+return u0
+-- Script Path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid
+-- Decompile time: 0.30 ms
+
+local Cell = require(script.Cell)
+local Debug = require(script.Debug)
+
+return {Root = require(script.Grid), Cell = Cell, Debug = Debug}
+-- Script Path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid.Cell
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid.Cell
+-- Decompile time: 0.10 ms
+
+return (require(script.GridCell))
+-- Script Path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid.Cell.GridCell
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Components.Grid.Cell.GridCell
+-- Decompile time: 0.95 ms
+
+local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local Dash = require(Parent.Dash)
+local React = require(Parent.React)
+
+require(Foundation.Components.Types)
+
+local View = require(Foundation.Components.View)
+local getGridSizeTag = require(Foundation.Utility.getGridSizeTag)
+local withDefaults = require(Foundation.Utility.withDefaults)
+local u28 = {size = 1, testId = "--foundation-grid--cell"}
+
+return React.memo(
+    React.forwardRef(function(a1, a2)
+        -- Line: 27
+        -- upvalues: withDefaults (val), u28 (val), Dash (val), React (val), getGridSizeTag (val), View (val)
+        local u5 = withDefaults(a1, u28)
+        return React.createElement(
+            View,
+            Dash.assign(
+                Dash.omit(
+                    u5,
+                    {"size"}
+                ),
+                {
+                    tag = table.concat(
+                        {
+                            React.useMemo(
+                                function() -- Line: 31; upvalues: getGridSizeTag (upval), u5 (val)
+                                    return getGridSizeTag(u5.size)
+                                end,
+                                {u5.size}
+                            ),
+                            u5.tag,
+                        },
+                        " "
+                    ),
+                    ref = a2,
+                }
+            ),
+            u5.children
+        )
+    end)
+)
+-- Script Path: game:GetService("ReplicatedStorage").Shared.Remotes
+-- Took 0s to decompile.
+-- Executor: Real (3.2.2)
+
+-- Script path: game:GetService("ReplicatedStorage").Shared.Remotes
+-- Decompile time: 2.72 ms
+
+local u436
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local v1 = {
+    RequestPlace = "RequestPlace",
+    PlaceResult = "PlaceResult",
+    RequestSwing = "RequestSwing",
+    RequestEquipSlot = "RequestEquipSlot",
+    RequestHoldBlock = "RequestHoldBlock",
+    RequestCraft = "RequestCraft",
+    RequestHandCraft = "RequestHandCraft",
+    RequestLoadFuel = "RequestLoadFuel",
+    RequestEmptyMachine = "RequestEmptyMachine",
+    RequestStopCrafting = "RequestStopCrafting",
+    RequestStorageWithdraw = "RequestStorageWithdraw",
+    RequestStorageWithdrawAll = "RequestStorageWithdrawAll",
+    LumberMillState = "LumberMillState",
+    RequestLumberMill = "RequestLumberMill",
+    BallistaShot = "BallistaShot",
+    RequestSetAbility = "RequestSetAbility",
+    ArcaneTableState = "ArcaneTableState",
+    RequestArcaneCombine = "RequestArcaneCombine",
+    ArcaneTableFx = "ArcaneTableFx",
+    ArcaneTableResult = "ArcaneTableResult",
+    SetAbilityFx = "SetAbilityFx",
+    RequestStorageStore = "RequestStorageStore",
+    RequestItemCopies = "RequestItemCopies",
+    ItemCopies = "ItemCopies",
+    StorageUpdate = "StorageUpdate",
+    RequestVendingOpen = "RequestVendingOpen",
+    RequestVendingConfigure = "RequestVendingConfigure",
+    RequestVendingStock = "RequestVendingStock",
+    RequestVendingTrade = "RequestVendingTrade",
+    VendingUpdate = "VendingUpdate",
+    CoinsChanged = "CoinsChanged",
+    NpcDialogue = "NpcDialogue",
+    DialogueDismissed = "DialogueDismissed",
+    RequestShopOpen = "RequestShopOpen",
+    ShopOpened = "ShopOpened",
+    RequestShopBuy = "RequestShopBuy",
+    RequestShopSell = "RequestShopSell",
+    RequestCollectionTurnIn = "RequestCollectionTurnIn",
+    RequestExpansion = "RequestExpansion",
+    RequestDrop = "RequestDrop",
+    RequestPickup = "RequestPickup",
+    RequestHarvest = "RequestHarvest",
+    RequestUseItem = "RequestUseItem",
+    RequestSignText = "RequestSignText",
+    SignEdit = "SignEdit",
+    RequestAnimalName = "RequestAnimalName",
+    AnimalManageState = "AnimalManageState",
+    ChickenLaid = "ChickenLaid",
+    RequestAnimalManage = "RequestAnimalManage",
+    HorseCoats = "HorseCoats",
+    RequestHorseCoat = "RequestHorseCoat",
+    RequestUnlockHorseCoat = "RequestUnlockHorseCoat",
+    RequestConsume = "RequestConsume",
+    RequestPollinate = "RequestPollinate",
+    RequestPhone = "RequestPhone",
+    PollenSource = "PollenSource",
+    RequestFillWater = "RequestFillWater",
+    RequestFlight = "RequestFlight",
+    ClientDiagnostics = "ClientDiagnostics",
+    RequestSprint = "RequestSprint",
+    RequestSetting = "RequestSetting",
+    SettingsChanged = "SettingsChanged",
+    NewsFeed = "NewsFeed",
+    RequestNewsSeen = "RequestNewsSeen",
+    PromptFavorite = "PromptFavorite",
+    FavoriteResult = "FavoriteResult",
+    RequestAchievements = "RequestAchievements",
+    AchievementData = "AchievementData",
+    AchievementUnlocked = "AchievementUnlocked",
+    RequestCollection = "RequestCollection",
+    CollectionData = "CollectionData",
+    PortalSkins = "PortalSkins",
+    RequestSetPortalSkin = "RequestSetPortalSkin",
+    RequestUnlockPortalSkin = "RequestUnlockPortalSkin",
+    ItemGained = "ItemGained",
+    ItemDropped = "ItemDropped",
+    BlockBroken = "BlockBroken",
+    NodeShattered = "NodeShattered",
+    WorldSound = "WorldSound",
+    RequestPermissionSummary = "RequestPermissionSummary",
+    RequestPermissionToggle = "RequestPermissionToggle",
+    PermissionSummary = "PermissionSummary",
+    FriendLuckChanged = "FriendLuckChanged",
+    RequestFriendList = "RequestFriendList",
+    FriendList = "FriendList",
+    RequestFriendAction = "RequestFriendAction",
+    RequestIslandInvite = "RequestIslandInvite",
+    IslandInviteReceived = "IslandInviteReceived",
+    RequestIslandInviteVisit = "RequestIslandInviteVisit",
+    FriendRoleChanged = "FriendRoleChanged",
+    LeaderboardYou = "LeaderboardYou",
+    TipJarOpen = "TipJarOpen",
+    RequestTip = "RequestTip",
+    RequestCoinTip = "RequestCoinTip",
+    TipJarTipped = "TipJarTipped",
+    RequestSync = "RequestSync",
+    RequestSetEquipment = "RequestSetEquipment",
+    EquipmentChanged = "EquipmentChanged",
+    RequestWear = "RequestWear",
+    WearablesChanged = "WearablesChanged",
+    RequestSetBackpackLayout = "RequestSetBackpackLayout",
+    InfoDialog = "InfoDialog",
+    BackpackLayoutChanged = "BackpackLayoutChanged",
+    RequestSetHotbar = "RequestSetHotbar",
+    HotbarChanged = "HotbarChanged",
+    RequestDevCommand = "RequestDevCommand",
+    DevConsoleOpen = "DevConsoleOpen",
+    DevCommandResult = "DevCommandResult",
+    InventoryChanged = "InventoryChanged",
+    IslandReady = "IslandReady",
+    BlockCountChanged = "BlockCountChanged",
+    ProgressionChanged = "ProgressionChanged",
+    RequestUpgradeInfo = "RequestUpgradeInfo",
+    UpgradeInfo = "UpgradeInfo",
+    RequestUpgrade = "RequestUpgrade",
+    MachineUpdate = "MachineUpdate",
+    EquippedChanged = "EquippedChanged",
+    HitConfirmed = "HitConfirmed",
+    DamageDealt = "DamageDealt",
+    PortalTravel = "PortalTravel",
+    TravelMove = "TravelMove",
+    Objective = "Objective",
+    TutorialStep = "TutorialStep",
+    TutorialProgress = "TutorialProgress",
+    HintsChanged = "HintsChanged",
+    RequestHintSeen = "RequestHintSeen",
+    SeenChanged = "SeenChanged",
+    RequestMarkSeen = "RequestMarkSeen",
+    Alert = "Alert",
+    SaleStatus = "SaleStatus",
+    Announcement = "Announcement",
+    Boosts = "Boosts",
+    ChatLine = "ChatLine",
+    AdminFx = "AdminFx",
+    FoodFx = "FoodFx",
+    ServerEventUpdate = "ServerEventUpdate",
+    RestartNotice = "RestartNotice",
+    SpecialDrop = "SpecialDrop",
+    Celebration = "Celebration",
+    Notice = "Notice",
+    RequestIslands = "RequestIslands",
+    RequestRejoin = "RequestRejoin",
+    IslandsData = "IslandsData",
+    RequestIslandLimits = "RequestIslandLimits",
+    IslandLimits = "IslandLimits",
+    LoadChoice = "LoadChoice",
+    LoadChoiceAnswer = "LoadChoiceAnswer",
+    RequestIslandAction = "RequestIslandAction",
+    CoopInvites = "CoopInvites",
+    IslandActionResult = "IslandActionResult",
+    RequestIslandReset = "RequestIslandReset",
+    IslandResetPrompt = "IslandResetPrompt",
+    RequestPortalMove = "RequestPortalMove",
+    RequestPortalReset = "RequestPortalReset",
+    PortalMoveOpen = "PortalMoveOpen",
+    RequestSpawnMove = "RequestSpawnMove",
+    GuestBookOpened = "GuestBookOpened",
+    RequestGuestBookLike = "RequestGuestBookLike",
+    RequestGuestBookFind = "RequestGuestBookFind",
+    GuestBookFound = "GuestBookFound",
+    RequestCompost = "RequestCompost",
+    CompostState = "CompostState",
+    RequestIncubator = "RequestIncubator",
+    IncubatorState = "IncubatorState",
+    RequestFeeder = "RequestFeeder",
+    FeederState = "FeederState",
+    RequestChickenSubmit = "RequestChickenSubmit",
+    ChickenBookData = "ChickenBookData",
+    RequestTamer = "RequestTamer",
+    RequestFavorite = "RequestFavorite",
+    FavoritesData = "FavoritesData",
+    RequestMount = "RequestMount",
+    RequestSetMount = "RequestSetMount",
+    LoadScreenClosed = "LoadScreenClosed",
+    ShowcaseDone = "ShowcaseDone",
+    GuidesState = "GuidesState",
+    RequestGuides = "RequestGuides",
+    ShowroomsState = "ShowroomsState",
+    RequestShowrooms = "RequestShowrooms",
+    RequestShoot = "RequestShoot",
+    ProjectileFired = "ProjectileFired",
+    ProjectileEnded = "ProjectileEnded",
+    RequestGift = "RequestGift",
+    GiftResult = "GiftResult",
+    CustomerState = "CustomerState",
+    RequestCustomer = "RequestCustomer",
+    RequestBank = "RequestBank",
+    RequestStash = "RequestStash",
+    BankState = "BankState",
+    RequestFlutterFeed = "RequestFlutterFeed",
+    RequestFlutterEquip = "RequestFlutterEquip",
+    FlutterState = "FlutterState",
+    FlutterFx = "FlutterFx",
+}
+local v2 = {
+    v1.RequestPlace,
+    v1.PlaceResult,
+    v1.RequestSwing,
+    v1.RequestEquipSlot,
+    v1.RequestHoldBlock,
+    v1.RequestCraft,
+    v1.RequestHandCraft,
+    v1.RequestLoadFuel,
+    v1.RequestEmptyMachine,
+    v1.RequestStopCrafting,
+    v1.RequestStorageWithdraw,
+    v1.RequestStorageWithdrawAll,
+    v1.LumberMillState,
+    v1.RequestLumberMill,
+    v1.BallistaShot,
+    v1.RequestSetAbility,
+    v1.ArcaneTableState,
+    v1.RequestArcaneCombine,
+    v1.ArcaneTableFx,
+    v1.ArcaneTableResult,
+    v1.SetAbilityFx,
+    v1.GuestBookOpened,
+    v1.RequestGuestBookLike,
+    v1.RequestGuestBookFind,
+    v1.GuestBookFound,
+    v1.RequestCompost,
+    v1.CompostState,
+    v1.RequestIncubator,
+    v1.IncubatorState,
+    v1.RequestFeeder,
+    v1.FeederState,
+    v1.RequestChickenSubmit,
+    v1.ChickenBookData,
+    v1.RequestTamer,
+    v1.RequestFavorite,
+    v1.FavoritesData,
+    v1.RequestMount,
+    v1.RequestSetMount,
+    v1.LoadScreenClosed,
+    v1.ShowcaseDone,
+    v1.GuidesState,
+    v1.RequestGuides,
+    v1.ShowroomsState,
+    v1.RequestShowrooms,
+    v1.RequestStorageStore,
+    v1.RequestItemCopies,
+    v1.ItemCopies,
+    v1.StorageUpdate,
+    v1.RequestVendingOpen,
+    v1.RequestVendingConfigure,
+    v1.RequestVendingStock,
+    v1.RequestVendingTrade,
+    v1.VendingUpdate,
+    v1.CoinsChanged,
+    v1.NpcDialogue,
+    v1.DialogueDismissed,
+    v1.RequestShopOpen,
+    v1.ShopOpened,
+    v1.RequestShopBuy,
+    v1.RequestShopSell,
+    v1.RequestCollectionTurnIn,
+    v1.RequestExpansion,
+    v1.RequestDrop,
+    v1.RequestPickup,
+    v1.RequestHarvest,
+    v1.RequestUseItem,
+    v1.RequestPollinate,
+    v1.RequestPhone,
+    v1.PollenSource,
+    v1.RequestConsume,
+    v1.RequestFillWater,
+    v1.RequestFlight,
+    v1.ClientDiagnostics,
+    v1.RequestSprint,
+    v1.RequestSetting,
+    v1.SettingsChanged,
+    v1.NewsFeed,
+    v1.RequestNewsSeen,
+    v1.PromptFavorite,
+    v1.FavoriteResult,
+    v1.RequestCollection,
+    v1.CollectionData,
+    v1.PortalSkins,
+    v1.RequestSetPortalSkin,
+    v1.RequestUnlockPortalSkin,
+    v1.ItemGained,
+    v1.ItemDropped,
+    v1.BlockBroken,
+    v1.NodeShattered,
+    v1.WorldSound,
+    v1.RequestPermissionSummary,
+    v1.RequestPermissionToggle,
+    v1.PermissionSummary,
+    v1.FriendLuckChanged,
+    v1.RequestFriendList,
+    v1.FriendList,
+    v1.RequestFriendAction,
+    v1.RequestIslandInvite,
+    v1.IslandInviteReceived,
+    v1.RequestIslandInviteVisit,
+    v1.FriendRoleChanged,
+    v1.LeaderboardYou,
+    v1.TipJarOpen,
+    v1.RequestTip,
+    v1.RequestCoinTip,
+    v1.TipJarTipped,
+    v1.RequestSync,
+    v1.RequestSetEquipment,
+    v1.EquipmentChanged,
+    v1.RequestWear,
+    v1.WearablesChanged,
+    v1.RequestSetBackpackLayout,
+    v1.InfoDialog,
+    v1.BackpackLayoutChanged,
+    v1.RequestSetHotbar,
+    v1.HotbarChanged,
+    v1.RequestDevCommand,
+    v1.DevConsoleOpen,
+    v1.DevCommandResult,
+    v1.MachineUpdate,
+    v1.EquippedChanged,
+    v1.HitConfirmed,
+    v1.DamageDealt,
+    v1.PortalTravel,
+    v1.TravelMove,
+    v1.Objective,
+    v1.TutorialStep,
+    v1.TutorialProgress,
+    v1.HintsChanged,
+    v1.RequestHintSeen,
+    v1.SeenChanged,
+    v1.RequestMarkSeen,
+    v1.InventoryChanged,
+    v1.IslandReady,
+    v1.BlockCountChanged,
+    v1.ProgressionChanged,
+    v1.RequestUpgradeInfo,
+    v1.UpgradeInfo,
+    v1.RequestUpgrade,
+    v1.Alert,
+    v1.SaleStatus,
+    v1.Announcement,
+    v1.Boosts,
+    v1.ChatLine,
+    v1.AdminFx,
+    v1.FoodFx,
+    v1.ServerEventUpdate,
+    v1.RestartNotice,
+    v1.SpecialDrop,
+    v1.Celebration,
+    v1.Notice,
+    v1.RequestIslandReset,
+    v1.IslandResetPrompt,
+    v1.RequestPortalMove,
+    v1.RequestPortalReset,
+    v1.PortalMoveOpen,
+    v1.RequestSpawnMove,
+    v1.RequestIslands,
+    v1.RequestRejoin,
+    v1.IslandsData,
+    v1.RequestIslandLimits,
+    v1.IslandLimits,
+    v1.LoadChoice,
+    v1.LoadChoiceAnswer,
+    v1.RequestIslandAction,
+    v1.CoopInvites,
+    v1.IslandActionResult,
+    v1.RequestAchievements,
+    v1.AchievementData,
+    v1.AchievementUnlocked,
+    v1.RequestSignText,
+    v1.SignEdit,
+    v1.RequestAnimalName,
+    v1.AnimalManageState,
+    v1.RequestAnimalManage,
+    v1.HorseCoats,
+    v1.RequestHorseCoat,
+    v1.RequestUnlockHorseCoat,
+    v1.ChickenLaid,
+    v1.RequestShoot,
+    v1.ProjectileFired,
+    v1.ProjectileEnded,
+    v1.RequestGift,
+    v1.GiftResult,
+    v1.CustomerState,
+    v1.RequestCustomer,
+    v1.RequestBank,
+    v1.RequestStash,
+    v1.BankState,
+    v1.RequestFlutterFeed,
+    v1.RequestFlutterEquip,
+    v1.FlutterState,
+    v1.FlutterFx,
+}
+
+if not RunService:IsServer() then
+    u436 = ReplicatedStorage:WaitForChild("Remotes")
+else
+    local RemoteEvent
+    u436 = ReplicatedStorage:FindFirstChild("Remotes")
+
+    if not u436 then
+        u436 = Instance.new("Folder")
+        u436.Name = "Remotes"
+        u436.Parent = ReplicatedStorage
+    end
+
+    for i, j in v2 do
+        if not u436:FindFirstChild(j) then
+            RemoteEvent = Instance.new("RemoteEvent")
+            RemoteEvent.Name = j
+            RemoteEvent.Parent = u436
+        end
+    end
+end
+
+function v1.get(a1) -- Line: 792; upvalues: RunService (val), u436 (ref); types: a1: string
+    if not RunService:IsServer() then
+        return (u436:WaitForChild(a1))
+    end
+
+    local v1 = u436:FindFirstChild(a1)
+
+    if not v1 then
+        error((("[ABOVE] no remote named %*: declare it AND add it to EVENT_NAMES in Remotes.luau"):format(a1)))
+    end
+
+    return v1
+end
+
+return v1
 
